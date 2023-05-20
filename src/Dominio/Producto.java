@@ -2,9 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Sistema;
+package Dominio;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -20,12 +22,21 @@ public class Producto {
     public enum Tipo {Fruta,Verdura}
     public enum FormaVenta {Unidad,Kilogramo}
 
+    // constructor por defecto tendria que tener?
+    
+    
     public Producto(String nombre, String descripcion, Tipo unTipo, FormaVenta unaVenta, BufferedImage imagen) {
+        this(nombre,descripcion,unTipo,unaVenta);
+        this.imagen = imagen;
+    }
+    
+    public Producto(String nombre, String descripcion, Tipo unTipo, FormaVenta unaVenta) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.unTipo = unTipo;
         this.unaVenta = unaVenta;
         this.imagen = imagen;
+        // llamar a imagen por defecto que diga (Sin imagen)
     }
 
     public String getNombre() {
@@ -65,12 +76,8 @@ public class Producto {
     }
 
     public void setImagen(BufferedImage imagen) {
-        this.imagen = ImageIO.read(new File(name + ".png"));
+        // this.imagen = ImageIO.read(new File(name + ".png"));
+        // como carajo se hace esto?
     }
-    
-    
-    public Producto (String name) {
-        this.name = name;
-        
-    }
+            
 }
