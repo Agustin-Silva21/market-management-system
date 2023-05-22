@@ -43,5 +43,9 @@ public class Dueño {
         this.añosDeExp = añosDeExp;
     }
     
+    @Override
     
+    public String toString(){
+        return this.getNombre();
+    }
 }

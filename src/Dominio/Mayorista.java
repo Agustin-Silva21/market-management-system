@@ -55,5 +55,9 @@ public class Mayorista {
         this.Producto = Producto;
     }
     
+    @Override
+    public String toString() {
+        return this.getNombre() + this.getRut();
+    }
     
 }

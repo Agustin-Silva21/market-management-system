@@ -79,5 +79,9 @@ public class Producto {
         // this.imagen = ImageIO.read(new File(name + ".png"));
         // como carajo se hace esto?
     }
-            
+    
+    @Override
+    public String toString() {
+        return this.getNombre();
+    }
 }

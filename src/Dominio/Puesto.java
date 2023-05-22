@@ -91,27 +91,11 @@ public class Puesto {
         getOferta().replace(unProducto, getOferta().get(unProducto) + cantidad);            
     }
     
-    /*
-    public String[] obtenerClaves() {
-        return this.getDiccionario().keySet().toArray(new String[this.getDiccionario().size()]);
-    }
-    */
+    @Override
     
-    /*
-    public int encontrarProducto(String unaTraduccion) {
-        boolean encontre = false;
-        String clave = "";
-        Iterator<String> it = this.getDiccionario().keySet().iterator();
-        while (it.hasNext() && !encontre) {
-            String claveAux = it.next();
-            if (this.darTraduccionDe(claveAux).equals(unaTraduccion)) {
-                encontre = true;
-                clave = claveAux;
-            }
-        }
-        return clave;
+    public String toString(){
+        return this.id;
     }
-    */
     
     
 }
