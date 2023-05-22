@@ -4,17 +4,17 @@
  */
 package Main;
 
-/**
- *
- * @author agustin973
- */
+import Dominio.Mercado;
+import Interfaz.MenuPpal;
 public class Obligatorio2 {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Mercado m = new Mercado();
+        MenuPpal menu = new MenuPpal (m);
+        menu.setVisible(true);
     }
     
 }
