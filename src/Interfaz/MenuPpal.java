@@ -1,15 +1,15 @@
 package Interfaz;
 
-import dominio.Empresa;
+import Dominio.Mercado;
 public class MenuPpal extends javax.swing.JFrame {
 
-    private Empresa modelo;
+    private Mercado modelo;
 
     public MenuPpal() {
         initComponents();
     }
 
-    public MenuPpal(Empresa unModelo) {
+    public MenuPpal(Mercado unModelo) {
         modelo = unModelo;
         initComponents();
     }
@@ -140,45 +140,38 @@ public class MenuPpal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void altaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altaClienteActionPerformed
-        AltaClientes v = new AltaClientes(modelo);
-        v.setVisible(true);
+        
+        
 }//GEN-LAST:event_altaClienteActionPerformed
 
     private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
-        // TODO add your handling code here:
-        VentanaAcercaDe v = new VentanaAcercaDe();
-        v.setVisible(true);
+        
+        
     }//GEN-LAST:event_aboutMenuItemActionPerformed
 
     private void registrarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarProductoActionPerformed
         // TODO add your handling code here:
-        AltaLimusina v = new AltaLimusina(modelo);
+        registrarProducto v = new registrarProducto(modelo);
         v.setVisible(true);
 }//GEN-LAST:event_registrarProductoActionPerformed
 
     private void altaCamionetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altaCamionetaActionPerformed
-        AltaCamioneta v = new AltaCamioneta(modelo);
-        v.setVisible(true);
+        
     // TODO add your handling code here:
     }//GEN-LAST:event_altaCamionetaActionPerformed
 
     private void altaChoferActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altaChoferActionPerformed
-        AltaChoferes v = new AltaChoferes(modelo);
-        v.setVisible(true);
+        
 
     // TODO add your handling code here:
     }//GEN-LAST:event_altaChoferActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-ReservasHechas v = new ReservasHechas(modelo);
-v.setVisible(true);
+       
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void agregarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarReservaActionPerformed
-        // TODO add your handling code here:
-Reserva v = new Reserva(modelo);
-        v.setVisible(true);
+      
     }//GEN-LAST:event_agregarReservaActionPerformed
 
     /**

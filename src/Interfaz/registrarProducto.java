@@ -1,6 +1,12 @@
 package Interfaz;
 
 import Dominio.Mercado;
+import java.awt.Image;
+import java.io.File;
+import javax.swing.ImageIcon;
+import static javax.swing.JFileChooser.*;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class registrarProducto extends javax.swing.JFrame {
 
@@ -13,67 +19,95 @@ public class registrarProducto extends javax.swing.JFrame {
     public registrarProducto(Mercado unModelo) {
         modelo = unModelo;
         initComponents();
+        selectorArchivo.setCurrentDirectory(new java.io.File("/home/agustin973/NetBeansProjects/Obligatorio2/src/Helpers/imagenesProductos"));
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("IMAGES","png","jpg","jpeg");
+        selectorArchivo.addChoosableFileFilter(filtro);
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        cajaChapa = new javax.swing.JTextField();
-        cajaColor = new javax.swing.JTextField();
-        botonAgregar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jFileChooser1 = new javax.swing.JFileChooser();
+        jFrame1 = new javax.swing.JFrame();
+        lblNombre = new javax.swing.JLabel();
+        lblDescripcion = new javax.swing.JLabel();
+        cajaNombre = new javax.swing.JTextField();
+        cajaDescripcion = new javax.swing.JTextField();
+        btnAgregar = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
+        lblTipo = new javax.swing.JLabel();
+        lblVentaPor = new javax.swing.JLabel();
+        selectorArchivo = new javax.swing.JFileChooser();
+        cajaTipo = new javax.swing.JComboBox<>();
+        cajaVenta = new javax.swing.JComboBox<>();
+        lblImagen = new javax.swing.JLabel();
+
+        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
+        jFrame1.getContentPane().setLayout(jFrame1Layout);
+        jFrame1Layout.setHorizontalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jFrame1Layout.setVerticalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Alta de Limusinas");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jLabel1.setText("Nombre:");
+        lblNombre.setText("Nombre:");
 
-        jLabel2.setText("Descripción:");
+        lblDescripcion.setText("Descripción:");
 
-        cajaChapa.setText("-------");
-        cajaChapa.addActionListener(new java.awt.event.ActionListener() {
+        cajaNombre.setText("-------");
+        cajaNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cajaChapaActionPerformed(evt);
+                cajaNombreActionPerformed(evt);
             }
         });
 
-        cajaColor.setText("Sin Color");
-        cajaColor.addActionListener(new java.awt.event.ActionListener() {
+        cajaDescripcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cajaColorActionPerformed(evt);
+                cajaDescripcionActionPerformed(evt);
             }
         });
 
-        botonAgregar.setText("Agregar");
-        botonAgregar.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonAgregarActionPerformed(evt);
+                btnAgregarActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Salir");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSalirActionPerformed(evt);
             }
         });
 
-        jLabel3.setText("Tipo:");
+        lblTipo.setText("Tipo:");
 
-        jLabel4.setText("Venta por:");
+        lblVentaPor.setText("Venta por:");
 
-        jFileChooser1.addActionListener(new java.awt.event.ActionListener() {
+        selectorArchivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFileChooser1ActionPerformed(evt);
+                selectorArchivoActionPerformed(evt);
             }
         });
+
+        cajaTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cajaTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cajaTipoActionPerformed(evt);
+            }
+        });
+
+        cajaVenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        lblImagen.setText("Sin imagen je");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -82,106 +116,126 @@ public class registrarProducto extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblDescripcion)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(43, 43, 43))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton1)
-                                    .addComponent(botonAgregar))
-                                .addGap(18, 18, 18)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(43, 43, 43))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnSalir)
+                                    .addComponent(btnAgregar)))
+                            .addComponent(lblVentaPor, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cajaColor, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
-                            .addComponent(cajaChapa))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 225, Short.MAX_VALUE)
-                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cajaDescripcion)
+                            .addComponent(cajaNombre)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cajaTipo, 0, 146, Short.MAX_VALUE)
+                                    .addComponent(cajaVenta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)))))
+                .addComponent(selectorArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(154, 154, 154)
+                .addComponent(lblImagen)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(selectorArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(60, 60, 60)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(cajaChapa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblNombre)
+                            .addComponent(cajaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel2)
+                        .addComponent(lblDescripcion)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cajaColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4)
-                        .addGap(26, 26, 26)
-                        .addComponent(botonAgregar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(53, Short.MAX_VALUE))
+                            .addComponent(cajaDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTipo))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblVentaPor)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(btnAgregar)
+                                .addGap(26, 26, 26)
+                                .addComponent(btnSalir))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(cajaTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(17, 17, 17)
+                                .addComponent(cajaVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(92, 92, 92)
+                .addComponent(lblImagen)
+                .addContainerGap(315, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(990, 418));
+        setSize(new java.awt.Dimension(1014, 787));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         dispose();
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void botonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarActionPerformed
-        modelo.agregarLimusina(Integer.parseInt(cajaChapa.getText().trim()), cajaColor.getText().trim());
-        cajaColor.setText("-----------");
-        cajaChapa.setText("----");
-    }//GEN-LAST:event_botonAgregarActionPerformed
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        
+    }//GEN-LAST:event_btnAgregarActionPerformed
 
-    private void cajaColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cajaColorActionPerformed
+    private void cajaDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cajaDescripcionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cajaColorActionPerformed
+    }//GEN-LAST:event_cajaDescripcionActionPerformed
 
-    private void cajaChapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cajaChapaActionPerformed
+    private void cajaNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cajaNombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cajaChapaActionPerformed
+    }//GEN-LAST:event_cajaNombreActionPerformed
 
-    private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
+    private void selectorArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectorArchivoActionPerformed
         // TODO add your handling code here:
-        String com = evt.getActionCommand();
-        if (com.equals("save")) {
-            
+        int showOpenDialogue = selectorArchivo.showOpenDialog(null);
+        if (showOpenDialogue == APPROVE_OPTION) {
+            File imagenSeleccionada = selectorArchivo.getSelectedFile();
+            String pathImagenSeleccionada = imagenSeleccionada.getPath();
+            JOptionPane.showConfirmDialog(null, pathImagenSeleccionada);
+            ImageIcon imagenicon = new ImageIcon(pathImagenSeleccionada);
+            Image imagen = imagenicon.getImage().getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_SMOOTH);
+            lblImagen.setIcon(new ImageIcon(imagen));
         }
-    }//GEN-LAST:event_jFileChooser1ActionPerformed
+        
+    }//GEN-LAST:event_selectorArchivoActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AltaCamioneta().setVisible(true);
-            }
-        });
-    }
+    private void cajaTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cajaTipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cajaTipoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonAgregar;
-    private javax.swing.JTextField cajaChapa;
-    private javax.swing.JTextField cajaColor;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JFileChooser jFileChooser1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnSalir;
+    private javax.swing.JTextField cajaDescripcion;
+    private javax.swing.JTextField cajaNombre;
+    private javax.swing.JComboBox<String> cajaTipo;
+    private javax.swing.JComboBox<String> cajaVenta;
+    private javax.swing.JFrame jFrame1;
+    private javax.swing.JLabel lblDescripcion;
+    private javax.swing.JLabel lblImagen;
+    private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblTipo;
+    private javax.swing.JLabel lblVentaPor;
+    private javax.swing.JFileChooser selectorArchivo;
     // End of variables declaration//GEN-END:variables
 
 }
