@@ -60,8 +60,19 @@ public class Mercado {
         this.listaMovimientos.add(unMovimiento);
     }
     
-    public boolean registrarProducto(Producto unProducto){
+    /*public boolean registrarProducto(Producto unProducto){
         boolean existe = false;
+        if (!getListaProductos().contains(unProducto)) {
+            agregarListaProductos(unProducto);
+            existe = true;
+        }
+        return existe;
+    }*/
+    
+    public boolean registrarProducto(String nombre, String descripcion, Producto.Tipo unTipo, Producto.FormaVenta unaVenta){
+        boolean existe = false;
+        Producto p = new Producto();
+        c
         if (!getListaProductos().contains(unProducto)) {
             agregarListaProductos(unProducto);
             existe = true;
@@ -182,6 +193,26 @@ public class Mercado {
             }
         }
         return listaPuestosAuxiliar.toArray(new String[listaPuestosAuxiliar.size()]);
+    }
+    
+    public String[] getListaTipoProducto() {
+        Producto.Tipo[] enumValues = Producto.Tipo.values();
+        String[] arrayTipoProducto = new String[enumValues.length];
+
+        for (int i = 0; i < enumValues.length; i++) {
+            arrayTipoProducto[i] = enumValues[i].toString();
+        }
+        return arrayTipoProducto;
+    }
+    
+    public String[] getListaFormaVentaProducto() {
+        Producto.FormaVenta[] enumValues = Producto.FormaVenta.values();
+        String[] arrayTipoProducto = new String[enumValues.length];
+
+        for (int i = 0; i < enumValues.length; i++) {
+            arrayTipoProducto[i] = enumValues[i].toString();
+        }
+        return arrayTipoProducto;
     }
     
     

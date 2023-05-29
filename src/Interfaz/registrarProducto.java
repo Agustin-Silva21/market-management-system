@@ -1,8 +1,14 @@
 package Interfaz;
 
 import Dominio.Mercado;
+import Dominio.Producto;
 import java.awt.Image;
 import java.io.File;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import static javax.swing.JFileChooser.*;
 import javax.swing.JOptionPane;
@@ -19,9 +25,18 @@ public class registrarProducto extends javax.swing.JFrame {
     public registrarProducto(Mercado unModelo) {
         modelo = unModelo;
         initComponents();
-        selectorArchivo.setCurrentDirectory(new java.io.File("/home/agustin973/NetBeansProjects/Obligatorio2/src/Helpers/imagenesProductos"));
+        ComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(modelo.getListaFormaVentaProducto());
+        cajaTipo.setModel(comboBoxModel);
+        comboBoxModel = new DefaultComboBoxModel<>(modelo.getListaTipoProducto());
+        cajaVenta.setModel(comboBoxModel);        
+        String pathDirectorio = System.getProperty("user.dir") + "/src/Helpers";
+        System.out.println(pathDirectorio);
+        selectorArchivo.setCurrentDirectory(new java.io.File(pathDirectorio + "/imagenesProductos"));
         FileNameExtensionFilter filtro = new FileNameExtensionFilter("IMAGES","png","jpg","jpeg");
         selectorArchivo.addChoosableFileFilter(filtro);
+        ImageIcon imagenicon = new ImageIcon(pathDirectorio + "/No-Image-Placeholder.jpg");
+        Image imagen = imagenicon.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+        lblImagen.setIcon(new ImageIcon(imagen));
     }
 
     @SuppressWarnings("unchecked")
@@ -54,7 +69,7 @@ public class registrarProducto extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Alta de Limusinas");
+        setTitle("Registro de Producto");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         lblNombre.setText("Nombre:");
@@ -62,12 +77,14 @@ public class registrarProducto extends javax.swing.JFrame {
         lblDescripcion.setText("Descripción:");
 
         cajaNombre.setText("-------");
+        cajaNombre.setToolTipText("Nombre del producto a agregar");
         cajaNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cajaNombreActionPerformed(evt);
             }
         });
 
+        cajaDescripcion.setToolTipText("Descripcion del producto a agregar");
         cajaDescripcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cajaDescripcionActionPerformed(evt);
@@ -99,6 +116,7 @@ public class registrarProducto extends javax.swing.JFrame {
         });
 
         cajaTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cajaTipo.setToolTipText("Indicar el tipo de producto a agregar");
         cajaTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cajaTipoActionPerformed(evt);
@@ -106,46 +124,45 @@ public class registrarProducto extends javax.swing.JFrame {
         });
 
         cajaVenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        lblImagen.setText("Sin imagen je");
+        cajaVenta.setToolTipText("Indicar como se cuantifica el producto");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblDescripcion)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lblTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(43, 43, 43))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnSalir)
-                                    .addComponent(btnAgregar)))
-                            .addComponent(lblVentaPor, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cajaDescripcion)
-                            .addComponent(cajaNombre)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cajaTipo, 0, 146, Short.MAX_VALUE)
-                                    .addComponent(cajaVenta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)))))
+                                .addGap(16, 16, 16)
+                                .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblDescripcion, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblTipo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblVentaPor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cajaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cajaDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cajaTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cajaVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(45, 45, 45))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(lblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(selectorArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(154, 154, 154)
-                .addComponent(lblImagen)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,40 +177,48 @@ public class registrarProducto extends javax.swing.JFrame {
                             .addComponent(lblNombre)
                             .addComponent(cajaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(lblDescripcion)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblDescripcion)
+                            .addComponent(cajaDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(7, 7, 7)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTipo)
+                            .addComponent(cajaTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblVentaPor)
+                            .addComponent(cajaVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                            .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cajaDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTipo))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblVentaPor)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addComponent(btnAgregar)
-                                .addGap(26, 26, 26)
-                                .addComponent(btnSalir))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(cajaTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(17, 17, 17)
-                                .addComponent(cajaVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(92, 92, 92)
-                .addComponent(lblImagen)
-                .addContainerGap(315, Short.MAX_VALUE))
+                        .addComponent(lblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(1014, 787));
+        setSize(new java.awt.Dimension(863, 525));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        dispose();
-        
+        int eleccion = JOptionPane.showConfirmDialog(null,
+             "¿Estas seguro que desea salir?", "Aviso", JOptionPane.YES_NO_OPTION);
+        if (eleccion == JOptionPane.YES_OPTION) {
+            dispose();            
+        }        
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        
+        String descripcion = cajaDescripcion.getText().trim();
+        String nombre = cajaNombre.getText().trim();
+        if (nombre.isEmpty() && !descripcion.isEmpty()) {
+        modelo.registrarProducto(Integer.parseInt(cajaChapa.getText().trim()),Integer.parseInt(cajaCarga.getText().trim()));
+            
+        }
+        cajaNombre        
+        cajaCarga.setText("---");
+        cajaChapa.setText("---");
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void cajaDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cajaDescripcionActionPerformed
@@ -206,15 +231,34 @@ public class registrarProducto extends javax.swing.JFrame {
 
     private void selectorArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectorArchivoActionPerformed
         // TODO add your handling code here:
-        int showOpenDialogue = selectorArchivo.showOpenDialog(null);
-        if (showOpenDialogue == APPROVE_OPTION) {
+        //evt.getActionCommand().equals(ABORT)
+        //int showOpenDialogue = selectorArchivo.showOpenDialog(null);
+        String accion = evt.getActionCommand();
+        System.out.println(accion);
+        if (accion.equalsIgnoreCase("ApproveSelection")) {
+            File imagenSeleccionada = selectorArchivo.getSelectedFile();
+            String pathImagenSeleccionada = imagenSeleccionada.getPath();  
+            ImageIcon imagenicon = new ImageIcon(pathImagenSeleccionada);
+            Image imagen = imagenicon.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+            lblImagen.setIcon(new ImageIcon(imagen));
+            String seleccion = (String) cajaTipo.getSelectedItem();
+            System.out.println(seleccion);
+            
+        }else if(accion.equalsIgnoreCase("CancelSelection")){
+            String pathDirectorio = System.getProperty("user.dir") + "/src/Helpers";
+            ImageIcon imagenicon = new ImageIcon(pathDirectorio + "/No-Image-Placeholder.jpg");
+            Image imagen = imagenicon.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+            lblImagen.setIcon(new ImageIcon(imagen));
+        }
+        /*if (showOpenDialogue == APPROVE_OPTION) {
             File imagenSeleccionada = selectorArchivo.getSelectedFile();
             String pathImagenSeleccionada = imagenSeleccionada.getPath();
             JOptionPane.showConfirmDialog(null, pathImagenSeleccionada);
             ImageIcon imagenicon = new ImageIcon(pathImagenSeleccionada);
-            Image imagen = imagenicon.getImage().getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_SMOOTH);
+            Image imagen = imagenicon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
             lblImagen.setIcon(new ImageIcon(imagen));
         }
+        */
         
     }//GEN-LAST:event_selectorArchivoActionPerformed
 
