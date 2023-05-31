@@ -1,7 +1,8 @@
 package Interfaz;
 
 import Dominio.Mercado;
-import Dominio.Producto;
+import Dominio.Producto.FormaVenta;
+import Dominio.Producto.Tipo;
 import java.awt.Image;
 import java.io.File;
 import java.nio.file.FileSystems;
@@ -26,9 +27,9 @@ public class registrarProducto extends javax.swing.JFrame {
         modelo = unModelo;
         initComponents();
         ComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(modelo.getListaFormaVentaProducto());
-        cajaTipo.setModel(comboBoxModel);
+        cajaVenta.setModel(comboBoxModel);
         comboBoxModel = new DefaultComboBoxModel<>(modelo.getListaTipoProducto());
-        cajaVenta.setModel(comboBoxModel);        
+        cajaTipo.setModel(comboBoxModel);        
         String pathDirectorio = System.getProperty("user.dir") + "/src/Helpers";
         System.out.println(pathDirectorio);
         selectorArchivo.setCurrentDirectory(new java.io.File(pathDirectorio + "/imagenesProductos"));
@@ -212,13 +213,30 @@ public class registrarProducto extends javax.swing.JFrame {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         String descripcion = cajaDescripcion.getText().trim();
         String nombre = cajaNombre.getText().trim();
-        if (nombre.isEmpty() && !descripcion.isEmpty()) {
-        modelo.registrarProducto(Integer.parseInt(cajaChapa.getText().trim()),Integer.parseInt(cajaCarga.getText().trim()));
+        String tipoString = (String) cajaTipo.getSelectedItem();
+        String formaVentaString = (String) cajaVenta.getSelectedItem();
+        ImageIcon imagen = (ImageIcon) lblImagen.getIcon();
+        if (!nombre.isEmpty() && !descripcion.isEmpty()) {
+            String mensaje = "Nombre: " + nombre + "\nDescripcion: " + descripcion + "\nTipo: " + tipoString + "\nForma de Venta: " + formaVentaString;
             
+            Tipo tipo = Tipo.valueOf(tipoString);
+            FormaVenta formaVenta = FormaVenta.valueOf(formaVentaString);
+            int opcion = JOptionPane.showOptionDialog(null,mensaje,"Titulo",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,imagen,new String[]{"Guardar","Cancelar"},"Guardar");
+            
+            if (opcion == JOptionPane.YES_OPTION) {
+                System.out.println("guardar");
+                if (modelo.registrarProducto(nombre, descripcion, tipo, formaVenta)) {
+                    JOptionPane.showMessageDialog(null, "El producto ha sido guardado exitosamente.", "Guardar Producto", JOptionPane.INFORMATION_MESSAGE);
+                }
+
+            }else if(opcion == JOptionPane.NO_OPTION) {
+                System.out.println("borrartodo");
+            }
+            //modelo.registrarProducto();
         }
-        cajaNombre        
-        cajaCarga.setText("---");
-        cajaChapa.setText("---");
+        //cajaNombre        
+        //cajaCarga.setText("---");
+        //cajaChapa.setText("---");
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void cajaDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cajaDescripcionActionPerformed
