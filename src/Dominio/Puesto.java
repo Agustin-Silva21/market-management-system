@@ -7,10 +7,6 @@ package Dominio;
 import java.util.HashMap;
 import java.util.Iterator;
 
-/**
- *
- * @author agustin973
- */
 public class Puesto {
     private String id;
     private Dueño dueño;

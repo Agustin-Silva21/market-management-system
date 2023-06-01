@@ -17,28 +17,28 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="registrarProductoActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="altaCamioneta">
+            <MenuItem class="javax.swing.JMenuItem" name="registrarDue&#xf1;o">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Registrar due&#xf1;o"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="altaCamionetaActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="registrarDue&#xf1;oActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="altaCliente">
+            <MenuItem class="javax.swing.JMenuItem" name="registrarPuesto">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Registrar puesto"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="altaClienteActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="registrarPuestoActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="altaChofer">
+            <MenuItem class="javax.swing.JMenuItem" name="registrarMayorista">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Registrar mayorista"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="altaChoferActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="registrarMayoristaActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

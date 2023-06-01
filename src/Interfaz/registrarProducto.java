@@ -5,13 +5,9 @@ import Dominio.Producto.FormaVenta;
 import Dominio.Producto.Tipo;
 import java.awt.Image;
 import java.io.File;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
-import static javax.swing.JFileChooser.*;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 

@@ -22,9 +22,9 @@ public class MenuPpal extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         registrarProducto = new javax.swing.JMenuItem();
-        altaCamioneta = new javax.swing.JMenuItem();
-        altaCliente = new javax.swing.JMenuItem();
-        altaChofer = new javax.swing.JMenuItem();
+        registrarDueño = new javax.swing.JMenuItem();
+        registrarPuesto = new javax.swing.JMenuItem();
+        registrarMayorista = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         agregarReserva = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -49,29 +49,29 @@ public class MenuPpal extends javax.swing.JFrame {
         });
         fileMenu.add(registrarProducto);
 
-        altaCamioneta.setText("Registrar dueño");
-        altaCamioneta.addActionListener(new java.awt.event.ActionListener() {
+        registrarDueño.setText("Registrar dueño");
+        registrarDueño.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                altaCamionetaActionPerformed(evt);
+                registrarDueñoActionPerformed(evt);
             }
         });
-        fileMenu.add(altaCamioneta);
+        fileMenu.add(registrarDueño);
 
-        altaCliente.setText("Registrar puesto");
-        altaCliente.addActionListener(new java.awt.event.ActionListener() {
+        registrarPuesto.setText("Registrar puesto");
+        registrarPuesto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                altaClienteActionPerformed(evt);
+                registrarPuestoActionPerformed(evt);
             }
         });
-        fileMenu.add(altaCliente);
+        fileMenu.add(registrarPuesto);
 
-        altaChofer.setText("Registrar mayorista");
-        altaChofer.addActionListener(new java.awt.event.ActionListener() {
+        registrarMayorista.setText("Registrar mayorista");
+        registrarMayorista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                altaChoferActionPerformed(evt);
+                registrarMayoristaActionPerformed(evt);
             }
         });
-        fileMenu.add(altaChofer);
+        fileMenu.add(registrarMayorista);
 
         menuBar.add(fileMenu);
 
@@ -139,10 +139,10 @@ public class MenuPpal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void altaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altaClienteActionPerformed
+    private void registrarPuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarPuestoActionPerformed
         
         
-}//GEN-LAST:event_altaClienteActionPerformed
+}//GEN-LAST:event_registrarPuestoActionPerformed
 
     private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
         
@@ -155,16 +155,16 @@ public class MenuPpal extends javax.swing.JFrame {
         v.setVisible(true);
 }//GEN-LAST:event_registrarProductoActionPerformed
 
-    private void altaCamionetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altaCamionetaActionPerformed
-        
-    // TODO add your handling code here:
-    }//GEN-LAST:event_altaCamionetaActionPerformed
+    private void registrarDueñoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarDueñoActionPerformed
+        registrarDueño v = new registrarDueño(modelo);
+        v.setVisible(true);// TODO add your handling code here:
+    }//GEN-LAST:event_registrarDueñoActionPerformed
 
-    private void altaChoferActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altaChoferActionPerformed
+    private void registrarMayoristaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarMayoristaActionPerformed
         
 
     // TODO add your handling code here:
-    }//GEN-LAST:event_altaChoferActionPerformed
+    }//GEN-LAST:event_registrarMayoristaActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
        
@@ -189,9 +189,6 @@ public class MenuPpal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem agregarReserva;
-    private javax.swing.JMenuItem altaCamioneta;
-    private javax.swing.JMenuItem altaChofer;
-    private javax.swing.JMenuItem altaCliente;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
@@ -202,6 +199,9 @@ public class MenuPpal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenuItem registrarDueño;
+    private javax.swing.JMenuItem registrarMayorista;
     private javax.swing.JMenuItem registrarProducto;
+    private javax.swing.JMenuItem registrarPuesto;
     // End of variables declaration//GEN-END:variables
 }

@@ -71,19 +71,20 @@ public class Mercado {
     
     public boolean registrarProducto(String nombre, String descripcion, Producto.Tipo unTipo, Producto.FormaVenta unaVenta){
         boolean existe = false;
-        Producto p = new Producto();
-        c
-        if (!getListaProductos().contains(unProducto)) {
-            agregarListaProductos(unProducto);
+        Producto p = new Producto(nombre,descripcion,unTipo,unaVenta);
+        if (!getListaProductos().contains(p)) {
+            agregarListaProductos(p);
             existe = true;
+            System.out.println("agregado?");
         }
         return existe;
     }
     
-    public boolean registrarDueño(Dueño unDueño){
+    public boolean registrarDueño(String nombre, int edad, int añosDeExp){
+        Dueño dueñoCreado = new Dueño(nombre,edad,añosDeExp);
         boolean existe = false;
-        if (!getListaDueños().contains(unDueño)) {
-            agregarListaDueños(unDueño);
+        if (!getListaDueños().contains(dueñoCreado)) {
+            agregarListaDueños(dueñoCreado);
             existe = true;
         }
         return existe;
