@@ -20,49 +20,49 @@ public registrarPuesto(Mercado unModelo) {
     private void initComponents() {
 
         lblId = new javax.swing.JLabel();
-        cajaNombre = new javax.swing.JTextField();
+        txtIdentificacion = new javax.swing.JTextField();
         lblEdad = new javax.swing.JLabel();
-        cajaAñosExp = new javax.swing.JTextField();
-        botonAgregar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        txtUbicacion = new javax.swing.JTextField();
+        btnAgregar = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
         lblAñosExp = new javax.swing.JLabel();
         lblAñosExp1 = new javax.swing.JLabel();
-        cajaAñosExp1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        txtCantEmpleados = new javax.swing.JTextField();
+        cmbDuenio = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registro de Puesto");
 
         lblId.setText("Identificacion");
 
-        cajaNombre.setText(" ");
-        cajaNombre.setToolTipText("Inserte nombre aqui");
-        cajaNombre.addActionListener(new java.awt.event.ActionListener() {
+        txtIdentificacion.setText(" ");
+        txtIdentificacion.setToolTipText("Inserte nombre aqui");
+        txtIdentificacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cajaNombreActionPerformed(evt);
+                txtIdentificacionActionPerformed(evt);
             }
         });
 
         lblEdad.setText("Dueño");
 
-        cajaAñosExp.setToolTipText("Insertar años de experiencia del dueño");
-        cajaAñosExp.addActionListener(new java.awt.event.ActionListener() {
+        txtUbicacion.setToolTipText("Insertar años de experiencia del dueño");
+        txtUbicacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cajaAñosExpActionPerformed(evt);
+                txtUbicacionActionPerformed(evt);
             }
         });
 
-        botonAgregar.setText("Agregar");
-        botonAgregar.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonAgregarActionPerformed(evt);
+                btnAgregarActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Salir");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSalirActionPerformed(evt);
             }
         });
 
@@ -70,14 +70,19 @@ public registrarPuesto(Mercado unModelo) {
 
         lblAñosExp1.setText("Cantidad de empleados");
 
-        cajaAñosExp1.setToolTipText("Insertar años de experiencia del dueño");
-        cajaAñosExp1.addActionListener(new java.awt.event.ActionListener() {
+        txtCantEmpleados.setToolTipText("Insertar años de experiencia del dueño");
+        txtCantEmpleados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cajaAñosExp1ActionPerformed(evt);
+                txtCantEmpleadosActionPerformed(evt);
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbDuenio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbDuenio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbDuenioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -92,16 +97,16 @@ public registrarPuesto(Mercado unModelo) {
                     .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cajaAñosExp, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cajaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cajaAñosExp1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtUbicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCantEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbDuenio, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(95, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(botonAgregar)
+                .addComponent(btnAgregar)
                 .addGap(75, 75, 75)
-                .addComponent(jButton1)
+                .addComponent(btnSalir)
                 .addGap(157, 157, 157))
         );
         layout.setVerticalGroup(
@@ -109,24 +114,24 @@ public registrarPuesto(Mercado unModelo) {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cajaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblId))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cajaAñosExp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtUbicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblAñosExp))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cajaAñosExp1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCantEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblAñosExp1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbDuenio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblEdad))
                 .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonAgregar)
-                    .addComponent(jButton1))
+                    .addComponent(btnAgregar)
+                    .addComponent(btnSalir))
                 .addContainerGap(68, Short.MAX_VALUE))
         );
 
@@ -134,15 +139,15 @@ public registrarPuesto(Mercado unModelo) {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void botonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarActionPerformed
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         try {
             int edad = Integer.parseInt(cajaEdad.getText());
-            int añosExp = Integer.parseInt(cajaAñosExp.getText());
-            String nombre = cajaNombre.getText().trim();
+            int añosExp = Integer.parseInt(txtUbicacion.getText());
+            String nombre = txtIdentificacion.getText().trim();
             if (edad<18) {
                 JOptionPane.showMessageDialog(null, "La edad debe ser mayor a 18 años!");
             }else if(añosExp<0){
@@ -163,23 +168,27 @@ public registrarPuesto(Mercado unModelo) {
             }
             JOptionPane.showMessageDialog(null, errorMessage);
         } finally{
-            cajaNombre.setText("---");
+            txtIdentificacion.setText("---");
             cajaEdad.setText("");
-            cajaAñosExp.setText("");
+            txtUbicacion.setText("");
         }
-    }//GEN-LAST:event_botonAgregarActionPerformed
+    }//GEN-LAST:event_btnAgregarActionPerformed
 
-    private void cajaAñosExpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cajaAñosExpActionPerformed
+    private void txtUbicacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUbicacionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cajaAñosExpActionPerformed
+    }//GEN-LAST:event_txtUbicacionActionPerformed
 
-    private void cajaNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cajaNombreActionPerformed
+    private void txtIdentificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdentificacionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cajaNombreActionPerformed
+    }//GEN-LAST:event_txtIdentificacionActionPerformed
 
-    private void cajaAñosExp1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cajaAñosExp1ActionPerformed
+    private void txtCantEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantEmpleadosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cajaAñosExp1ActionPerformed
+    }//GEN-LAST:event_txtCantEmpleadosActionPerformed
+
+    private void cmbDuenioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDuenioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbDuenioActionPerformed
 
     /**
     * @param args the command line arguments
@@ -193,16 +202,16 @@ public registrarPuesto(Mercado unModelo) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonAgregar;
-    private javax.swing.JTextField cajaAñosExp;
-    private javax.swing.JTextField cajaAñosExp1;
-    private javax.swing.JTextField cajaNombre;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnSalir;
+    private javax.swing.JComboBox<String> cmbDuenio;
     private javax.swing.JLabel lblAñosExp;
     private javax.swing.JLabel lblAñosExp1;
     private javax.swing.JLabel lblEdad;
     private javax.swing.JLabel lblId;
+    private javax.swing.JTextField txtCantEmpleados;
+    private javax.swing.JTextField txtIdentificacion;
+    private javax.swing.JTextField txtUbicacion;
     // End of variables declaration//GEN-END:variables
 
 }

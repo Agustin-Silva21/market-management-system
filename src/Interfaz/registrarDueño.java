@@ -146,8 +146,11 @@ public registrarDueño(Mercado unModelo) {
             }else if(nombre.isBlank()){
                 JOptionPane.showMessageDialog(null, "Se debe colocar nombre!","Error",JOptionPane.ERROR_MESSAGE);
             }else{
-                modelo.registrarDueño(nombre,edad,añosExp);
-                JOptionPane.showMessageDialog(null, "Dueño creado con exito","Confirmacion",JOptionPane.INFORMATION_MESSAGE);
+                if (modelo.registrarDueño(nombre, edad, añosExp)) {
+                    JOptionPane.showMessageDialog(null, "Dueño creado con exito","Confirmacion",JOptionPane.INFORMATION_MESSAGE);                    
+                }else{                   
+                    JOptionPane.showMessageDialog(null, "El nombre no debe repetirse!","Error",JOptionPane.ERROR_MESSAGE);
+                }
             }
         } catch (NumberFormatException ex) {
             String errorMessage;

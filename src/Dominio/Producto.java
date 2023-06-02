@@ -100,14 +100,15 @@ public class Producto {
     }*/
     @Override
     public boolean equals(Object obj) {
-        boolean retVal = false;
+    boolean retVal = false;
 
-        if (obj instanceof Producto ptr) {
-            retVal = (ptr.getNombre() == null ? this.getNombre() == null : ptr.getNombre().equals(this.getNombre()));
-        }
-
-        return retVal;
+    if (obj instanceof Producto) {
+        Producto ptr = (Producto) obj;
+        retVal = (ptr.getNombre() == null ? this.getNombre() == null : ptr.getNombre().equals(this.getNombre()));
     }
+
+    return retVal;
+}
     // https://stackoverflow.com/questions/8322129/arraylists-custom-contains-method
     @Override
     public int hashCode() {
