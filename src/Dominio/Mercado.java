@@ -160,7 +160,7 @@ public class Mercado {
         Iterator<Movimiento> it = listaMovimientos.iterator();
         while (it.hasNext()) {
             Movimiento unMovimiento = it.next();
-            if (unMovimiento.getUnProducto().equals(unProducto)) {
+            if (unMovimiento.getProducto().equals(unProducto)) {
                 if (unMovimiento.getClass().getName().equalsIgnoreCase("Compra")) {
                     totalComprado += unMovimiento.getPrecio();
                     cantComprada += unMovimiento.getCantidad();
@@ -190,7 +190,7 @@ public class Mercado {
         for (int i = 0; i < this.getListaMovimientos().size(); i++) {
             Movimiento unMovimiento = this.getListaMovimientos().get(i);
             if (unMovimiento.getPrecio() == unPrecio) {                
-                listaPuestosAuxiliar.add(unMovimiento.getUnPuesto().getId());
+                listaPuestosAuxiliar.add(unMovimiento.getPuesto().getId());
             }
         }
         return listaPuestosAuxiliar.toArray(new String[listaPuestosAuxiliar.size()]);
