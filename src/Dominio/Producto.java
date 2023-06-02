@@ -6,6 +6,7 @@ package Dominio;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import javax.imageio.ImageIO;
 
 /**
@@ -23,11 +24,21 @@ public class Producto {
     public enum FormaVenta {Unidad,Kilogramo}
 
     // constructor por defecto tendria que tener?
+    public Producto() throws IOException{
+        this.nombre = "----";
+        this.descripcion = "----";
+        this.unTipo = Tipo.Fruta;
+        this.unaVenta = FormaVenta.Kilogramo;
+        this.imagen = ImageIO.read(new File("/home/agustin973/NetBeansProjects/Obligatorio2/src/Helpers/No-Image-Placeholder.jpg"));
+    }
     
-    
-    public Producto(String nombre, String descripcion, Tipo unTipo, FormaVenta unaVenta, BufferedImage imagen) {
+    public Producto(String nombre, String descripcion, Tipo unTipo, FormaVenta unaVenta, String imagenPath) {
         this(nombre,descripcion,unTipo,unaVenta);
-        this.imagen = imagen;
+        try {
+            this.imagen = ImageIO.read(new File(imagenPath));
+        } catch (IOException e){
+            System.out.println("Error al obtener la imagen!");
+        }
     }
     
     public Producto(String nombre, String descripcion, Tipo unTipo, FormaVenta unaVenta) {
@@ -35,8 +46,11 @@ public class Producto {
         this.descripcion = descripcion;
         this.unTipo = unTipo;
         this.unaVenta = unaVenta;
-        this.imagen = imagen;
-        // llamar a imagen por defecto que diga (Sin imagen)
+        try {    
+            this.imagen = ImageIO.read(new File("/home/agustin973/NetBeansProjects/Obligatorio2/src/Helpers/No-Image-Placeholder.jpg"));          
+        } catch (IOException e){
+            System.out.println("Error al obtener la imagen!");
+        }
     }
 
     public String getNombre() {
@@ -79,9 +93,25 @@ public class Producto {
         // this.imagen = ImageIO.read(new File(name + ".png"));
         // como carajo se hace esto?
     }
-    
+    /*@Override
+    public boolean equals(Object obj) {
+        return this.getNombre().equalsIgnoreCase((Producto)obj).getNombre();
+    }*/
     @Override
-    public String toString() {
-        return this.getNombre();
+    public boolean equals(Object obj) {
+        boolean retVal = false;
+
+        if (obj instanceof Producto ptr) {
+            retVal = (ptr.getNombre() == null ? this.getNombre() == null : ptr.getNombre().equals(this.getNombre()));
+        }
+
+        return retVal;
+    }
+    // https://stackoverflow.com/questions/8322129/arraylists-custom-contains-method
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 17 * hash + (this.getNombre() != null ? this.getNombre().hashCode() : 0);
+        return hash;
     }
 }
