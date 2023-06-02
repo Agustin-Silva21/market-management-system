@@ -66,5 +66,7 @@ public class Dueño {
         return hash;
     }
     
-    
+    public String toString(){
+        return this.getNombre();
+    }
 }

@@ -93,7 +93,6 @@ public class Producto {
         // this.imagen = ImageIO.read(new File(name + ".png"));
         // como carajo se hace esto?
     }
-    
     /*@Override
     public boolean equals(Object obj) {
         return this.getNombre().equalsIgnoreCase((Producto)obj).getNombre();
@@ -115,6 +114,4 @@ public class Producto {
         hash = 17 * hash + (this.getNombre() != null ? this.getNombre().hashCode() : 0);
         return hash;
     }
-    
-            
 }

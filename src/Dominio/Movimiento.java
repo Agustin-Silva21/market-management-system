@@ -3,17 +3,17 @@ package Dominio;
 // Cuando creas un movimiento creas una venta, si creas Compra, ahi si te queda Compra
 public class Movimiento {
     private static int id = 0;
-    private Puesto unPuesto;
+    private Puesto puesto;
     // private Mayorista unMayorista;
     // Probamos con clase abstracta y sino lo dejamos aca y lo ponemos null
-    private Producto unProducto;
+    private Producto producto;
     private float precio;
     private float cantidad;
 
     public Movimiento(Puesto unPuesto, Producto unProducto, float precio, float cantidad) {
         this.id = getId();
-        this.unPuesto = unPuesto;
-        this.unProducto = unProducto;
+        this.puesto = unPuesto;
+        this.producto = unProducto;
         this.precio = precio;
         this.cantidad = cantidad;
         id++;
@@ -28,20 +28,20 @@ public class Movimiento {
     }
     // posible solucion: https://www.javatpoint.com/how-to-find-number-of-objects-created-in-java
     
-    public Puesto getUnPuesto() {
-        return unPuesto;
+    public Puesto getPuesto() {
+        return puesto;
     }
 
-    public void setUnPuesto(Puesto unPuesto) {
-        this.unPuesto = unPuesto;
+    public void setPuesto(Puesto unPuesto) {
+        this.puesto = unPuesto;
     }
 
-    public Producto getUnProducto() {
-        return unProducto;
+    public Producto getProducto() {
+        return producto;
     }
 
-    public void setUnProducto(Producto unProducto) {
-        this.unProducto = unProducto;
+    public void setProducto(Producto unProducto) {
+        this.producto = unProducto;
     }
 
     public float getPrecio() {
@@ -59,6 +59,9 @@ public class Movimiento {
     public void setCantidad(float cantidad) {
         this.cantidad = cantidad;
     }
-    
+    @Override
+    public String toString() {
+        return "" + this.getId() + ", " + this.getProducto() + ", " + this.getCantidad() + ", " + this.getPrecio();
+    }
     
 }
