@@ -65,6 +65,16 @@ public class Puesto implements Serializable{
         return oferta;
     }
     
+    public Producto[] getProductosOferta(){
+        Producto[] productos = new Producto[oferta.size()];
+    
+        int i = 0;
+        for (Producto producto : oferta.keySet()) {
+            productos[i] = producto;
+            i++;
+        }
+        return productos;
+    }
 
     public void agregarProducto(Producto unProducto,float cantidad) {
         this.oferta.put(unProducto, cantidad);

@@ -21,6 +21,7 @@ public class Producto implements Serializable{
     private Tipo unTipo;
     private FormaVenta unaVenta;
     private BufferedImage imagen;
+    private String pathImagen;
     // https://stackoverflow.com/questions/34072052/is-it-possible-to-add-an-image-png-as-an-attribute-of-a-java-class
     public enum Tipo {Fruta,Verdura}
     public enum FormaVenta {Unidad,Kilogramo}
@@ -31,13 +32,15 @@ public class Producto implements Serializable{
         this.descripcion = "----";
         this.unTipo = Tipo.Fruta;
         this.unaVenta = FormaVenta.Kilogramo;
-        this.imagen = ImageIO.read(new File("/home/agustin973/NetBeansProjects/Obligatorio2/src/Helpers/No-Image-Placeholder.jpg"));
+        this.pathImagen = "src/Helpers/ImagenesProductos/No-Image-Placeholder.jpg";
+        this.imagen = ImageIO.read(new File(pathImagen));
     }
     
     
     public Producto(String nombre, String descripcion, Tipo unTipo, FormaVenta unaVenta, String imagenPath) {
         this(nombre,descripcion,unTipo,unaVenta);
         try{
+            this.pathImagen = imagenPath;
             this.imagen = ImageIO.read(new File(imagenPath));
         } catch (IOException e){
             
@@ -49,8 +52,9 @@ public class Producto implements Serializable{
         this.descripcion = descripcion;
         this.unTipo = unTipo;
         this.unaVenta = unaVenta;
+        this.pathImagen = "src/Helpers/ImagenesProductos/No-Image-Placeholder.jpg";
         try{
-            this.imagen = ImageIO.read(new File("src/Helpers/No-Image-Placeholder.jpg"));
+            this.imagen = ImageIO.read(new File(pathImagen));
         } catch (IOException e){
             System.out.println("Imagen no encontrada");
         }
@@ -92,6 +96,14 @@ public class Producto implements Serializable{
         return imagen;
     }
 
+    public String getPathImagen() {
+        return pathImagen;
+    }
+
+    public void setPathImagen(String pathImagen) {
+        this.pathImagen = pathImagen;
+    }
+
     public void setImagen(BufferedImage imagen) {
         // this.imagen = ImageIO.read(new File(name + ".png"));
         // como carajo se hace esto?
@@ -100,6 +112,13 @@ public class Producto implements Serializable{
     public boolean equals(Object obj) {
         return this.getNombre().equalsIgnoreCase((Producto)obj).getNombre();
     }*/
+    
+    @Override
+    public String toString() {
+        return this.getNombre();
+    }
+    
+    
     @Override
     public boolean equals(Object obj) {
         boolean retVal = false;

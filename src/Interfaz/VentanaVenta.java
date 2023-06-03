@@ -2,6 +2,7 @@
 package Interfaz;
 
 import Dominio.*;
+import java.awt.Component;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -10,14 +11,11 @@ import java.util.*;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import java.awt.Component;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+
 
 public class VentanaVenta extends javax.swing.JFrame {
 
@@ -26,119 +24,44 @@ public class VentanaVenta extends javax.swing.JFrame {
         initComponents();
         this.setSize(1000,1000);
         productosAComprar = new HashMap<>();
-        cantidadYPrecioParaMostrar = new ArrayList<>();
         lstPuestos.setListData(mercado.getListaPuestos().toArray());
         
     }
     
+    private void cargarProductos(Producto[] productos){
+        
+        DefaultTableModel tabla = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+                //return super.isCellEditable(row, column); 
+            }
+            
+        };
+        tabla.addColumn("Productos");
+        for(Producto prod: productos){
+            tabla.addRow(new Object[]{
+            prod.getPathImagen()
+        });
+        }
+        
+        lstProductosOfrecidos.setModel(tabla);
+        lstProductosOfrecidos.setRowHeight(10);
+        lstProductosOfrecidos.getTableHeader().setReorderingAllowed(false);
+        lstProductosOfrecidos.getColumnModel().getColumn(0).setCellRenderer(new ImageRender());
+    }
     
-
-    public class MyTableModel extends DefaultTableModel {
+    private class ImageRender extends DefaultTableCellRenderer {
 
         @Override
-        public boolean isCellEditable(int row, int column) {
-            return false;
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            String imagenNombre = value.toString();
+            System.out.println("imagenNombre");
+            ImageIcon icono = new ImageIcon(new ImageIcon("src/Helpers/ImagenesProductos/" + imagenNombre).getImage().getScaledInstance(60, 60,Image.SCALE_DEFAULT));
+            return new JLabel(icono);
         }
-
+        
     }
-    
-    
-    
-
-    public class ImageRenderer extends DefaultTableCellRenderer{
-
-      private JLabel lb = new JLabel();
-      //imagen que se muestra cuando la celda esta vacia
-      private ImageIcon icon = new ImageIcon( getClass().getResource("/com/bolivia/res/default.jpg") );
-        //para contener las imagenes que se vayan cargando 
-      private Map iconos = new HashMap() ;
-
-      @Override
-      public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, 
-                                                     boolean hasFocus, int row, int column)
-      {
-            lb.setText((String) value);
-            File fichero;
-            //
-            if( value !=null )
-            {
-                fichero = new File( value.toString() );
-                //comprueba que fichero exista
-                if( fichero.exists() )
-                {
-                    //busca la imagen en el MAP
-                    if( ya_existe( value.toString() ) )
-                    {
-                        //si ya existe, extrae la imagen del MAP
-                        lb.setIcon( getIcono( value.toString() ) );
-                    }
-                    else //No existe
-                    {
-                    //Agrega la imagen al map
-                    iconos.put(value.toString(), bToIcon(fichero) );
-                    //extrae y muestra
-                    lb.setIcon( getIcono( value.toString() ) );    
-                    }
-
-                }
-                else //si no existe, muestra imagen por default
-                {
-                    lb.setIcon(icon);
-                }        
-            }
-            else
-            {
-                lb.setIcon(icon);
-            }
-        return lb;
-      }
-
-     /**
-     * Comprueba que una imagen ya exista en memoria
-     * @param String key identificador 
-     */
-     private boolean ya_existe( String key )
-     {
-        Iterator it = iconos.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry e = (Map.Entry)it.next();        
-            if( e.getKey().equals(key) )
-                return true;
-        }
-        return false;
-     }
-
-     /**
-     * Extrae una imagen del MAP dado su KEY
-     * @param String key identificador unico
-     * @return ImageIcon
-     */
-     private ImageIcon getIcono( String key )
-     {
-        ImageIcon imageIcon = icon;
-        Iterator it = iconos.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry e = (Map.Entry)it.next();        
-            if( e.getKey().equals(key) )
-            {
-               imageIcon = (ImageIcon) e.getValue();
-               break;
-            }            
-        }
-        return imageIcon;
-     }
-
-     /**
-     * Dado la ruta de un archivo de imagen, carga este en un ImageIcon y retorna
-     * @param File fichero
-     */
-    private ImageIcon bToIcon( File fichero )
-    {        
-        ImageIcon imageIcon = new ImageIcon( fichero.getAbsolutePath() );
-        return imageIcon;
-    }
-
-    }//--> fin clase
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -153,19 +76,11 @@ public class VentanaVenta extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         lstPuestos = new javax.swing.JList();
         lblCompra = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        lstProductosAComprar = new javax.swing.JList();
-        btnComprar = new javax.swing.JButton();
-        btnAgregarProducto = new javax.swing.JButton();
-        btnQuitarProducto = new javax.swing.JButton();
         lblPuestos = new javax.swing.JLabel();
-        lvlProductos = new javax.swing.JLabel();
-        lblProductosSeleccionados = new javax.swing.JLabel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        lstProductosAComprarDatos = new javax.swing.JList();
-        jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        lstProductosOfrecidos = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        listaPrueba = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -179,52 +94,11 @@ public class VentanaVenta extends javax.swing.JFrame {
         jScrollPane1.setViewportView(lstPuestos);
 
         lblCompra.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        lblCompra.setText("Registro de Compras");
-
-        lstProductosAComprar.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        lstProductosAComprar.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                lstProductosAComprarValueChanged(evt);
-            }
-        });
-        jScrollPane4.setViewportView(lstProductosAComprar);
-
-        btnComprar.setText("Comprar");
-        btnComprar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnComprarActionPerformed(evt);
-            }
-        });
-
-        btnAgregarProducto.setText("->");
-        btnAgregarProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarProductoActionPerformed(evt);
-            }
-        });
-
-        btnQuitarProducto.setText("<-");
-        btnQuitarProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnQuitarProductoActionPerformed(evt);
-            }
-        });
+        lblCompra.setText("Registro de Ventas");
 
         lblPuestos.setText("Puestos");
 
-        lvlProductos.setText("Productos");
-
-        lblProductosSeleccionados.setText("A Comprar");
-
-        lstProductosAComprarDatos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        lstProductosAComprarDatos.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                lstProductosAComprarDatosValueChanged(evt);
-            }
-        });
-        jScrollPane5.setViewportView(lstProductosAComprarDatos);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        lstProductosOfrecidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -235,20 +109,10 @@ public class VentanaVenta extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        lstProductosOfrecidos.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        jScrollPane2.setViewportView(lstProductosOfrecidos);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
-        );
+        jScrollPane3.setViewportView(listaPrueba);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -262,29 +126,14 @@ public class VentanaVenta extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblPuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(104, 104, 104)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(470, 470, 470)
-                                .addComponent(btnComprar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(145, 145, 145)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(btnQuitarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(btnAgregarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(lblPuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lvlProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(165, 165, 165)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblProductosSeleccionados, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(68, 68, 68)
-                                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane1)
+                                    .addComponent(jScrollPane3))
+                                .addGap(100, 100, 100)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,35 +141,15 @@ public class VentanaVenta extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lblCompra)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblProductosSeleccionados, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lblPuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(12, 12, 12)
-                                        .addComponent(btnAgregarProducto)
-                                        .addGap(39, 39, 39)
-                                        .addComponent(btnQuitarProducto)))
-                                .addGap(8, 8, 8)
-                                .addComponent(lvlProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(48, 48, 48)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(566, 566, 566))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(202, 202, 202)
-                        .addComponent(btnComprar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(65, 65, 65)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(632, 632, 632))
         );
 
         getContentPane().add(jPanel1);
@@ -330,78 +159,29 @@ public class VentanaVenta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     
-    private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
-        
-    }//GEN-LAST:event_btnComprarActionPerformed
-
-    private void btnAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProductoActionPerformed
-        
-    }//GEN-LAST:event_btnAgregarProductoActionPerformed
-
-    private void lstProductosAComprarValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstProductosAComprarValueChanged
-        
-        
-    }//GEN-LAST:event_lstProductosAComprarValueChanged
-
-    private void lstProductosAComprarDatosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstProductosAComprarDatosValueChanged
-        
-        
-    }//GEN-LAST:event_lstProductosAComprarDatosValueChanged
-
-    private void btnQuitarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarProductoActionPerformed
-        
-    }//GEN-LAST:event_btnQuitarProductoActionPerformed
-
     private void lstPuestosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPuestosValueChanged
         Puesto seleccionLista = (Puesto)lstPuestos.getSelectedValue();
         int posicion = mercado.getListaPuestos().indexOf(seleccionLista);
-        Producto[] productosOfrecidos = mercado.getListaPuestos().get(posicion).getOferta().keySet().toArray(new Producto[0]);
-        
-        JLabel[] listaIconos = new JLabel[productosOfrecidos.length];
-        for (int i = 0; i < productosOfrecidos.length; i ++){
-            BufferedImage productoSeleccionado = productosOfrecidos[i].getImagen();
-            File tempFile = new File("temp.jpg"); // Create a temporary file
-            try {
-                ImageIO.write(productoSeleccionado, "jpg", tempFile); // Write the BufferedImage to the temporary file
-                ImageIcon imagenIcon = new ImageIcon(tempFile.getPath());
-                Image imagen = imagenIcon.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
-                JLabel labelImagen = new JLabel(new ImageIcon(imagen));
-                listaIconos[i] = labelImagen;
-            } catch (IOException e) {
-                 System.out.println("fail");
-            } finally {
-                tempFile.delete(); // Delete the temporary file
-            }
-        }
-        //jLabel1 =new JLabel(listaIconos[0]);
+        Producto[] productosOfrecidos = mercado.getListaPuestos().get(posicion).getProductosOferta();
+        System.out.println(mercado.getListaPuestos().get(posicion).getProductosOferta());
         
         
-        this.lstProductosOfrecidos.setListData(listaIconos);
+        System.out.println(Arrays.toString(productosOfrecidos));
+        cargarProductos(productosOfrecidos);
+        
     }//GEN-LAST:event_lstPuestosValueChanged
 
-    private void reCargar(){
-        
-        
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregarProducto;
-    private javax.swing.JButton btnComprar;
-    private javax.swing.JButton btnQuitarProducto;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblCompra;
-    private javax.swing.JLabel lblProductosSeleccionados;
     private javax.swing.JLabel lblPuestos;
-    private javax.swing.JList lstProductosAComprar;
-    private javax.swing.JList lstProductosAComprarDatos;
+    private javax.swing.JList listaPrueba;
+    private javax.swing.JTable lstProductosOfrecidos;
     private javax.swing.JList lstPuestos;
-    private javax.swing.JLabel lvlProductos;
     // End of variables declaration//GEN-END:variables
     private Mercado mercado;
     private HashMap<Producto, float[]> productosAComprar;
