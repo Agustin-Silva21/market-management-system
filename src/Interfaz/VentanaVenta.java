@@ -11,6 +11,13 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import java.awt.Component;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 
 public class VentanaVenta extends javax.swing.JFrame {
 
@@ -26,6 +33,112 @@ public class VentanaVenta extends javax.swing.JFrame {
     
     
 
+    public class MyTableModel extends DefaultTableModel {
+
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+
+    }
+    
+    
+    
+
+    public class ImageRenderer extends DefaultTableCellRenderer{
+
+      private JLabel lb = new JLabel();
+      //imagen que se muestra cuando la celda esta vacia
+      private ImageIcon icon = new ImageIcon( getClass().getResource("/com/bolivia/res/default.jpg") );
+        //para contener las imagenes que se vayan cargando 
+      private Map iconos = new HashMap() ;
+
+      @Override
+      public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, 
+                                                     boolean hasFocus, int row, int column)
+      {
+            lb.setText((String) value);
+            File fichero;
+            //
+            if( value !=null )
+            {
+                fichero = new File( value.toString() );
+                //comprueba que fichero exista
+                if( fichero.exists() )
+                {
+                    //busca la imagen en el MAP
+                    if( ya_existe( value.toString() ) )
+                    {
+                        //si ya existe, extrae la imagen del MAP
+                        lb.setIcon( getIcono( value.toString() ) );
+                    }
+                    else //No existe
+                    {
+                    //Agrega la imagen al map
+                    iconos.put(value.toString(), bToIcon(fichero) );
+                    //extrae y muestra
+                    lb.setIcon( getIcono( value.toString() ) );    
+                    }
+
+                }
+                else //si no existe, muestra imagen por default
+                {
+                    lb.setIcon(icon);
+                }        
+            }
+            else
+            {
+                lb.setIcon(icon);
+            }
+        return lb;
+      }
+
+     /**
+     * Comprueba que una imagen ya exista en memoria
+     * @param String key identificador 
+     */
+     private boolean ya_existe( String key )
+     {
+        Iterator it = iconos.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry e = (Map.Entry)it.next();        
+            if( e.getKey().equals(key) )
+                return true;
+        }
+        return false;
+     }
+
+     /**
+     * Extrae una imagen del MAP dado su KEY
+     * @param String key identificador unico
+     * @return ImageIcon
+     */
+     private ImageIcon getIcono( String key )
+     {
+        ImageIcon imageIcon = icon;
+        Iterator it = iconos.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry e = (Map.Entry)it.next();        
+            if( e.getKey().equals(key) )
+            {
+               imageIcon = (ImageIcon) e.getValue();
+               break;
+            }            
+        }
+        return imageIcon;
+     }
+
+     /**
+     * Dado la ruta de un archivo de imagen, carga este en un ImageIcon y retorna
+     * @param File fichero
+     */
+    private ImageIcon bToIcon( File fichero )
+    {        
+        ImageIcon imageIcon = new ImageIcon( fichero.getAbsolutePath() );
+        return imageIcon;
+    }
+
+    }//--> fin clase
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -40,8 +153,6 @@ public class VentanaVenta extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         lstPuestos = new javax.swing.JList();
         lblCompra = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        lstProductosOfrecidos = new javax.swing.JList();
         jScrollPane4 = new javax.swing.JScrollPane();
         lstProductosAComprar = new javax.swing.JList();
         btnComprar = new javax.swing.JButton();
@@ -52,7 +163,9 @@ public class VentanaVenta extends javax.swing.JFrame {
         lblProductosSeleccionados = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         lstProductosAComprarDatos = new javax.swing.JList();
-        jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -67,9 +180,6 @@ public class VentanaVenta extends javax.swing.JFrame {
 
         lblCompra.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblCompra.setText("Registro de Compras");
-
-        lstProductosOfrecidos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane3.setViewportView(lstProductosOfrecidos);
 
         lstProductosAComprar.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         lstProductosAComprar.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -114,7 +224,31 @@ public class VentanaVenta extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(lstProductosAComprarDatos);
 
-        jLabel1.setText("jLabel1");
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -129,11 +263,10 @@ public class VentanaVenta extends javax.swing.JFrame {
                         .addGap(42, 42, 42)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(49, 49, 49)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnComprar, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(104, 104, 104)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(470, 470, 470)
+                                .addComponent(btnComprar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -144,14 +277,14 @@ public class VentanaVenta extends javax.swing.JFrame {
                                     .addComponent(lblPuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lvlProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(56, 56, 56)
+                                .addGap(165, 165, 165)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblProductosSeleccionados, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(37, 37, 37)
+                                        .addGap(68, 68, 68)
                                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addContainerGap(203, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,25 +299,28 @@ public class VentanaVenta extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addComponent(btnAgregarProducto)
+                                        .addGap(39, 39, 39)
+                                        .addComponent(btnQuitarProducto)))
+                                .addGap(8, 8, 8)
+                                .addComponent(lvlProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
-                                .addComponent(btnAgregarProducto)
-                                .addGap(39, 39, 39)
-                                .addComponent(btnQuitarProducto))
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(8, 8, 8)
-                        .addComponent(lvlProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(383, 383, 383))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(48, 48, 48)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(566, 566, 566))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(202, 202, 202)
                         .addComponent(btnComprar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(297, 297, 297))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         getContentPane().add(jPanel1);
@@ -252,18 +388,18 @@ public class VentanaVenta extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregarProducto;
     private javax.swing.JButton btnComprar;
     private javax.swing.JButton btnQuitarProducto;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblCompra;
     private javax.swing.JLabel lblProductosSeleccionados;
     private javax.swing.JLabel lblPuestos;
     private javax.swing.JList lstProductosAComprar;
     private javax.swing.JList lstProductosAComprarDatos;
-    private javax.swing.JList lstProductosOfrecidos;
     private javax.swing.JList lstPuestos;
     private javax.swing.JLabel lvlProductos;
     // End of variables declaration//GEN-END:variables

@@ -47,6 +47,25 @@ public class Dueño implements Serializable{
     }
     
     @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Dueño unDueño = (Dueño) obj;
+        return nombre.equals(unDueño.nombre);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 41 * hash + Objects.hashCode(this.nombre);
+        hash = 41 * hash + this.edad;
+        hash = 41 * hash + this.añosDeExp;
+        return hash;
+    }
     
     public String toString(){
         return this.getNombre();
