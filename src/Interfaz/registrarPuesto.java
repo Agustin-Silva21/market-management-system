@@ -1,18 +1,26 @@
-
 package Interfaz;
 
+import Dominio.Dueño;
 import Dominio.Mercado;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 public class registrarPuesto extends javax.swing.JFrame {
-private Mercado modelo;
-    /** Creates new form AltaClientes */
+
+    private Mercado modelo;
+
     public registrarPuesto() {
         initComponents();
     }
-public registrarPuesto(Mercado unModelo) {
-    modelo = unModelo;
-    initComponents();
+
+    public registrarPuesto(Mercado unModelo) {
+        modelo = unModelo;
+        initComponents();
+        //http://www.orbital-computer.de/JComboBox/
+        ComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(modelo.getListaDueños().stream().map(Dueño::getNombre).toArray(String[]::new));
+        cmbDuenio.setModel(comboBoxModel);
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -140,36 +148,49 @@ public registrarPuesto(Mercado unModelo) {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        dispose();
+        int eleccion = JOptionPane.showConfirmDialog(null,
+             "¿Estas seguro que desea salir?\nLos cambios no guardados seran eliminados", "Aviso", JOptionPane.YES_NO_OPTION);
+        if (eleccion == JOptionPane.YES_OPTION) {
+            dispose();            
+        }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         try {
-            int edad = Integer.parseInt(cajaEdad.getText());
-            int añosExp = Integer.parseInt(txtUbicacion.getText());
-            String nombre = txtIdentificacion.getText().trim();
-            if (edad<18) {
-                JOptionPane.showMessageDialog(null, "La edad debe ser mayor a 18 años!");
-            }else if(añosExp<0){
-                JOptionPane.showMessageDialog(null, "La experiencia no puede ser negativa!");
-            }else if(nombre.isBlank()){
-                JOptionPane.showMessageDialog(null, "Se debe colocar nombre!");
-            }else{
-                modelo.registrarDueño(nombre,edad,añosExp);
-            }
+            String identificacion = txtIdentificacion.getText().trim();
+            String ubicacion = txtUbicacion.getText().trim();
+            int cantEmpleados = Integer.parseInt(txtCantEmpleados.getText());
+            String DuenioString = (String) cmbDuenio.getSelectedItem();
+            String mensaje = "";
             
-            System.out.println(edad + " " + añosExp);            
-        } catch (NumberFormatException ex) {
-            String errorMessage;
-            if (ex.getMessage().contains(cajaEdad.getText())) {
-                errorMessage = "Edad debe ser un numero!";
+            mensaje = identificacion.isBlank() ? "La identificacion no puede estar vacia!\n" : mensaje;
+            mensaje = ubicacion.isBlank() ? "La ubicacion no puede estar vacio!\n" : mensaje;
+            mensaje = cantEmpleados<0 ? "La cantidad de empleados no puede ser negativa!\n" : mensaje;
+            
+            if (mensaje.isEmpty()) {
+                mensaje = "Identificacion: " + identificacion + "\nUbicacion: " + ubicacion + "\nCantidad de empleados: " + cantEmpleados + "\nDueño: " + DuenioString;
+                int indiceDuenio = cmbDuenio.getSelectedIndex();
+                int opcion = JOptionPane.showOptionDialog(null, mensaje, "Titulo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Guardar", "Cancelar"}, "Guardar");
+                modelo.registrarPuesto(identificacion, modelo.getDueñoPorIndice(indiceDuenio), ubicacion, cantEmpleados);
+                if (opcion == JOptionPane.YES_OPTION) {
+                    if (modelo.registrarPuesto(identificacion, modelo.getDueñoPorIndice(indiceDuenio), ubicacion, cantEmpleados)) {
+                        JOptionPane.showMessageDialog(null, "El puesto ha sido guardado exitosamente.", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "El puesto debe tener un nombre unico", "Puesto no guardado", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
             } else {
-                errorMessage = "A debe ser un numero!";
+                JOptionPane.showMessageDialog(null, mensaje, "Error al registrar puesto", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (NumberFormatException ex) {
+            String errorMessage = "";
+            if (ex.getMessage().contains(txtCantEmpleados.getText())) {
+                errorMessage = "Cantidad de empleados debe ser un numero!";
             }
             JOptionPane.showMessageDialog(null, errorMessage);
-        } finally{
+        } finally {
             txtIdentificacion.setText("---");
-            cajaEdad.setText("");
+            txtCantEmpleados.setText("");
             txtUbicacion.setText("");
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
@@ -191,8 +212,8 @@ public registrarPuesto(Mercado unModelo) {
     }//GEN-LAST:event_cmbDuenioActionPerformed
 
     /**
-    * @param args the command line arguments
-    */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

@@ -90,19 +90,21 @@ public class Mercado {
         return existe;
     }
     
-    public boolean registrarPuesto(Puesto unPuesto){
+    public boolean registrarPuesto(String id, Dueño dueño, String ubicacion, int cantEmpleados){
+        Puesto puestoCreado = new Puesto(id,dueño,ubicacion,cantEmpleados);
         boolean existe = false;
-        if (!getListaPuestos().contains(unPuesto)) {
-            agregarListaPuestos(unPuesto);
+        if (!getListaPuestos().contains(puestoCreado)) {
+            agregarListaPuestos(puestoCreado);
             existe = true;
         }
         return existe;
     }
     
-    public boolean registrarMayorista(Mayorista unMayorista){
+    public boolean registrarMayorista(String rut, String nombre, String direccion, ArrayList<Producto> Producto){
+        Mayorista mayoristaCreado = new Mayorista(rut,nombre,direccion,Producto);
         boolean existe = false;
-        if (!getListaMayoristas().contains(unMayorista)) {
-            agregarListaMayoristas(unMayorista);
+        if (!getListaMayoristas().contains(mayoristaCreado)) {
+            agregarListaMayoristas(mayoristaCreado);
             existe = true;
         }
         return existe;
@@ -195,6 +197,15 @@ public class Mercado {
         }
         return listaPuestosAuxiliar.toArray(new String[listaPuestosAuxiliar.size()]);
     }
+    
+    public Dueño getDueñoPorIndice(int indice) {
+        if (indice >= 0 && indice < listaDueños.size()) {
+            return listaDueños.get(indice);
+        } else {
+            throw new IndexOutOfBoundsException("Invalid index: " + indice);
+        }
+    }
+
     
     public String[] getListaTipoProducto() {
         Producto.Tipo[] enumValues = Producto.Tipo.values();
