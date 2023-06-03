@@ -4,13 +4,15 @@
  */
 package Dominio;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author agustin973
  */
-public class Mayorista {
+public class Mayorista implements Serializable{
+    private static final long serialVersionUID = 1L;
     private String rut;
     private String nombre;
     private String direccion;

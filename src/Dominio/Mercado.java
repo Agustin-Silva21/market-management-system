@@ -3,15 +3,20 @@ package Dominio;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.beans.*;
+import java.io.Serializable;
 
-public class Mercado {
+public class Mercado implements Serializable{
+    private static final long serialVersionUID = 1L;
     private ArrayList<Mayorista> listaMayoristas;
     private ArrayList<Producto> listaProductos;
     private ArrayList<Puesto> listaPuestos;
     private ArrayList<Dueño> listaDueños;
     private ArrayList<Movimiento> listaMovimientos;
+    //private PropertyChangeSupport manejador;
 
     public Mercado() {
+        //this.manejador = new PropertyChangeSupport(this);
         this.listaMayoristas = new ArrayList<>();
         this.listaProductos = new ArrayList<>();
         this.listaPuestos = new ArrayList<>();
@@ -25,7 +30,9 @@ public class Mercado {
     }
 
     public void agregarListaMayoristas(Mayorista unMayorista) {
+        
         this.listaMayoristas.add(unMayorista);
+    
     }
 
     public ArrayList<Producto> getListaProductos() {
@@ -33,7 +40,9 @@ public class Mercado {
     }
 
     public void agregarListaProductos(Producto unProducto) {
+        
         this.listaProductos.add(unProducto);
+        
     }
 
     public ArrayList<Puesto> getListaPuestos() {
@@ -41,7 +50,9 @@ public class Mercado {
     }
 
     public void agregarListaPuestos(Puesto unPuesto) {
+        
         this.listaPuestos.add(unPuesto);
+        
     }
 
     public ArrayList<Dueño> getListaDueños() {
@@ -49,7 +60,9 @@ public class Mercado {
     }
 
     public void agregarListaDueños(Dueño unDueño) {
+        
         this.listaDueños.add(unDueño);
+        
     }
 
     public ArrayList<Movimiento> getListaMovimientos() {
@@ -57,7 +70,9 @@ public class Mercado {
     }
 
     public void agregarListaMovimientos(Movimiento unMovimiento) {
+        
         this.listaMovimientos.add(unMovimiento);
+        
     }
     
     public boolean registrarProducto(Producto unProducto){
@@ -183,6 +198,8 @@ public class Mercado {
         }
         return listaPuestosAuxiliar.toArray(new String[listaPuestosAuxiliar.size()]);
     }
+    
+    
     
     
 }

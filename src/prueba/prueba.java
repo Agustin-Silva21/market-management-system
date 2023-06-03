@@ -5,11 +5,17 @@ import Dominio.*;
 import Dominio.Producto.FormaVenta;
 import Dominio.Producto.Tipo;
 import Interfaz.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class prueba {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
       Dueño d1 = new Dueño("Gab", 32, 120);
       Dueño d2 = new Dueño("May", 18, 1);
       Dueño d3 = new Dueño("Jen", 48, 10);
@@ -73,8 +79,21 @@ public class prueba {
       mercado.agregarListaPuestos(puesto4);
       mercado.agregarListaPuestos(puesto5);
       
-      VentanaCompra vent = new VentanaCompra(mercado);
+      VentanaVenta vent = new VentanaVenta(mercado);
       vent.setVisible(true);
+      
+      /*
+      ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream ("salida"));
+      
+      out.writeObject(mercado);
+      out.close();
+      
+      
+      ObjectInputStream in = new ObjectInputStream(new FileInputStream("salida"));
+      
+      Mercado mercado2 = (Mercado)in.readObject();
+      in.close();
+      */
       
     }
     

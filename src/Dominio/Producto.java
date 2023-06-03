@@ -6,13 +6,16 @@ package Dominio;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.io.Serializable;
 import javax.imageio.ImageIO;
 
 /**
  *
  * @author agustin973
  */
-public class Producto {
+public class Producto implements Serializable{
+    private static final long serialVersionUID = 1L;
     private String nombre;
     private String descripcion;
     private Tipo unTipo;
@@ -25,9 +28,13 @@ public class Producto {
     // constructor por defecto tendria que tener?
     
     
-    public Producto(String nombre, String descripcion, Tipo unTipo, FormaVenta unaVenta, BufferedImage imagen) {
+    public Producto(String nombre, String descripcion, Tipo unTipo, FormaVenta unaVenta, String imagenPath) {
         this(nombre,descripcion,unTipo,unaVenta);
-        this.imagen = imagen;
+        try{
+            this.imagen = ImageIO.read(new File(imagenPath));
+        } catch (IOException e){
+            
+        }
     }
     
     public Producto(String nombre, String descripcion, Tipo unTipo, FormaVenta unaVenta) {
@@ -35,8 +42,11 @@ public class Producto {
         this.descripcion = descripcion;
         this.unTipo = unTipo;
         this.unaVenta = unaVenta;
-        this.imagen = imagen;
-        // llamar a imagen por defecto que diga (Sin imagen)
+        try{
+            this.imagen = ImageIO.read(new File("src/Helpers/No-Image-Placeholder.jpg"));
+        } catch (IOException e){
+            System.out.println("Imagen no encontrada");
+        }
     }
 
     public String getNombre() {

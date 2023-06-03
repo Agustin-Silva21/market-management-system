@@ -4,6 +4,8 @@
  */
 package Dominio;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -11,7 +13,8 @@ import java.util.Iterator;
  *
  * @author agustin973
  */
-public class Puesto {
+public class Puesto implements Serializable{
+    private static final long serialVersionUID = 1L;
     private String id;
     private Dueño dueño;
     private String ubicacion;
@@ -61,6 +64,7 @@ public class Puesto {
     public HashMap<Producto, Float> getOferta() {
         return oferta;
     }
+    
 
     public void agregarProducto(Producto unProducto,float cantidad) {
         this.oferta.put(unProducto, cantidad);

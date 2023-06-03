@@ -1,7 +1,11 @@
 package Dominio;
 
 // Cuando creas un movimiento creas una venta, si creas Compra, ahi si te queda Compra
-public class Movimiento {
+
+import java.io.Serializable;
+
+public class Movimiento implements Serializable{
+    private static final long serialVersionUID = 1L;
     private static int id = 0;
     private Puesto puesto;
     // private Mayorista unMayorista;

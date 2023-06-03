@@ -4,11 +4,14 @@
  */
 package Dominio;
 
+import java.io.Serializable;
+
 /**
  *
  * @author agustin973
  */
-public class Dueño {
+public class Dueño implements Serializable{
+    private static final long serialVersionUID = 1L;
     private String nombre;
     private int edad;
     private int añosDeExp;
