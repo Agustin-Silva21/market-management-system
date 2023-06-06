@@ -115,4 +115,9 @@ public class Producto {
         hash = 17 * hash + (this.getNombre() != null ? this.getNombre().hashCode() : 0);
         return hash;
     }
+
+    @Override
+    public String toString() {
+        return this.getNombre();
+    }
 }

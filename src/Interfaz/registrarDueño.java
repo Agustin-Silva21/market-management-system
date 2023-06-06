@@ -29,7 +29,7 @@ public registrarDueño(Mercado unModelo) {
         cajaEdad = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Alta de Camionetas");
+        setTitle("Registro de Dueño");
 
         lblNombre.setText("Nombre");
 

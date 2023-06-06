@@ -198,7 +198,8 @@ public class MenuPpal extends javax.swing.JFrame {
     }//GEN-LAST:event_registrarDueñoActionPerformed
 
     private void registrarMayoristaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarMayoristaActionPerformed
-        
+        registrarMayorista v = new registrarMayorista(modelo);
+        v.setVisible(true);
 
     // TODO add your handling code here:
     }//GEN-LAST:event_registrarMayoristaActionPerformed

@@ -1,8 +1,6 @@
 package Dominio;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.*;
 
 public class Mercado {
     private ArrayList<Mayorista> listaMayoristas;
@@ -26,6 +24,7 @@ public class Mercado {
 
     public void agregarListaMayoristas(Mayorista unMayorista) {
         this.listaMayoristas.add(unMayorista);
+        ordenarMayoristas();
     }
 
     public ArrayList<Producto> getListaProductos() {
@@ -225,6 +224,31 @@ public class Mercado {
             arrayTipoProducto[i] = enumValues[i].toString();
         }
         return arrayTipoProducto;
+    }
+    
+    public ArrayList<Producto> getProductoPorNombre(List<String> listaProductosString){
+        ArrayList<Producto> productosHallados = new ArrayList<>();
+        
+        for (int i = 0; i < listaProductosString.size(); i++) {
+            boolean encontre = false;
+            int j = 0;
+            while(!encontre){
+                Producto productoEncontrado = this.getListaProductos().get(j);
+                if (productoEncontrado.getNombre().equals(listaProductosString.get(i))) {
+                    encontre = true;
+                    productosHallados.add(productoEncontrado);
+                }
+            }
+        }
+        return productosHallados;
+    }
+    
+    public void ordenarMayoristas() {
+        Collections.sort(listaMayoristas, new Comparator<Mayorista>() {
+            public int compare(Mayorista m1, Mayorista m2) {
+                return m1.getNombre().compareToIgnoreCase(m2.getNombre());
+            }
+        });
     }
     
     

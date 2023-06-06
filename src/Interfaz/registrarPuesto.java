@@ -5,6 +5,7 @@ import Dominio.Mercado;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 public class registrarPuesto extends javax.swing.JFrame {
 
@@ -14,13 +15,14 @@ public class registrarPuesto extends javax.swing.JFrame {
         initComponents();
     }
 
-    public registrarPuesto(Mercado unModelo) {
+    public registrarPuesto(Mercado unModelo) {        
         modelo = unModelo;
         initComponents();
+        UIManager.put("OptionPane.yesButtonText", "Si");
+        UIManager.put("OptionPane.noButtonText", "No");
         //http://www.orbital-computer.de/JComboBox/
         ComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(modelo.getListaDueños().stream().map(Dueño::getNombre).toArray(String[]::new));
-        cmbDuenio.setModel(comboBoxModel);
-        
+        cmbDuenio.setModel(comboBoxModel);        
     }
 
     @SuppressWarnings("unchecked")
@@ -44,7 +46,7 @@ public class registrarPuesto extends javax.swing.JFrame {
         lblId.setText("Identificacion");
 
         txtIdentificacion.setText(" ");
-        txtIdentificacion.setToolTipText("Inserte nombre aqui");
+        txtIdentificacion.setToolTipText("Inserte identificacion aqui");
         txtIdentificacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdentificacionActionPerformed(evt);
@@ -53,7 +55,7 @@ public class registrarPuesto extends javax.swing.JFrame {
 
         lblEdad.setText("Dueño");
 
-        txtUbicacion.setToolTipText("Insertar años de experiencia del dueño");
+        txtUbicacion.setToolTipText("Insertar ubicacion aqui");
         txtUbicacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUbicacionActionPerformed(evt);
@@ -78,7 +80,7 @@ public class registrarPuesto extends javax.swing.JFrame {
 
         lblAñosExp1.setText("Cantidad de empleados");
 
-        txtCantEmpleados.setToolTipText("Insertar años de experiencia del dueño");
+        txtCantEmpleados.setToolTipText("Insertar cantidad de empleados aqui");
         txtCantEmpleados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCantEmpleadosActionPerformed(evt);
@@ -148,29 +150,28 @@ public class registrarPuesto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        int eleccion = JOptionPane.showConfirmDialog(null,
-             "¿Estas seguro que desea salir?\nLos cambios no guardados seran eliminados", "Aviso", JOptionPane.YES_NO_OPTION);
+        int eleccion = JOptionPane.showConfirmDialog(null, "¿Estas seguro que desea salir?\nLos cambios no guardados seran eliminados", "Aviso", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (eleccion == JOptionPane.YES_OPTION) {
             dispose();            
         }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        try {
             String identificacion = txtIdentificacion.getText().trim();
             String ubicacion = txtUbicacion.getText().trim();
+        try {
             int cantEmpleados = Integer.parseInt(txtCantEmpleados.getText());
             String DuenioString = (String) cmbDuenio.getSelectedItem();
             String mensaje = "";
             
-            mensaje = identificacion.isBlank() ? "La identificacion no puede estar vacia!\n" : mensaje;
-            mensaje = ubicacion.isBlank() ? "La ubicacion no puede estar vacio!\n" : mensaje;
-            mensaje = cantEmpleados<0 ? "La cantidad de empleados no puede ser negativa!\n" : mensaje;
+            mensaje = identificacion.isEmpty() ? "La identificacion no puede estar vacia!\n" : mensaje;
+            mensaje += ubicacion.isEmpty() ? "La ubicacion no puede estar vacia!\n" : mensaje;
+            mensaje += cantEmpleados<0 ? "La cantidad de empleados no puede ser negativa!\n" : mensaje;
             
             if (mensaje.isEmpty()) {
                 mensaje = "Identificacion: " + identificacion + "\nUbicacion: " + ubicacion + "\nCantidad de empleados: " + cantEmpleados + "\nDueño: " + DuenioString;
                 int indiceDuenio = cmbDuenio.getSelectedIndex();
-                int opcion = JOptionPane.showOptionDialog(null, mensaje, "Titulo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Guardar", "Cancelar"}, "Guardar");
+                int opcion = JOptionPane.showOptionDialog(null, mensaje, "Confirmacion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Guardar", "Cancelar"}, "Guardar");
                 modelo.registrarPuesto(identificacion, modelo.getDueñoPorIndice(indiceDuenio), ubicacion, cantEmpleados);
                 if (opcion == JOptionPane.YES_OPTION) {
                     if (modelo.registrarPuesto(identificacion, modelo.getDueñoPorIndice(indiceDuenio), ubicacion, cantEmpleados)) {
@@ -182,12 +183,17 @@ public class registrarPuesto extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, mensaje, "Error al registrar puesto", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (NumberFormatException ex) {
+        } catch (NumberFormatException | IndexOutOfBoundsException ex) {
+            System.out.println(ex);
             String errorMessage = "";
-            if (ex.getMessage().contains(txtCantEmpleados.getText())) {
-                errorMessage = "Cantidad de empleados debe ser un numero!";
+            if (ex instanceof NumberFormatException) {
+                if (ex.getMessage().contains(txtCantEmpleados.getText())) {
+                    errorMessage += "Cantidad de empleados debe ser un número!";
+                }
+            } else if (ex instanceof IndexOutOfBoundsException) {
+                errorMessage += "Se debe registrar un Dueño para registrar un puesto";
             }
-            JOptionPane.showMessageDialog(null, errorMessage);
+            JOptionPane.showMessageDialog(null, errorMessage, "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             txtIdentificacion.setText("---");
             txtCantEmpleados.setText("");
