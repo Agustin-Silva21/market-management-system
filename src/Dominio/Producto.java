@@ -4,10 +4,14 @@
  */
 package Dominio;
 
+import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -23,7 +27,6 @@ public class Producto {
     public enum Tipo {Fruta,Verdura}
     public enum FormaVenta {Unidad,Kilogramo}
 
-    // constructor por defecto tendria que tener?
     public Producto() throws IOException{
         this.nombre = "----";
         this.descripcion = "----";
@@ -69,34 +72,26 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    public Tipo getUnTipo() {
+    public Tipo getTipo() {
         return unTipo;
     }
 
-    public void setUnTipo(Tipo unTipo) {
+    public void setTipo(Tipo unTipo) {
         this.unTipo = unTipo;
     }
 
-    public FormaVenta getUnaVenta() {
+    public FormaVenta getFormaVenta() {
         return unaVenta;
     }
 
-    public void setUnaVenta(FormaVenta unaVenta) {
+    public void setFormaVenta(FormaVenta unaVenta) {
         this.unaVenta = unaVenta;
     }
 
-    public BufferedImage getImagen() {
-        return imagen;
+    public Icon getImagenAsIcon() {
+        return new ImageIcon(this.imagen);
     }
 
-    public void setImagen(BufferedImage imagen) {
-        // this.imagen = ImageIO.read(new File(name + ".png"));
-        // como carajo se hace esto?
-    }
-    /*@Override
-    public boolean equals(Object obj) {
-        return this.getNombre().equalsIgnoreCase((Producto)obj).getNombre();
-    }*/
     @Override
     public boolean equals(Object obj) {
     boolean retVal = false;

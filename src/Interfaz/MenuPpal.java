@@ -31,12 +31,12 @@ public class MenuPpal extends javax.swing.JFrame {
         editMenu = new javax.swing.JMenu();
         agregarReserva = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
-        helpMenu = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        aboutMenuItem = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        menuConsultas = new javax.swing.JMenu();
+        consultaProducto = new javax.swing.JMenuItem();
+        consultaDuenios = new javax.swing.JMenuItem();
+        consultaPuestos = new javax.swing.JMenuItem();
+        consultaMayoristas = new javax.swing.JMenuItem();
+        generarArchivoMovimientos = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -116,29 +116,29 @@ public class MenuPpal extends javax.swing.JFrame {
 
         menuBar.add(editMenu);
 
-        helpMenu.setText("Consultas");
+        menuConsultas.setText("Consultas");
 
-        jMenuItem2.setText("Consulta dueños");
-        helpMenu.add(jMenuItem2);
-
-        aboutMenuItem.setText("Consulta producto");
-        aboutMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        consultaProducto.setText("Consulta producto");
+        consultaProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aboutMenuItemActionPerformed(evt);
+                consultaProductoActionPerformed(evt);
             }
         });
-        helpMenu.add(aboutMenuItem);
+        menuConsultas.add(consultaProducto);
 
-        jMenuItem3.setText("Consulta puestos");
-        helpMenu.add(jMenuItem3);
+        consultaDuenios.setText("Consulta dueños");
+        menuConsultas.add(consultaDuenios);
 
-        jMenuItem4.setText("Consulta mayoristas");
-        helpMenu.add(jMenuItem4);
+        consultaPuestos.setText("Consulta puestos");
+        menuConsultas.add(consultaPuestos);
 
-        jMenuItem5.setText("Generar archivo detalle de movimientos");
-        helpMenu.add(jMenuItem5);
+        consultaMayoristas.setText("Consulta mayoristas");
+        menuConsultas.add(consultaMayoristas);
 
-        menuBar.add(helpMenu);
+        generarArchivoMovimientos.setText("Generar archivo detalle de movimientos");
+        menuConsultas.add(generarArchivoMovimientos);
+
+        menuBar.add(menuConsultas);
 
         jMenu1.setText("Cerrar sesion");
         menuBar.add(jMenu1);
@@ -181,10 +181,10 @@ public class MenuPpal extends javax.swing.JFrame {
         v.setVisible(true);       
 }//GEN-LAST:event_registrarPuestoActionPerformed
 
-    private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
-        
-        
-    }//GEN-LAST:event_aboutMenuItemActionPerformed
+    private void consultaProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaProductoActionPerformed
+        consultaPorProducto v = new consultaPorProducto(modelo);
+        v.setVisible(true);        
+    }//GEN-LAST:event_consultaProductoActionPerformed
 
     private void registrarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarProductoActionPerformed
         // TODO add your handling code here:
@@ -226,21 +226,21 @@ public class MenuPpal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem agregarReserva;
+    private javax.swing.JMenuItem consultaDuenios;
+    private javax.swing.JMenuItem consultaMayoristas;
+    private javax.swing.JMenuItem consultaProducto;
+    private javax.swing.JMenuItem consultaPuestos;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenu fileMenu;
-    private javax.swing.JMenu helpMenu;
+    private javax.swing.JMenuItem generarArchivoMovimientos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblImagenPpal;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenu menuConsultas;
     private javax.swing.JMenuItem registrarDueño;
     private javax.swing.JMenuItem registrarMayorista;
     private javax.swing.JMenuItem registrarProducto;

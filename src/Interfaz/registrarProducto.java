@@ -15,6 +15,7 @@ public class registrarProducto extends javax.swing.JFrame {
     private Mercado modelo;
     private static int largoImg = 200;
     private static int anchoImg = 200;
+    private static String pathDirectorio = System.getProperty("user.dir") + "/src/Helpers";
 
     public registrarProducto() {
         initComponents();
@@ -26,9 +27,7 @@ public class registrarProducto extends javax.swing.JFrame {
         ComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(modelo.getListaFormaVentaProducto());
         cajaVenta.setModel(comboBoxModel);
         comboBoxModel = new DefaultComboBoxModel<>(modelo.getListaTipoProducto());
-        cajaTipo.setModel(comboBoxModel);        
-        String pathDirectorio = System.getProperty("user.dir") + "/src/Helpers";
-        System.out.println(pathDirectorio);
+        cajaTipo.setModel(comboBoxModel);
         selectorArchivo.setCurrentDirectory(new java.io.File(pathDirectorio + "/imagenesProductos"));
         FileNameExtensionFilter filtro = new FileNameExtensionFilter("IMAGES","png","jpg","jpeg");
         selectorArchivo.addChoosableFileFilter(filtro);
