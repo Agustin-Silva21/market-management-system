@@ -7,6 +7,8 @@ package Main;
 import Dominio.*;
 import Interfaz.MenuPpal;
 import java.util.ArrayList;
+import java.util.HashMap;
+
 public class Obligatorio2 {
 
     public static void main(String[] args) {
@@ -61,35 +63,50 @@ public class Obligatorio2 {
       Movimiento McDonaaldsCompra1 = new Compra(puesto1, m1, p1, 1000, 5.5f);
       Movimiento McDonaaldsCompra2 = new Compra(puesto1, m1, p2, 2000, 10.5f);
       Movimiento McDonaldsVenta1 = new Movimiento(puesto1, p1, 300, 0.5f);
-      Movimiento McDonaldsVenta2 = new Movimiento(puesto1, p1, 200, 0.75f);
+      Movimiento McDonaldsVenta2 = new Movimiento(puesto1, p1, 100, 0.75f);
       Movimiento McDonaldsVenta3 = new Movimiento(puesto1, p2, 300, 1.5f);
 
 
       Movimiento BurgerKingCompra1 = new Compra(puesto2, m2, p3, 500, 2.5f);
       Movimiento BurgerKingCompra2 = new Compra(puesto2, m2, p2, 1000, 5.5f);
+      Movimiento BurgerKingCompra3 = new Compra(puesto2, m1, p1, 3000, 12f);
       Movimiento BurgerKingVenta1 = new Movimiento(puesto2, p3, 300, 0.5f);
       Movimiento BurgerKingVenta2 = new Movimiento(puesto2, p2, 300, 0.75f);
       Movimiento BurgerKingVenta3 = new Movimiento(puesto2, p2, 300, 1.5f);
+      Movimiento BurgerKingVenta4 = new Movimiento(puesto2, p1, 100, 1.0f);
 
       Movimiento MostazaCompra1 = new Compra(puesto3, m3, p1, 1000, 5.5f);
       Movimiento MostazaCompra2 = new Compra(puesto3, m4, p5, 1000, 5.5f);
+      Movimiento MostazaVenta1 = new Movimiento(puesto3, p1, 300, 0.5f);
+      Movimiento MostazaVenta2 = new Movimiento(puesto3, p5, 300, 0.75f);
+      Movimiento MostazaVenta3 = new Movimiento(puesto3, p5, 400, 1.5f);
 
-      Movimiento MostazaCompra1 = new Compra(puesto3, m3, p1, 1000, 5.5f);
-        Movimiento MostazaCompra2 = new Compra(puesto3, m3, p4, 1000, 5.5f);
+      puesto1.agregarProducto(p1, 0.5f);
+      puesto1.agregarProducto(p2, 0.75f);
 
 
-      Movimiento m = new Movimiento(puesto1, p1, 10, 10);
-      Movimiento m2 = new Movimiento(puesto1, p2, 2, 5);
-      Movimiento m3 = new Movimiento(puesto1, p3, 5, 2);
-      Movimiento m4 = new Movimiento(puesto1, p4, 3, 3);
-      Movimiento m5 = new Movimiento(puesto1, p5, 1, 1);
-      Movimiento m6 = new Compra(puesto1, m1, p1, 10, 10);
-      Movimiento m7 = new Compra(puesto1, m1, p2, 2, 5);
-      Movimiento m8 = new Compra(puesto2, m1, p3, 5, 2);
-      Movimiento m9 = new Compra(puesto1, m1, p4, 3, 3);
-      Movimiento m10 = new Compra(puesto1, m1, p5, 1, 1);
+
 
       Mercado mercado = new Mercado();
+      mercado.agregarListaMovimientos(McDonaaldsCompra1);
+      mercado.agregarListaMovimientos(McDonaaldsCompra2);
+      mercado.agregarListaMovimientos(McDonaldsVenta1);
+      mercado.agregarListaMovimientos(McDonaldsVenta2);
+      mercado.agregarListaMovimientos(McDonaldsVenta3);
+      mercado.agregarListaMovimientos(BurgerKingCompra1);
+      mercado.agregarListaMovimientos(BurgerKingCompra2);
+      mercado.agregarListaMovimientos(BurgerKingCompra3);
+      mercado.agregarListaMovimientos(BurgerKingVenta1);
+      mercado.agregarListaMovimientos(BurgerKingVenta2);
+      mercado.agregarListaMovimientos(BurgerKingVenta3);
+      mercado.agregarListaMovimientos(BurgerKingVenta4);
+      mercado.agregarListaMovimientos(MostazaCompra1);
+      mercado.agregarListaMovimientos(MostazaCompra2);
+      mercado.agregarListaMovimientos(MostazaVenta1);
+      mercado.agregarListaMovimientos(MostazaVenta2);
+      mercado.agregarListaMovimientos(MostazaVenta3);
+
+
       mercado.agregarListaMayoristas(m1);
       mercado.agregarListaMayoristas(m2);
       mercado.agregarListaMayoristas(m3);

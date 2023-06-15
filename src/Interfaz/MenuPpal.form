@@ -83,21 +83,33 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Consulta due&#xf1;os"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="consultaDueniosActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="consultaPuestos">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Consulta puestos"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="consultaPuestosActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="consultaMayoristas">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Consulta mayoristas"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="consultaMayoristasActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="generarArchivoMovimientos">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Generar archivo detalle de movimientos"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="generarArchivoMovimientosActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

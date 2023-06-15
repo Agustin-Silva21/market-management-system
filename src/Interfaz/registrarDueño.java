@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 
 public class registrarDueño extends javax.swing.JFrame {
 private Mercado modelo;
-    /** Creates new form AltaClientes */
+
     public registrarDueño() {
         initComponents();
     }

@@ -127,15 +127,35 @@ public class MenuPpal extends javax.swing.JFrame {
         menuConsultas.add(consultaProducto);
 
         consultaDuenios.setText("Consulta dueños");
+        consultaDuenios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultaDueniosActionPerformed(evt);
+            }
+        });
         menuConsultas.add(consultaDuenios);
 
         consultaPuestos.setText("Consulta puestos");
+        consultaPuestos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultaPuestosActionPerformed(evt);
+            }
+        });
         menuConsultas.add(consultaPuestos);
 
         consultaMayoristas.setText("Consulta mayoristas");
+        consultaMayoristas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultaMayoristasActionPerformed(evt);
+            }
+        });
         menuConsultas.add(consultaMayoristas);
 
         generarArchivoMovimientos.setText("Generar archivo detalle de movimientos");
+        generarArchivoMovimientos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generarArchivoMovimientosActionPerformed(evt);
+            }
+        });
         menuConsultas.add(generarArchivoMovimientos);
 
         menuBar.add(menuConsultas);
@@ -212,6 +232,26 @@ public class MenuPpal extends javax.swing.JFrame {
         VentanaCompra vent = new VentanaCompra(modelo);
         vent.setVisible(true);
     }//GEN-LAST:event_agregarReservaActionPerformed
+
+    private void consultaDueniosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaDueniosActionPerformed
+        consultaDueños vent = new consultaDueños(modelo);
+        vent.setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_consultaDueniosActionPerformed
+
+    private void consultaPuestosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaPuestosActionPerformed
+        consultaPuestos vent = new consultaPuestos(modelo);
+        vent.setVisible(true);
+    }//GEN-LAST:event_consultaPuestosActionPerformed
+
+    private void consultaMayoristasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaMayoristasActionPerformed
+        consultaMayoristas vent = new consultaMayoristas(modelo);
+        vent.setVisible(true);
+    }//GEN-LAST:event_consultaMayoristasActionPerformed
+
+    private void generarArchivoMovimientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generarArchivoMovimientosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_generarArchivoMovimientosActionPerformed
 
     /**
      * @param args the command line arguments

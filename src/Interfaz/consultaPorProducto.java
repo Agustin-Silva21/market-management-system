@@ -5,22 +5,22 @@
 package Interfaz;
 
 import Dominio.Mercado;
+import Dominio.Movimiento;
+import Dominio.Producto;
 
 import javax.swing.*;
-import java.awt.*;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.Iterator;
 
 
 public class consultaPorProducto extends javax.swing.JFrame implements PropertyChangeListener {
-
     private Mercado modelo;
     private PropertyChangeSupport soporteDeCambio;
     private int indice = 0;
 
     public consultaPorProducto() {
         initComponents();
-
     }
     public consultaPorProducto(Mercado unMercado) {
         soporteDeCambio = new PropertyChangeSupport(this);
@@ -37,11 +37,13 @@ public class consultaPorProducto extends javax.swing.JFrame implements PropertyC
     }
 
     public void showProductData(int indice){
-        lblImagenProducto.setIcon(modelo.getListaProductos().get(indice).getImagenAsIcon());
-        txtNombre.setText(modelo.getListaProductos().get(indice).getNombre());
-        txtDescripcion.setText(modelo.getListaProductos().get(indice).getDescripcion());
-        txtFormaventa.setText(modelo.getListaProductos().get(indice).getFormaVenta().toString());
-        txtTipoProducto.setText(modelo.getListaProductos().get(indice).getTipo().toString());
+        Producto unProducto = modelo.getListaProductos().get(indice);
+        lblImagenProducto.setIcon(unProducto.getImagenAsIcon());
+        txtNombre.setText(unProducto.getNombre());
+        txtDescripcion.setText(unProducto.getDescripcion());
+        txtFormaventa.setText(unProducto.getFormaVenta().toString());
+        txtTipoProducto.setText(unProducto.getTipo().toString());
+        sumarMovimientosPorProductos(unProducto);
     }
 
     public void changeIndexValue(int value){
@@ -54,6 +56,56 @@ public class consultaPorProducto extends javax.swing.JFrame implements PropertyC
 
     public void addPropertyChangeListener(java.beans.PropertyChangeListener listener) {
         soporteDeCambio.addPropertyChangeListener(listener);
+    }
+
+    public void sumarMovimientosPorProductos(Producto productoASumar){
+        float totalVendido = 0;
+        float totalComprado = 0;
+        float cantVendida = 0;
+        float cantComprada = 0;
+        float precioMinimoVendido = 0;
+        float precioMaximoVendido = 0;
+        Iterator<Movimiento> it = modelo.getListaMovimientos().iterator();
+        DefaultListModel<String> lstModelPuestosPrecioVentaMin = new DefaultListModel<>();
+        DefaultListModel<String> lstModelPuestosPrecioVentaMax = new DefaultListModel<>();
+        while (it.hasNext()) {
+            Movimiento unMovimiento = it.next();
+            if (unMovimiento.getProducto().equals(productoASumar)) {
+                if (unMovimiento.getClass().getName().equalsIgnoreCase("Dominio.Compra")) {
+                    totalComprado += unMovimiento.getPrecio();
+                    cantComprada += unMovimiento.getCantidad();
+                } else {
+                    totalVendido += unMovimiento.getPrecio();
+                    cantVendida += unMovimiento.getCantidad();
+                    if (precioMinimoVendido > unMovimiento.getPrecio() || precioMinimoVendido == 0) {
+                        precioMinimoVendido = unMovimiento.getPrecio();
+                        lstModelPuestosPrecioVentaMin.removeAllElements();
+                        lstModelPuestosPrecioVentaMin.addElement(unMovimiento.getPuesto().getId());
+                    }else{
+                        if (precioMinimoVendido == unMovimiento.getPrecio() && !lstModelPuestosPrecioVentaMin.contains(unMovimiento.getPuesto().getId())) {
+                            lstModelPuestosPrecioVentaMin.addElement(unMovimiento.getPuesto().getId());
+                        }
+                    }
+                    if (precioMaximoVendido < unMovimiento.getPrecio()) {
+                        precioMaximoVendido = unMovimiento.getPrecio();
+                        lstModelPuestosPrecioVentaMax.removeAllElements();
+                        lstModelPuestosPrecioVentaMax.addElement(unMovimiento.getPuesto().getId());
+                    }else{
+                        if (precioMaximoVendido == unMovimiento.getPrecio() && !lstModelPuestosPrecioVentaMax.contains(unMovimiento.getPuesto().getId())) {
+                            lstModelPuestosPrecioVentaMax.addElement(unMovimiento.getPuesto().getId());
+                        }
+                    }
+                }
+            }
+        }
+        txtTotalCompradoPuestos.setText(String.valueOf(totalComprado));
+        txtTotalVendidoPuestos.setText(String.valueOf(totalVendido));
+        txtCantCompradaPuestos.setText(String.valueOf(cantComprada));
+        txtCantVendidaPuestos.setText(String.valueOf(cantVendida));
+        txtPrecioMinVendido.setText(String.valueOf(precioMinimoVendido));
+        txtPrecioMaxVendido.setText(String.valueOf(precioMaximoVendido));
+        lstPuestosPrecioVentaMin.setModel(lstModelPuestosPrecioVentaMin);
+        lstPuestosPrecioVentaMax.setModel(lstModelPuestosPrecioVentaMax);
     }
 
     public void setTextFieldsAsNotEditable(){
