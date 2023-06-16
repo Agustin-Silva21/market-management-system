@@ -96,6 +96,14 @@ public class Producto implements Serializable, Comparable<Producto>{
     public void setFormaVenta(FormaVenta unaVenta) {
         this.venta = unaVenta;
     }
+    
+    public String getPathImagen() {
+        return pathImagen;
+    }
+
+    public void setPathImagen(String pathImagen) {
+        this.pathImagen = pathImagen;
+    }
 
     public Icon getImagenAsIcon() {
         return new ImageIcon(this.imagen);

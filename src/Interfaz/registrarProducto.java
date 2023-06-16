@@ -6,12 +6,10 @@ import Dominio.Producto.Tipo;
 import java.awt.Image;
 import java.io.File;
 import java.io.Serializable;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class registrarProducto extends javax.swing.JFrame implements Serializable{
-
-public class registrarProducto extends javax.swing.JFrame {
 
     private Mercado modelo;
     private static final int largoImg = 200;
@@ -221,7 +219,7 @@ public class registrarProducto extends javax.swing.JFrame {
         lblImagen.setIcon(new ImageIcon(imagen));
     }
 
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // Inicializacion de variables
         String descripcion = cajaDescripcion.getText().trim();
         String nombre = cajaNombre.getText().trim();

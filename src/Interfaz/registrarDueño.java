@@ -4,6 +4,7 @@ package Interfaz;
 import Dominio.Mercado;
 import java.io.Serializable;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 public class registrarDueño extends javax.swing.JFrame implements Serializable{
 private Mercado modelo;
@@ -156,7 +157,7 @@ private Mercado modelo;
         }
         reiniciarCampos();
     }
-    //GEN-LAST:event_botonAgregarActionPerformed
+//GEN-LAST:event_botonAgregarActionPerformed
 
     private String chequearCamposVacios(){
         String mensaje = "";
