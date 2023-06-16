@@ -14,14 +14,16 @@ import javax.imageio.ImageIO;
  *
  * @author agustin973
  */
-public class Producto implements Serializable{
+public class Producto implements Serializable, Comparable<Producto>{
     private static final long serialVersionUID = 1L;
     private String nombre;
     private String descripcion;
-    private Tipo unTipo;
-    private FormaVenta unaVenta;
+    private Tipo tipo;
+    private FormaVenta venta;
     private BufferedImage imagen;
     private String pathImagen;
+
+    
     // https://stackoverflow.com/questions/34072052/is-it-possible-to-add-an-image-png-as-an-attribute-of-a-java-class
     public enum Tipo {Fruta,Verdura}
     public enum FormaVenta {Unidad,Kilogramo}
@@ -30,8 +32,8 @@ public class Producto implements Serializable{
     public Producto() throws IOException{
         this.nombre = "----";
         this.descripcion = "----";
-        this.unTipo = Tipo.Fruta;
-        this.unaVenta = FormaVenta.Kilogramo;
+        this.tipo = Tipo.Fruta;
+        this.venta = FormaVenta.Kilogramo;
         this.pathImagen = "src/Helpers/ImagenesProductos/No-Image-Placeholder.jpg";
         this.imagen = ImageIO.read(new File(pathImagen));
     }
@@ -50,9 +52,9 @@ public class Producto implements Serializable{
     public Producto(String nombre, String descripcion, Tipo unTipo, FormaVenta unaVenta) {
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.unTipo = unTipo;
-        this.unaVenta = unaVenta;
-        this.pathImagen = "src/Helpers/ImagenesProductos/No-Image-Placeholder.jpg";
+        this.tipo = unTipo;
+        this.venta = unaVenta;
+        this.pathImagen = "src/Helpers/ImagenesProductos/Uvas.jpg";
         try{
             this.imagen = ImageIO.read(new File(pathImagen));
         } catch (IOException e){
@@ -76,20 +78,20 @@ public class Producto implements Serializable{
         this.descripcion = descripcion;
     }
 
-    public Tipo getUnTipo() {
-        return unTipo;
+    public Tipo getTipo() {
+        return tipo;
     }
 
-    public void setUnTipo(Tipo unTipo) {
-        this.unTipo = unTipo;
+    public void setTipo(Tipo unTipo) {
+        this.tipo = unTipo;
     }
 
-    public FormaVenta getUnaVenta() {
-        return unaVenta;
+    public FormaVenta getVenta() {
+        return venta;
     }
 
     public void setUnaVenta(FormaVenta unaVenta) {
-        this.unaVenta = unaVenta;
+        this.venta = unaVenta;
     }
 
     public BufferedImage getImagen() {
@@ -111,7 +113,7 @@ public class Producto implements Serializable{
     /*@Override
     public boolean equals(Object obj) {
         return this.getNombre().equalsIgnoreCase((Producto)obj).getNombre();
-    }*/
+    }*/    
     
     @Override
     public String toString() {
@@ -136,4 +138,16 @@ public class Producto implements Serializable{
         hash = 17 * hash + (this.getNombre() != null ? this.getNombre().hashCode() : 0);
         return hash;
     }
+    @Override
+    public int compareTo(Producto o) {
+        // Comparación basada en atributo1
+        int compTipo = this.getTipo().compareTo(o.getTipo());
+        if (compTipo != 0) {
+            return compTipo;
+        }
+        
+        // Si los atributos 1 son iguales, compara por atributo2
+        return this.getNombre().compareTo(o.getNombre());
+    }
+    
 }

@@ -3,7 +3,6 @@ package Dominio;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.beans.*;
 import java.io.Serializable;
 
 public class Mercado implements Serializable{
@@ -160,7 +159,7 @@ public class Mercado implements Serializable{
                 Movimiento unMovimiento = new Movimiento(unPuesto,unProducto,precioUnitario,cantVendida);
                 agregarListaMovimientos (unMovimiento);
             }
-            unPuesto.limpiarProducto();
+            unPuesto.limpiarProducto(unPuesto);
         }
     }
     
@@ -231,7 +230,19 @@ public class Mercado implements Serializable{
         return arrayTipoProducto;
     }
     
-    
+    public String nombreProductoXPath(String path){
+        String nombreProd = "";
+        Boolean encontrado = false;
+        Producto aux;
+        for(int i = 0; i < this.getListaProductos().size() && !encontrado; i++){
+            aux = this.getListaProductos().get(i);
+            if(aux.getPathImagen().equals(path)){
+                nombreProd = aux.getNombre();
+                encontrado = true;
+            }
+        }        
+        return nombreProd;
+    }
     
     
 }

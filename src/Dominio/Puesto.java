@@ -5,7 +5,6 @@
 package Dominio;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -68,11 +67,11 @@ public class Puesto implements Serializable{
     public Producto[] getProductosOferta(){
         Producto[] productos = new Producto[oferta.size()];
     
-        int i = 0;
+        /*int i = 0;
         for (Producto producto : oferta.keySet()) {
             productos[i] = producto;
             i++;
-        }
+        }*/
         return productos;
     }
 
@@ -81,12 +80,12 @@ public class Puesto implements Serializable{
     }
     
     
-    public void limpiarProducto(){
-        Iterator<Producto> it = this.getOferta().keySet().iterator();
+    public void limpiarProducto(Puesto unPuesto){
+        Iterator<Producto> it = unPuesto.getOferta().keySet().iterator();
         while (it.hasNext()) {
             Producto unProducto = it.next();
-            if (getOferta().get(unProducto) == 0) {
-                getOferta().remove(unProducto);
+            if (unPuesto.getOferta().get(unProducto) == 0) {
+                unPuesto.getOferta().remove(unProducto);
             }
         }
     }

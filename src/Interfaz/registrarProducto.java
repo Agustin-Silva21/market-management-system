@@ -5,13 +5,14 @@ import Dominio.Producto.FormaVenta;
 import Dominio.Producto.Tipo;
 import java.awt.Image;
 import java.io.File;
+import java.io.Serializable;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class registrarProducto extends javax.swing.JFrame {
+public class registrarProducto extends javax.swing.JFrame implements Serializable{
 
     private Mercado modelo;
 
