@@ -7,6 +7,7 @@ package Dominio;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Objects;
 
 /**
  *
@@ -105,6 +106,23 @@ public class Puesto implements Serializable{
     }
     
     @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Puesto unPuesto = (Puesto) obj;
+        return id.equals(unPuesto.id);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 67 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
     
     public String toString(){
         return this.id;

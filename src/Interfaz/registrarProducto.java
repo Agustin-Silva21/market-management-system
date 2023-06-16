@@ -6,15 +6,17 @@ import Dominio.Producto.Tipo;
 import java.awt.Image;
 import java.io.File;
 import java.io.Serializable;
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.*;
 
 public class registrarProducto extends javax.swing.JFrame implements Serializable{
 
+public class registrarProducto extends javax.swing.JFrame {
+
     private Mercado modelo;
+    private static int largoImg = 200;
+    private static int anchoImg = 200;
+    private static String pathDirectorio = System.getProperty("user.dir") + "/src/Helpers";
 
     public registrarProducto() {
         initComponents();
@@ -23,20 +25,22 @@ public class registrarProducto extends javax.swing.JFrame implements Serializabl
     public registrarProducto(Mercado unModelo) {
         modelo = unModelo;
         initComponents();
+        iniciarComponentes();
+        iniciarComponentes();
+        reiniciarCampos();
+    }
+
+    private void iniciarComponentes() {
         ComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(modelo.getListaFormaVentaProducto());
         cajaVenta.setModel(comboBoxModel);
         comboBoxModel = new DefaultComboBoxModel<>(modelo.getListaTipoProducto());
-        cajaTipo.setModel(comboBoxModel);        
-        String pathDirectorio = System.getProperty("user.dir") + "/src/Helpers";
-        System.out.println(pathDirectorio);
+        cajaTipo.setModel(comboBoxModel);
         selectorArchivo.setCurrentDirectory(new java.io.File(pathDirectorio + "/imagenesProductos"));
         FileNameExtensionFilter filtro = new FileNameExtensionFilter("IMAGES","png","jpg","jpeg");
         selectorArchivo.addChoosableFileFilter(filtro);
-        ImageIcon imagenicon = new ImageIcon(pathDirectorio + "/No-Image-Placeholder.jpg");
-        Image imagen = imagenicon.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
-        lblImagen.setIcon(new ImageIcon(imagen));
+        UIManager.put("OptionPane.yesButtonText", "Si");
+        UIManager.put("OptionPane.noButtonText", "No");
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -207,34 +211,49 @@ public class registrarProducto extends javax.swing.JFrame implements Serializabl
         }        
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    private void reiniciarCampos() {
+        cajaNombre.setText("");
+        cajaDescripcion.setText("");
+        cajaTipo.setSelectedIndex(0);
+        cajaVenta.setSelectedIndex(0);
+        ImageIcon imagenicon = new ImageIcon(pathDirectorio + "/No-Image-Placeholder.jpg");
+        Image imagen = imagenicon.getImage().getScaledInstance(largoImg, anchoImg, Image.SCALE_SMOOTH);
+        lblImagen.setIcon(new ImageIcon(imagen));
+    }
+
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        // Inicializacion de variables
         String descripcion = cajaDescripcion.getText().trim();
         String nombre = cajaNombre.getText().trim();
         String tipoString = (String) cajaTipo.getSelectedItem();
         String formaVentaString = (String) cajaVenta.getSelectedItem();
         ImageIcon imagen = (ImageIcon) lblImagen.getIcon();
-        if (!nombre.isEmpty() && !descripcion.isEmpty()) {
-            String mensaje = "Nombre: " + nombre + "\nDescripcion: " + descripcion + "\nTipo: " + tipoString + "\nForma de Venta: " + formaVentaString;
-            
+        // Validacion de campos y creacion de mensaje
+        String mensaje = "";
+        mensaje = nombre.isBlank() ? "El nombre no puede estar vacio!\n" : mensaje;
+        System.out.println(mensaje);
+        mensaje += descripcion.isBlank() ? "La descripcion no puede estar vacia!" : mensaje;
+        System.out.println(mensaje);
+        if (mensaje.isBlank()) {
+            mensaje = "Nombre: " + nombre + "\nDescripcion: " + descripcion + "\nTipo: " + tipoString + "\nForma de Venta: " + formaVentaString;
             Tipo tipo = Tipo.valueOf(tipoString);
             FormaVenta formaVenta = FormaVenta.valueOf(formaVentaString);
-            int opcion = JOptionPane.showOptionDialog(null,mensaje,"Titulo",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,imagen,new String[]{"Guardar","Cancelar"},"Guardar");
-            
+            // Confirmacion de guardado de producto
+            int opcion = JOptionPane.showOptionDialog(null,mensaje,"Producto a guardar",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,imagen,new String[]{"Guardar","Cancelar"},"Guardar");
             if (opcion == JOptionPane.YES_OPTION) {
-                System.out.println("guardar");
                 if (modelo.registrarProducto(nombre, descripcion, tipo, formaVenta)) {
                     JOptionPane.showMessageDialog(null, "El producto ha sido guardado exitosamente.", "Guardar Producto", JOptionPane.INFORMATION_MESSAGE);
+                }else{
+                    JOptionPane.showMessageDialog(null, "El producto debe tener un nombre unico", "Producto no guardado", JOptionPane.ERROR_MESSAGE);
                 }
-
             }else if(opcion == JOptionPane.NO_OPTION) {
-                System.out.println("borrartodo");
+                JOptionPane.showMessageDialog(null, "El producto no ha sido guardado.", "Guardar Producto", JOptionPane.INFORMATION_MESSAGE);
             }
-            //modelo.registrarProducto();
+        }else{
+            JOptionPane.showMessageDialog(null, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
         }
-        //cajaNombre        
-        //cajaCarga.setText("---");
-        //cajaChapa.setText("---");
-    }//GEN-LAST:event_btnAgregarActionPerformed
+        reiniciarCampos();
+    }
 
     private void cajaDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cajaDescripcionActionPerformed
         // TODO add your handling code here:
@@ -245,16 +264,12 @@ public class registrarProducto extends javax.swing.JFrame implements Serializabl
     }//GEN-LAST:event_cajaNombreActionPerformed
 
     private void selectorArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectorArchivoActionPerformed
-        // TODO add your handling code here:
-        //evt.getActionCommand().equals(ABORT)
-        //int showOpenDialogue = selectorArchivo.showOpenDialog(null);
         String accion = evt.getActionCommand();
-        System.out.println(accion);
         if (accion.equalsIgnoreCase("ApproveSelection")) {
             File imagenSeleccionada = selectorArchivo.getSelectedFile();
             String pathImagenSeleccionada = imagenSeleccionada.getPath();  
             ImageIcon imagenicon = new ImageIcon(pathImagenSeleccionada);
-            Image imagen = imagenicon.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+            Image imagen = imagenicon.getImage().getScaledInstance(largoImg, anchoImg, Image.SCALE_SMOOTH);
             lblImagen.setIcon(new ImageIcon(imagen));
             String seleccion = (String) cajaTipo.getSelectedItem();
             System.out.println(seleccion);
@@ -262,19 +277,9 @@ public class registrarProducto extends javax.swing.JFrame implements Serializabl
         }else if(accion.equalsIgnoreCase("CancelSelection")){
             String pathDirectorio = System.getProperty("user.dir") + "/src/Helpers";
             ImageIcon imagenicon = new ImageIcon(pathDirectorio + "/No-Image-Placeholder.jpg");
-            Image imagen = imagenicon.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+            Image imagen = imagenicon.getImage().getScaledInstance(largoImg, anchoImg, Image.SCALE_SMOOTH);
             lblImagen.setIcon(new ImageIcon(imagen));
-        }
-        /*if (showOpenDialogue == APPROVE_OPTION) {
-            File imagenSeleccionada = selectorArchivo.getSelectedFile();
-            String pathImagenSeleccionada = imagenSeleccionada.getPath();
-            JOptionPane.showConfirmDialog(null, pathImagenSeleccionada);
-            ImageIcon imagenicon = new ImageIcon(pathImagenSeleccionada);
-            Image imagen = imagenicon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-            lblImagen.setIcon(new ImageIcon(imagen));
-        }
-        */
-        
+        }        
     }//GEN-LAST:event_selectorArchivoActionPerformed
 
     private void cajaTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cajaTipoActionPerformed

@@ -4,11 +4,15 @@
  */
 package Dominio;
 
+import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -28,7 +32,6 @@ public class Producto implements Serializable, Comparable<Producto>{
     public enum Tipo {Fruta,Verdura}
     public enum FormaVenta {Unidad,Kilogramo}
 
-    // constructor por defecto tendria que tener?
     public Producto() throws IOException{
         this.nombre = "----";
         this.descripcion = "----";
@@ -86,51 +89,29 @@ public class Producto implements Serializable, Comparable<Producto>{
         this.tipo = unTipo;
     }
 
-    public FormaVenta getVenta() {
+    public FormaVenta getFormaVenta() {
         return venta;
     }
 
-    public void setUnaVenta(FormaVenta unaVenta) {
+    public void setFormaVenta(FormaVenta unaVenta) {
         this.venta = unaVenta;
     }
 
-    public BufferedImage getImagen() {
-        return imagen;
+    public Icon getImagenAsIcon() {
+        return new ImageIcon(this.imagen);
     }
 
-    public String getPathImagen() {
-        return pathImagen;
-    }
-
-    public void setPathImagen(String pathImagen) {
-        this.pathImagen = pathImagen;
-    }
-
-    public void setImagen(BufferedImage imagen) {
-        // this.imagen = ImageIO.read(new File(name + ".png"));
-        // como carajo se hace esto?
-    }
-    /*@Override
-    public boolean equals(Object obj) {
-        return this.getNombre().equalsIgnoreCase((Producto)obj).getNombre();
-    }*/    
-    
-    @Override
-    public String toString() {
-        return this.getNombre();
-    }
-    
-    
     @Override
     public boolean equals(Object obj) {
-        boolean retVal = false;
+    boolean retVal = false;
 
-        if (obj instanceof Producto ptr) {
-            retVal = (ptr.getNombre() == null ? this.getNombre() == null : ptr.getNombre().equals(this.getNombre()));
-        }
-
-        return retVal;
+    if (obj instanceof Producto) {
+        Producto ptr = (Producto) obj;
+        retVal = (ptr.getNombre() == null ? this.getNombre() == null : ptr.getNombre().equals(this.getNombre()));
     }
+
+    return retVal;
+}
     // https://stackoverflow.com/questions/8322129/arraylists-custom-contains-method
     @Override
     public int hashCode() {
@@ -138,6 +119,7 @@ public class Producto implements Serializable, Comparable<Producto>{
         hash = 17 * hash + (this.getNombre() != null ? this.getNombre().hashCode() : 0);
         return hash;
     }
+  
     @Override
     public int compareTo(Producto o) {
         // Comparación basada en atributo1
@@ -149,5 +131,8 @@ public class Producto implements Serializable, Comparable<Producto>{
         // Si los atributos 1 son iguales, compara por atributo2
         return this.getNombre().compareTo(o.getNombre());
     }
-    
+    @Override
+    public String toString() {
+        return this.getNombre();
+    }
 }

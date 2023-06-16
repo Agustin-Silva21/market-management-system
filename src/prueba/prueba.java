@@ -16,8 +16,7 @@ public class prueba {
       Dueño d2 = new Dueño("May", 18, 1);
       Dueño d3 = new Dueño("Jen", 48, 10);
       Dueño d4 = new Dueño("Ray", 26, 15);
-      Dueño d5 = new Dueño("Sal", 35, 12);
-      
+      Dueño d5 = new Dueño("Sal", 35, 12);   
       
       
       Producto p1 = new Producto("Manzana", "rica", Tipo.Fruta, FormaVenta.Kilogramo);

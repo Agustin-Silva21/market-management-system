@@ -19,6 +19,9 @@ public class MenuPpal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        lblImagenPpal = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         registrarProducto = new javax.swing.JMenuItem();
@@ -28,16 +31,34 @@ public class MenuPpal extends javax.swing.JFrame {
         editMenu = new javax.swing.JMenu();
         agregarReserva = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
-        helpMenu = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        aboutMenuItem = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        menuConsultas = new javax.swing.JMenu();
+        consultaProducto = new javax.swing.JMenuItem();
+        consultaDuenios = new javax.swing.JMenuItem();
+        consultaPuestos = new javax.swing.JMenuItem();
+        consultaMayoristas = new javax.swing.JMenuItem();
+        generarArchivoMovimientos = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Reservas");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 418, Short.MAX_VALUE)
+        );
+
+        jLabel1.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Menu Principal");
+
+        lblImagenPpal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Helpers/imgMenuPrincipal.jpg"))); // NOI18N
+        lblImagenPpal.setText("jLabel1");
 
         fileMenu.setText("Registros");
 
@@ -95,29 +116,49 @@ public class MenuPpal extends javax.swing.JFrame {
 
         menuBar.add(editMenu);
 
-        helpMenu.setText("Consultas");
+        menuConsultas.setText("Consultas");
 
-        jMenuItem2.setText("Consulta dueños");
-        helpMenu.add(jMenuItem2);
-
-        aboutMenuItem.setText("Consulta producto");
-        aboutMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        consultaProducto.setText("Consulta producto");
+        consultaProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aboutMenuItemActionPerformed(evt);
+                consultaProductoActionPerformed(evt);
             }
         });
-        helpMenu.add(aboutMenuItem);
+        menuConsultas.add(consultaProducto);
 
-        jMenuItem3.setText("Consulta puestos");
-        helpMenu.add(jMenuItem3);
+        consultaDuenios.setText("Consulta dueños");
+        consultaDuenios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultaDueniosActionPerformed(evt);
+            }
+        });
+        menuConsultas.add(consultaDuenios);
 
-        jMenuItem4.setText("Consulta mayoristas");
-        helpMenu.add(jMenuItem4);
+        consultaPuestos.setText("Consulta puestos");
+        consultaPuestos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultaPuestosActionPerformed(evt);
+            }
+        });
+        menuConsultas.add(consultaPuestos);
 
-        jMenuItem5.setText("Generar archivo detalle de movimientos");
-        helpMenu.add(jMenuItem5);
+        consultaMayoristas.setText("Consulta mayoristas");
+        consultaMayoristas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultaMayoristasActionPerformed(evt);
+            }
+        });
+        menuConsultas.add(consultaMayoristas);
 
-        menuBar.add(helpMenu);
+        generarArchivoMovimientos.setText("Generar archivo detalle de movimientos");
+        generarArchivoMovimientos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generarArchivoMovimientosActionPerformed(evt);
+            }
+        });
+        menuConsultas.add(generarArchivoMovimientos);
+
+        menuBar.add(menuConsultas);
 
         jMenu1.setText("Cerrar sesion");
         menuBar.add(jMenu1);
@@ -128,26 +169,42 @@ public class MenuPpal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(lblImagenPpal, javax.swing.GroupLayout.PREFERRED_SIZE, 778, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(20, 20, 20))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(339, 339, 339)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 285, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblImagenPpal, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33))
         );
 
-        setSize(new java.awt.Dimension(408, 334));
+        setSize(new java.awt.Dimension(841, 549));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void registrarPuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarPuestoActionPerformed
-        
-        
+        registrarPuesto v = new registrarPuesto(modelo);
+        v.setVisible(true);       
 }//GEN-LAST:event_registrarPuestoActionPerformed
 
-    private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
-        
-        
-    }//GEN-LAST:event_aboutMenuItemActionPerformed
+    private void consultaProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaProductoActionPerformed
+        consultaPorProducto v = new consultaPorProducto(modelo);
+        v.setVisible(true);        
+    }//GEN-LAST:event_consultaProductoActionPerformed
 
     private void registrarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarProductoActionPerformed
         // TODO add your handling code here:
@@ -161,7 +218,8 @@ public class MenuPpal extends javax.swing.JFrame {
     }//GEN-LAST:event_registrarDueñoActionPerformed
 
     private void registrarMayoristaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarMayoristaActionPerformed
-        
+        registrarMayorista v = new registrarMayorista(modelo);
+        v.setVisible(true);
 
     // TODO add your handling code here:
     }//GEN-LAST:event_registrarMayoristaActionPerformed
@@ -171,8 +229,29 @@ public class MenuPpal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void agregarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarReservaActionPerformed
-      
+        VentanaCompra vent = new VentanaCompra(modelo);
+        vent.setVisible(true);
     }//GEN-LAST:event_agregarReservaActionPerformed
+
+    private void consultaDueniosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaDueniosActionPerformed
+        consultaDueños vent = new consultaDueños(modelo);
+        vent.setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_consultaDueniosActionPerformed
+
+    private void consultaPuestosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaPuestosActionPerformed
+        consultaPuestos vent = new consultaPuestos(modelo);
+        vent.setVisible(true);
+    }//GEN-LAST:event_consultaPuestosActionPerformed
+
+    private void consultaMayoristasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaMayoristasActionPerformed
+        consultaMayoristas vent = new consultaMayoristas(modelo);
+        vent.setVisible(true);
+    }//GEN-LAST:event_consultaMayoristasActionPerformed
+
+    private void generarArchivoMovimientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generarArchivoMovimientosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_generarArchivoMovimientosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,18 +266,21 @@ public class MenuPpal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem agregarReserva;
+    private javax.swing.JMenuItem consultaDuenios;
+    private javax.swing.JMenuItem consultaMayoristas;
+    private javax.swing.JMenuItem consultaProducto;
+    private javax.swing.JMenuItem consultaPuestos;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenu fileMenu;
-    private javax.swing.JMenu helpMenu;
+    private javax.swing.JMenuItem generarArchivoMovimientos;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblImagenPpal;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenu menuConsultas;
     private javax.swing.JMenuItem registrarDueño;
     private javax.swing.JMenuItem registrarMayorista;
     private javax.swing.JMenuItem registrarProducto;
