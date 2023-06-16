@@ -5,11 +5,13 @@ import Dominio.*;
 import Dominio.Producto.FormaVenta;
 import Dominio.Producto.Tipo;
 import Interfaz.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class prueba {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
       Dueño d1 = new Dueño("Gab", 32, 120);
       Dueño d2 = new Dueño("May", 18, 1);
       Dueño d3 = new Dueño("Jen", 48, 10);
@@ -22,6 +24,17 @@ public class prueba {
       Producto p3 = new Producto("Naranja", "rica", Tipo.Verdura, FormaVenta.Kilogramo);
       Producto p4 = new Producto("Sandia", "rica", Tipo.Fruta, FormaVenta.Unidad);
       Producto p5 = new Producto("Lechuga", "rica", Tipo.Verdura, FormaVenta.Unidad);
+      Producto p6 = new Producto("Zapallo", "rica", Tipo.Fruta, FormaVenta.Kilogramo);
+      Producto p7 = new Producto("Banana", "rica", Tipo.Fruta, FormaVenta.Unidad);
+      Producto p8 = new Producto("Tangerina", "rica", Tipo.Verdura, FormaVenta.Kilogramo);
+      Producto p9 = new Producto("Papa", "rica", Tipo.Fruta, FormaVenta.Unidad);
+      Producto p10 = new Producto("Acelga", "rica", Tipo.Verdura, FormaVenta.Unidad);
+      Producto p11 = new Producto("Pepino", "rica", Tipo.Fruta, FormaVenta.Kilogramo);
+      Producto p12 = new Producto("Mandioca", "rica", Tipo.Fruta, FormaVenta.Unidad);
+      Producto p13 = new Producto("Manzana Verde", "rica", Tipo.Verdura, FormaVenta.Kilogramo);
+      Producto p14 = new Producto("Cebolla", "rica", Tipo.Fruta, FormaVenta.Unidad);
+      Producto p15 = new Producto("Ajo", "rica", Tipo.Verdura, FormaVenta.Unidad);
+      
       
       ArrayList<Producto> oferta1 = new ArrayList<>();
       oferta1.add(p1);
@@ -50,6 +63,33 @@ public class prueba {
       Puesto puesto4 = new Puesto("Barnys", d4, "Norte", 0);
       Puesto puesto5 = new Puesto("Chorripan", d5, "Centro", 5);
       
+      puesto1.agregarProducto(p1, 10);
+      puesto1.agregarProducto(p2, 11);
+      puesto1.agregarProducto(p3, 12);
+      puesto1.agregarProducto(p4, 10);
+      puesto1.agregarProducto(p5, 11);
+      puesto1.agregarProducto(p6, 12);
+      puesto1.agregarProducto(p7, 10);
+      puesto1.agregarProducto(p8, 11);
+      puesto1.agregarProducto(p9, 12);
+      puesto1.agregarProducto(p10, 10);
+      puesto1.agregarProducto(p11, 11);
+      puesto1.agregarProducto(p12, 12);
+      puesto1.agregarProducto(p13, 10);
+      puesto1.agregarProducto(p14, 11);
+      puesto1.agregarProducto(p15, 12);
+      puesto2.agregarProducto(p2, 12);
+      puesto2.agregarProducto(p3, 14);
+      puesto2.agregarProducto(p4, 9);
+      puesto3.agregarProducto(p3, 8);
+      puesto3.agregarProducto(p4, 7);
+      puesto3.agregarProducto(p5, 15);
+      puesto4.agregarProducto(p4, 15);
+      puesto4.agregarProducto(p5, 14);
+      puesto4.agregarProducto(p2, 12);
+      puesto5.agregarProducto(p3, 10);
+      puesto5.agregarProducto(p4, 14);
+      
       Mercado mercado = new Mercado();
       mercado.agregarListaMayoristas(m1);
       mercado.agregarListaMayoristas(m2);
@@ -72,8 +112,22 @@ public class prueba {
       mercado.agregarListaPuestos(puesto4);
       mercado.agregarListaPuestos(puesto5);
       
-      VentanaCompra vent = new VentanaCompra(mercado);
+      
+      VentanaVenta vent = new VentanaVenta(mercado);
       vent.setVisible(true);
+      
+      /*
+      ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream ("salida"));
+      
+      out.writeObject(mercado);
+      out.close();
+      
+      
+      ObjectInputStream in = new ObjectInputStream(new FileInputStream("salida"));
+      
+      Mercado mercado2 = (Mercado)in.readObject();
+      in.close();
+      */
       
     }
     

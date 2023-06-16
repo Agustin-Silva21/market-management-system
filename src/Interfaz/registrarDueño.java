@@ -2,10 +2,10 @@
 package Interfaz;
 
 import Dominio.Mercado;
+import java.io.Serializable;
+import javax.swing.JOptionPane;
 
-import javax.swing.*;
-
-public class registrarDueño extends javax.swing.JFrame {
+public class registrarDueño extends javax.swing.JFrame implements Serializable{
 private Mercado modelo;
 
     public registrarDueño() {

@@ -4,11 +4,17 @@
  */
 package Dominio;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Objects;
 
-public class Puesto {
+/**
+ *
+ * @author agustin973
+ */
+public class Puesto implements Serializable{
+    private static final long serialVersionUID = 1L;
     private String id;
     private Dueño dueño;
     private String ubicacion;
@@ -58,18 +64,29 @@ public class Puesto {
     public HashMap<Producto, Float> getOferta() {
         return oferta;
     }
+    
+    public Producto[] getProductosOferta(){
+        Producto[] productos = new Producto[oferta.size()];
+    
+        /*int i = 0;
+        for (Producto producto : oferta.keySet()) {
+            productos[i] = producto;
+            i++;
+        }*/
+        return productos;
+    }
 
     public void agregarProducto(Producto unProducto,float cantidad) {
         this.oferta.put(unProducto, cantidad);
     }
     
     
-    public void limpiarProducto(){
-        Iterator<Producto> it = this.getOferta().keySet().iterator();
+    public void limpiarProducto(Puesto unPuesto){
+        Iterator<Producto> it = unPuesto.getOferta().keySet().iterator();
         while (it.hasNext()) {
             Producto unProducto = it.next();
-            if (getOferta().get(unProducto) == 0) {
-                getOferta().remove(unProducto);
+            if (unPuesto.getOferta().get(unProducto) == 0) {
+                unPuesto.getOferta().remove(unProducto);
             }
         }
     }

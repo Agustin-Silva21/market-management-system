@@ -1,15 +1,21 @@
 package Dominio;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.io.Serializable;
 
-public class Mercado {
+public class Mercado implements Serializable{
+    private static final long serialVersionUID = 1L;
     private ArrayList<Mayorista> listaMayoristas;
     private ArrayList<Producto> listaProductos;
     private ArrayList<Puesto> listaPuestos;
     private ArrayList<Dueño> listaDueños;
     private ArrayList<Movimiento> listaMovimientos;
+    //private PropertyChangeSupport manejador;
 
     public Mercado() {
+        //this.manejador = new PropertyChangeSupport(this);
         this.listaMayoristas = new ArrayList<>();
         this.listaProductos = new ArrayList<>();
         this.listaPuestos = new ArrayList<>();
@@ -23,6 +29,7 @@ public class Mercado {
     }
 
     public void agregarListaMayoristas(Mayorista unMayorista) {
+        
         this.listaMayoristas.add(unMayorista);
         ordenarMayoristas();
     }
@@ -32,7 +39,9 @@ public class Mercado {
     }
 
     public void agregarListaProductos(Producto unProducto) {
+        
         this.listaProductos.add(unProducto);
+        
     }
 
     public ArrayList<Puesto> getListaPuestos() {
@@ -40,7 +49,9 @@ public class Mercado {
     }
 
     public void agregarListaPuestos(Puesto unPuesto) {
+        
         this.listaPuestos.add(unPuesto);
+        
     }
 
     public ArrayList<Dueño> getListaDueños() {
@@ -48,7 +59,9 @@ public class Mercado {
     }
 
     public void agregarListaDueños(Dueño unDueño) {
+        
         this.listaDueños.add(unDueño);
+        
     }
 
     public ArrayList<Movimiento> getListaMovimientos() {
@@ -56,7 +69,9 @@ public class Mercado {
     }
 
     public void agregarListaMovimientos(Movimiento unMovimiento) {
+        
         this.listaMovimientos.add(unMovimiento);
+        
     }
     
     /*public boolean registrarProducto(Producto unProducto){
@@ -146,7 +161,7 @@ public class Mercado {
                 Movimiento unMovimiento = new Movimiento(unPuesto,unProducto,precioUnitario,cantVendida);
                 agregarListaMovimientos (unMovimiento);
             }
-            unPuesto.limpiarProducto();
+            unPuesto.limpiarProducto(unPuesto);
         }
     }
     
@@ -226,6 +241,20 @@ public class Mercado {
         return arrayTipoProducto;
     }
     
+    public String nombreProductoXPath(String path){
+        String nombreProd = "";
+        Boolean encontrado = false;
+        Producto aux;
+        for(int i = 0; i < this.getListaProductos().size() && !encontrado; i++){
+            aux = this.getListaProductos().get(i);
+            if(aux.getPathImagen().equals(path)){
+                nombreProd = aux.getNombre();
+                encontrado = true;
+            }
+        }        
+        return nombreProd;
+    }
+    
     public ArrayList<Producto> getProductoPorNombre(List<String> listaProductosString){
         ArrayList<Producto> productosHallados = new ArrayList<>();
         
@@ -250,7 +279,6 @@ public class Mercado {
             }
         });
     }
-   
-    
+
     
 }

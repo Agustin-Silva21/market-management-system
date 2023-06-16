@@ -4,11 +4,13 @@
  */
 package Dominio;
 
+import java.io.Serializable;
+
 /**
  *
  * @author agustin973
  */
-public class Compra extends Movimiento{
+public class Compra extends Movimiento implements Serializable{
     private Mayorista mayorista;
     
     public Compra(Puesto unPuesto,Mayorista unMayorista, Producto unProducto, float precio, float cantidad) {

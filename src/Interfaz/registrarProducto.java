@@ -5,8 +5,12 @@ import Dominio.Producto.FormaVenta;
 import Dominio.Producto.Tipo;
 import java.awt.Image;
 import java.io.File;
-import javax.swing.*;
+import java.io.Serializable;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.*;
+
+public class registrarProducto extends javax.swing.JFrame implements Serializable{
+
 public class registrarProducto extends javax.swing.JFrame {
 
     private Mercado modelo;
