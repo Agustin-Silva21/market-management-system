@@ -166,7 +166,7 @@ public class consultaPorProducto extends javax.swing.JFrame implements PropertyC
         lblNombre1 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         lblNombre.setText("Nombre");

@@ -75,7 +75,7 @@ public class consultaMayoristas extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblMayoristas = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consulta de Mayoristas");
 
         tblMayoristas.setModel(new javax.swing.table.DefaultTableModel(

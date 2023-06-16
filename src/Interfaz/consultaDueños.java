@@ -61,7 +61,7 @@ public class consultaDueños extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDuenios = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consulta de Dueños");
         setAutoRequestFocus(false);
 

@@ -58,14 +58,11 @@ public class Obligatorio2 {
       Puesto puesto4 = new Puesto("Barneys", d4, "Norte", 0);
       Puesto puesto5 = new Puesto("Chorripan", d5, "Centro", 5);
 
-
-
       Movimiento McDonaaldsCompra1 = new Compra(puesto1, m1, p1, 1000, 5.5f);
       Movimiento McDonaaldsCompra2 = new Compra(puesto1, m1, p2, 2000, 10.5f);
       Movimiento McDonaldsVenta1 = new Movimiento(puesto1, p1, 300, 0.5f);
       Movimiento McDonaldsVenta2 = new Movimiento(puesto1, p1, 100, 0.75f);
       Movimiento McDonaldsVenta3 = new Movimiento(puesto1, p2, 300, 1.5f);
-
 
       Movimiento BurgerKingCompra1 = new Compra(puesto2, m2, p3, 500, 2.5f);
       Movimiento BurgerKingCompra2 = new Compra(puesto2, m2, p2, 1000, 5.5f);
@@ -84,8 +81,12 @@ public class Obligatorio2 {
       puesto1.agregarProducto(p1, 0.5f);
       puesto1.agregarProducto(p2, 0.75f);
 
+      puesto2.agregarProducto(p3, 0.5f);
+      puesto2.agregarProducto(p2, 0.75f);
+      puesto2.agregarProducto(p1, 1.0f);
 
-
+      puesto3.agregarProducto(p1, 0.5f);
+      puesto3.agregarProducto(p5, 0.75f);
 
       Mercado mercado = new Mercado();
       mercado.agregarListaMovimientos(McDonaaldsCompra1);
@@ -93,6 +94,7 @@ public class Obligatorio2 {
       mercado.agregarListaMovimientos(McDonaldsVenta1);
       mercado.agregarListaMovimientos(McDonaldsVenta2);
       mercado.agregarListaMovimientos(McDonaldsVenta3);
+
       mercado.agregarListaMovimientos(BurgerKingCompra1);
       mercado.agregarListaMovimientos(BurgerKingCompra2);
       mercado.agregarListaMovimientos(BurgerKingCompra3);
@@ -100,33 +102,37 @@ public class Obligatorio2 {
       mercado.agregarListaMovimientos(BurgerKingVenta2);
       mercado.agregarListaMovimientos(BurgerKingVenta3);
       mercado.agregarListaMovimientos(BurgerKingVenta4);
+
       mercado.agregarListaMovimientos(MostazaCompra1);
       mercado.agregarListaMovimientos(MostazaCompra2);
       mercado.agregarListaMovimientos(MostazaVenta1);
       mercado.agregarListaMovimientos(MostazaVenta2);
       mercado.agregarListaMovimientos(MostazaVenta3);
 
-
       mercado.agregarListaMayoristas(m1);
       mercado.agregarListaMayoristas(m2);
       mercado.agregarListaMayoristas(m3);
       mercado.agregarListaMayoristas(m4);
       mercado.agregarListaMayoristas(m5);
+
       mercado.agregarListaProductos(p1);
       mercado.agregarListaProductos(p2);
       mercado.agregarListaProductos(p3);
       mercado.agregarListaProductos(p4);
       mercado.agregarListaProductos(p5);
+
       mercado.agregarListaDueños(d1);
       mercado.agregarListaDueños(d2);
       mercado.agregarListaDueños(d3);
       mercado.agregarListaDueños(d4);
       mercado.agregarListaDueños(d5);
+
       mercado.agregarListaPuestos(puesto1);
       mercado.agregarListaPuestos(puesto2);
       mercado.agregarListaPuestos(puesto3);
       mercado.agregarListaPuestos(puesto4);
       mercado.agregarListaPuestos(puesto5);
+
       MenuPpal menu = new MenuPpal (mercado);
       menu.setVisible(true);
     }

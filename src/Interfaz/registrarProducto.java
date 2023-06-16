@@ -5,10 +5,7 @@ import Dominio.Producto.FormaVenta;
 import Dominio.Producto.Tipo;
 import java.awt.Image;
 import java.io.File;
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 public class registrarProducto extends javax.swing.JFrame {
 
@@ -24,6 +21,12 @@ public class registrarProducto extends javax.swing.JFrame {
     public registrarProducto(Mercado unModelo) {
         modelo = unModelo;
         initComponents();
+        iniciarComponentes();
+        iniciarComponentes();
+        reiniciarCampos();
+    }
+
+    private void iniciarComponentes() {
         ComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(modelo.getListaFormaVentaProducto());
         cajaVenta.setModel(comboBoxModel);
         comboBoxModel = new DefaultComboBoxModel<>(modelo.getListaTipoProducto());
@@ -31,11 +34,9 @@ public class registrarProducto extends javax.swing.JFrame {
         selectorArchivo.setCurrentDirectory(new java.io.File(pathDirectorio + "/imagenesProductos"));
         FileNameExtensionFilter filtro = new FileNameExtensionFilter("IMAGES","png","jpg","jpeg");
         selectorArchivo.addChoosableFileFilter(filtro);
-        ImageIcon imagenicon = new ImageIcon(pathDirectorio + "/No-Image-Placeholder.jpg");
-        Image imagen = imagenicon.getImage().getScaledInstance(largoImg, anchoImg, Image.SCALE_SMOOTH);
-        lblImagen.setIcon(new ImageIcon(imagen));
+        UIManager.put("OptionPane.yesButtonText", "Si");
+        UIManager.put("OptionPane.noButtonText", "No");
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -206,12 +207,24 @@ public class registrarProducto extends javax.swing.JFrame {
         }        
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    private void reiniciarCampos() {
+        cajaNombre.setText("");
+        cajaDescripcion.setText("");
+        cajaTipo.setSelectedIndex(0);
+        cajaVenta.setSelectedIndex(0);
+        ImageIcon imagenicon = new ImageIcon(pathDirectorio + "/No-Image-Placeholder.jpg");
+        Image imagen = imagenicon.getImage().getScaledInstance(largoImg, anchoImg, Image.SCALE_SMOOTH);
+        lblImagen.setIcon(new ImageIcon(imagen));
+    }
+
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        // Inicializacion de variables
         String descripcion = cajaDescripcion.getText().trim();
         String nombre = cajaNombre.getText().trim();
         String tipoString = (String) cajaTipo.getSelectedItem();
         String formaVentaString = (String) cajaVenta.getSelectedItem();
         ImageIcon imagen = (ImageIcon) lblImagen.getIcon();
+        // Validacion de campos y creacion de mensaje
         String mensaje = "";
         mensaje = nombre.isBlank() ? "El nombre no puede estar vacio!\n" : mensaje;
         System.out.println(mensaje);
@@ -221,7 +234,8 @@ public class registrarProducto extends javax.swing.JFrame {
             mensaje = "Nombre: " + nombre + "\nDescripcion: " + descripcion + "\nTipo: " + tipoString + "\nForma de Venta: " + formaVentaString;
             Tipo tipo = Tipo.valueOf(tipoString);
             FormaVenta formaVenta = FormaVenta.valueOf(formaVentaString);
-            int opcion = JOptionPane.showOptionDialog(null,mensaje,"Titulo",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,imagen,new String[]{"Guardar","Cancelar"},"Guardar");
+            // Confirmacion de guardado de producto
+            int opcion = JOptionPane.showOptionDialog(null,mensaje,"Producto a guardar",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,imagen,new String[]{"Guardar","Cancelar"},"Guardar");
             if (opcion == JOptionPane.YES_OPTION) {
                 if (modelo.registrarProducto(nombre, descripcion, tipo, formaVenta)) {
                     JOptionPane.showMessageDialog(null, "El producto ha sido guardado exitosamente.", "Guardar Producto", JOptionPane.INFORMATION_MESSAGE);
@@ -229,11 +243,13 @@ public class registrarProducto extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "El producto debe tener un nombre unico", "Producto no guardado", JOptionPane.ERROR_MESSAGE);
                 }
             }else if(opcion == JOptionPane.NO_OPTION) {
-                cajaNombre.setText("---");
-                cajaDescripcion.setText("---");
+                JOptionPane.showMessageDialog(null, "El producto no ha sido guardado.", "Guardar Producto", JOptionPane.INFORMATION_MESSAGE);
             }
+        }else{
+            JOptionPane.showMessageDialog(null, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_btnAgregarActionPerformed
+        reiniciarCampos();
+    }
 
     private void cajaDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cajaDescripcionActionPerformed
         // TODO add your handling code here:

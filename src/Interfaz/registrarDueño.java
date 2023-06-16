@@ -2,7 +2,8 @@
 package Interfaz;
 
 import Dominio.Mercado;
-import javax.swing.JOptionPane;
+
+import javax.swing.*;
 
 public class registrarDueño extends javax.swing.JFrame {
 private Mercado modelo;
@@ -10,8 +11,11 @@ private Mercado modelo;
     public registrarDueño() {
         initComponents();
     }
-public registrarDueño(Mercado unModelo) {
+
+    public registrarDueño(Mercado unModelo) {
     modelo = unModelo;
+    UIManager.put("OptionPane.yesButtonText", "Si");
+    UIManager.put("OptionPane.noButtonText", "No");
     initComponents();
     }
 
@@ -135,22 +139,49 @@ public registrarDueño(Mercado unModelo) {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void botonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarActionPerformed
-        try {
+        String mensaje = "";
+        mensaje = chequearCamposVacios();
+        mensaje += chequearValidezCampos();
+        if (mensaje.isEmpty()){
             int edad = Integer.parseInt(cajaEdad.getText());
             int añosExp = Integer.parseInt(cajaAñosExp.getText());
             String nombre = cajaNombre.getText().trim();
-            if (edad<18) {
-                JOptionPane.showMessageDialog(null, "La edad debe ser mayor a 18 años!","Error",JOptionPane.ERROR_MESSAGE);
-            }else if(añosExp<0){
-                JOptionPane.showMessageDialog(null, "Los años no pueden ser numeros negativos!","Error",JOptionPane.ERROR_MESSAGE);
-            }else if(nombre.isBlank()){
-                JOptionPane.showMessageDialog(null, "Se debe colocar nombre!","Error",JOptionPane.ERROR_MESSAGE);
+            if (modelo.registrarDueño(nombre, edad, añosExp)) {
+                JOptionPane.showMessageDialog(null, "Dueño creado con exito","Confirmacion",JOptionPane.INFORMATION_MESSAGE);
             }else{
-                if (modelo.registrarDueño(nombre, edad, añosExp)) {
-                    JOptionPane.showMessageDialog(null, "Dueño creado con exito","Confirmacion",JOptionPane.INFORMATION_MESSAGE);                    
-                }else{                   
-                    JOptionPane.showMessageDialog(null, "El nombre no debe repetirse!","Error",JOptionPane.ERROR_MESSAGE);
-                }
+                JOptionPane.showMessageDialog(null, "Error al crear dueño","Error",JOptionPane.ERROR_MESSAGE);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, mensaje,"Error",JOptionPane.ERROR_MESSAGE);
+        }
+        reiniciarCampos();
+    }
+    //GEN-LAST:event_botonAgregarActionPerformed
+
+    private String chequearCamposVacios(){
+        String mensaje = "";
+        if (cajaNombre.getText().isBlank()) {
+            mensaje += "El nombre no puede estar vacio!\n";
+        }
+        if (cajaEdad.getText().isBlank()) {
+            mensaje += "La edad no puede estar vacia!\n";
+        }
+        if (cajaAñosExp.getText().isBlank()) {
+            mensaje += "Los años de experiencia no pueden estar vacios!\n";
+        }
+        return mensaje;
+    }
+
+    private String chequearValidezCampos(){
+        String mensaje = "";
+        try {
+            int edad = Integer.parseInt(cajaEdad.getText());
+            int añosExp = Integer.parseInt(cajaAñosExp.getText());
+            if (edad<18) {
+                mensaje += "La edad debe ser mayor a 18 años!\n";
+            }
+            if(añosExp<0){
+                mensaje += "Los años no pueden ser numeros negativos!\n";
             }
         } catch (NumberFormatException ex) {
             String errorMessage;
@@ -159,13 +190,16 @@ public registrarDueño(Mercado unModelo) {
             } else {
                 errorMessage = "Los años deben ser un numero!";
             }
-            JOptionPane.showMessageDialog(null, errorMessage,"Error",JOptionPane.ERROR_MESSAGE);
-        } finally{
-            cajaNombre.setText("---");
-            cajaEdad.setText("");
-            cajaAñosExp.setText("");
+            mensaje += errorMessage;
         }
-    }//GEN-LAST:event_botonAgregarActionPerformed
+        return mensaje;
+    }
+
+    private void reiniciarCampos(){
+        cajaNombre.setText("");
+        cajaEdad.setText("");
+        cajaAñosExp.setText("");
+    }
 
     private void cajaAñosExpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cajaAñosExpActionPerformed
         // TODO add your handling code here:
