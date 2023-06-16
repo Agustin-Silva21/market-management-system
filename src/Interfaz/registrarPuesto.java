@@ -2,15 +2,12 @@ package Interfaz;
 
 import Dominio.Dueño;
 import Dominio.Mercado;
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
-import javax.swing.UIManager;
+import java.io.Serializable;
+import javax.swing.*;
 
-public class registrarPuesto extends javax.swing.JFrame {
-
+public class registrarPuesto extends javax.swing.JFrame implements Serializable{
     private Mercado modelo;
-
+  
     public registrarPuesto() {
         initComponents();
     }

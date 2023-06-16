@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -17,12 +18,16 @@ import javax.swing.ImageIcon;
  *
  * @author agustin973
  */
-public class Producto {
+public class Producto implements Serializable, Comparable<Producto>{
+    private static final long serialVersionUID = 1L;
     private String nombre;
     private String descripcion;
-    private Tipo unTipo;
-    private FormaVenta unaVenta;
+    private Tipo tipo;
+    private FormaVenta venta;
     private BufferedImage imagen;
+    private String pathImagen;
+
+    
     // https://stackoverflow.com/questions/34072052/is-it-possible-to-add-an-image-png-as-an-attribute-of-a-java-class
     public enum Tipo {Fruta,Verdura}
     public enum FormaVenta {Unidad,Kilogramo}
@@ -30,29 +35,33 @@ public class Producto {
     public Producto() throws IOException{
         this.nombre = "----";
         this.descripcion = "----";
-        this.unTipo = Tipo.Fruta;
-        this.unaVenta = FormaVenta.Kilogramo;
-        this.imagen = ImageIO.read(new File("/home/agustin973/NetBeansProjects/Obligatorio2/src/Helpers/No-Image-Placeholder.jpg"));
+        this.tipo = Tipo.Fruta;
+        this.venta = FormaVenta.Kilogramo;
+        this.pathImagen = "src/Helpers/ImagenesProductos/No-Image-Placeholder.jpg";
+        this.imagen = ImageIO.read(new File(pathImagen));
     }
+    
     
     public Producto(String nombre, String descripcion, Tipo unTipo, FormaVenta unaVenta, String imagenPath) {
         this(nombre,descripcion,unTipo,unaVenta);
-        try {
+        try{
+            this.pathImagen = imagenPath;
             this.imagen = ImageIO.read(new File(imagenPath));
         } catch (IOException e){
-            System.out.println("Error al obtener la imagen!");
+            
         }
     }
     
     public Producto(String nombre, String descripcion, Tipo unTipo, FormaVenta unaVenta) {
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.unTipo = unTipo;
-        this.unaVenta = unaVenta;
-        try {    
-            this.imagen = ImageIO.read(new File("/home/agustin973/NetBeansProjects/Obligatorio2/src/Helpers/No-Image-Placeholder.jpg"));          
+        this.tipo = unTipo;
+        this.venta = unaVenta;
+        this.pathImagen = "src/Helpers/ImagenesProductos/Uvas.jpg";
+        try{
+            this.imagen = ImageIO.read(new File(pathImagen));
         } catch (IOException e){
-            System.out.println("Error al obtener la imagen!");
+            System.out.println("Imagen no encontrada");
         }
     }
 
@@ -73,19 +82,19 @@ public class Producto {
     }
 
     public Tipo getTipo() {
-        return unTipo;
+        return tipo;
     }
 
     public void setTipo(Tipo unTipo) {
-        this.unTipo = unTipo;
+        this.tipo = unTipo;
     }
 
     public FormaVenta getFormaVenta() {
-        return unaVenta;
+        return venta;
     }
 
     public void setFormaVenta(FormaVenta unaVenta) {
-        this.unaVenta = unaVenta;
+        this.venta = unaVenta;
     }
 
     public Icon getImagenAsIcon() {
@@ -110,7 +119,18 @@ public class Producto {
         hash = 17 * hash + (this.getNombre() != null ? this.getNombre().hashCode() : 0);
         return hash;
     }
-
+  
+    @Override
+    public int compareTo(Producto o) {
+        // Comparación basada en atributo1
+        int compTipo = this.getTipo().compareTo(o.getTipo());
+        if (compTipo != 0) {
+            return compTipo;
+        }
+        
+        // Si los atributos 1 son iguales, compara por atributo2
+        return this.getNombre().compareTo(o.getNombre());
+    }
     @Override
     public String toString() {
         return this.getNombre();
