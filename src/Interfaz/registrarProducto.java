@@ -10,9 +10,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class registrarProducto extends javax.swing.JFrame {
 
     private Mercado modelo;
-    private static int largoImg = 200;
-    private static int anchoImg = 200;
-    private static String pathDirectorio = System.getProperty("user.dir") + "/src/Helpers";
+    private static final int largoImg = 200;
+    private static final int anchoImg = 200;
+    private static final String pathDirectorio = System.getProperty("user.dir") + "/src/Helpers";
 
     public registrarProducto() {
         initComponents();

@@ -13,7 +13,6 @@ public class Obligatorio2 {
 
     public static void main(String[] args) {
 
-
       Dueño d1 = new Dueño("Gab", 32, 120);
       Dueño d2 = new Dueño("May", 18, 1);
       Dueño d3 = new Dueño("Jen", 48, 10);

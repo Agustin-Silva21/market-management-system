@@ -26,7 +26,7 @@ public class consultaMayoristas extends javax.swing.JFrame {
     }
 
     public void cargarTabla(){
-        String matriz[][] = new String[modelo.getListaMayoristas().size()][4];
+        String[][] matriz = new String[modelo.getListaMayoristas().size()][4];
         int i = 0;
         for (Mayorista m : modelo.getListaMayoristas()) {
             matriz[i][0] = m.getRut();
@@ -108,7 +108,7 @@ public class consultaMayoristas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

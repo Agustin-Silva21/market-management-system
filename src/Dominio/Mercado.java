@@ -3,11 +3,11 @@ package Dominio;
 import java.util.*;
 
 public class Mercado {
-    private ArrayList<Mayorista> listaMayoristas;
-    private ArrayList<Producto> listaProductos;
-    private ArrayList<Puesto> listaPuestos;
-    private ArrayList<Dueño> listaDueños;
-    private ArrayList<Movimiento> listaMovimientos;
+    private final ArrayList<Mayorista> listaMayoristas;
+    private final ArrayList<Producto> listaProductos;
+    private final ArrayList<Puesto> listaPuestos;
+    private final ArrayList<Dueño> listaDueños;
+    private final ArrayList<Movimiento> listaMovimientos;
 
     public Mercado() {
         this.listaMayoristas = new ArrayList<>();

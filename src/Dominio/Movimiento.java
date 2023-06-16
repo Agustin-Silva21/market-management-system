@@ -11,7 +11,7 @@ public class Movimiento {
     private float cantidad;
 
     public Movimiento(Puesto unPuesto, Producto unProducto, float precio, float cantidad) {
-        this.id = getId();
+        id = getId();
         this.puesto = unPuesto;
         this.producto = unProducto;
         this.precio = precio;
@@ -24,7 +24,7 @@ public class Movimiento {
     }
 
     public void setId(int id) {
-        this.id = id;
+        Movimiento.id = id;
     }
     // posible solucion: https://www.javatpoint.com/how-to-find-number-of-objects-created-in-java
     
@@ -61,7 +61,7 @@ public class Movimiento {
     }
     @Override
     public String toString() {
-        return "" + this.getId() + ", " + this.getProducto() + ", " + this.getCantidad() + ", " + this.getPrecio();
+        return this.getId() + ", " + this.getProducto() + ", " + this.getCantidad() + ", " + this.getPrecio();
     }
     
 }

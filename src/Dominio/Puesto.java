@@ -13,7 +13,7 @@ public class Puesto {
     private Dueño dueño;
     private String ubicacion;
     private int cantEmpleados;
-    private HashMap<Producto,Float> oferta;
+    private final HashMap<Producto,Float> oferta;
 
     public Puesto(String id, Dueño dueño, String ubicacion, int cantEmpleados) {
         this.id = id;

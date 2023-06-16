@@ -31,7 +31,7 @@ public class consultaPuestos extends javax.swing.JFrame {
     }
 
     public void cargarTabla(){
-        String matriz[][] = new String[modelo.getListaPuestos().size()][5];
+        String[][] matriz = new String[modelo.getListaPuestos().size()][5];
         int i = 0;
         for (Puesto p : getListaPuestosAlphabetical()) {
             matriz[i][0] = p.getId();
@@ -121,7 +121,7 @@ public class consultaPuestos extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

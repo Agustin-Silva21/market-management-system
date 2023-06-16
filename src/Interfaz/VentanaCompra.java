@@ -48,7 +48,7 @@ public class VentanaCompra extends javax.swing.JFrame {
                 float cant = Float.parseFloat(auxCant);
                 float precio = Float.parseFloat(auxPrec);
                 float precioTotal = cant * precio;
-                txtPrecioTotal.setText("" + precioTotal);
+                txtPrecioTotal.setText(String.valueOf(precioTotal));
             } catch (NumberFormatException ex) {
                 txtPrecioTotal.setText("0");
             }
@@ -369,11 +369,11 @@ public class VentanaCompra extends javax.swing.JFrame {
             txtPrecioUnitario.setText("0");
             
             int indiceAux = -1;
-            if(productosAComprar.keySet().contains((Producto)lstProductosOfrecidos.getSelectedValue())){
+            if(productosAComprar.containsKey((Producto)lstProductosOfrecidos.getSelectedValue())){
                 Object[] listaAux = productosAComprar.keySet().toArray();
                 for( int i = 0; i < productosAComprar.size(); i++){
                     Producto pAux = (Producto)listaAux[i];
-                    if (pAux.equals((Producto)lstProductosOfrecidos.getSelectedValue())){
+                    if (pAux.equals(lstProductosOfrecidos.getSelectedValue())){
                         indiceAux = i;
                         cantidadYPrecioParaMostrar.remove(indiceAux);
                     }
@@ -456,9 +456,9 @@ public class VentanaCompra extends javax.swing.JFrame {
     private javax.swing.JTextField txtPrecioTotal;
     private javax.swing.JTextField txtPrecioUnitario;
     // End of variables declaration//GEN-END:variables
-    private Mercado mercado;
-    private HashMap<Producto, float[]> productosAComprar;
-    private ArrayList<String> cantidadYPrecioParaMostrar;
+    private final Mercado mercado;
+    private final HashMap<Producto, float[]> productosAComprar;
+    private final ArrayList<String> cantidadYPrecioParaMostrar;
     private int mayoristaAnterior;
     private boolean banderaCambioMayorista;
 }

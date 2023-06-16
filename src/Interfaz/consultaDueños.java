@@ -28,7 +28,7 @@ public class consultaDueños extends javax.swing.JFrame {
     }
     public void cargarTabla(){
         // cargar tabla
-        String matriz[][] = new String[modelo.getListaDueños().size()][3];
+        String[][] matriz = new String[modelo.getListaDueños().size()][3];
         int i = 0;
         for (Dueño d : getListaDueñosAlphabetical()) {
             matriz[i][0] = d.getNombre();
@@ -98,7 +98,7 @@ public class consultaDueños extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
