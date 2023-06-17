@@ -23,6 +23,7 @@ public class consultaPorProducto extends javax.swing.JFrame implements PropertyC
         soporteDeCambio = new PropertyChangeSupport(this);
         soporteDeCambio.addPropertyChangeListener(this);
         this.modelo = unMercado;
+        modelo.addPropertyChangeListener(this);
         initComponents();
         setTextFieldsAsNotEditable();
         if (!unMercado.getListaProductos().isEmpty()) {
@@ -121,6 +122,9 @@ public class consultaPorProducto extends javax.swing.JFrame implements PropertyC
     @Override
     public void propertyChange(java.beans.PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals("indice")) {
+            showProductData(indice);
+        }
+        if (evt.getPropertyName().equals("listaProductos")) {
             showProductData(indice);
         }
     }

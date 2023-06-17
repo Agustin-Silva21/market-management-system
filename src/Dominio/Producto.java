@@ -1,9 +1,7 @@
 // Gabriel Machado 318697, Agustin Silva 310087
 package Dominio;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;

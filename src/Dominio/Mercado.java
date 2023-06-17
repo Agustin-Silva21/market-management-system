@@ -1,6 +1,8 @@
 // Gabriel Machado 318697, Agustin Silva 310087
 package Dominio;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -16,10 +18,10 @@ public class Mercado implements Serializable{
     private ArrayList<Puesto> listaPuestos;
     private ArrayList<Dueño> listaDueños;
     private ArrayList<Movimiento> listaMovimientos;
-    //private PropertyChangeSupport manejador;
+    private PropertyChangeSupport manejador;
 
     public Mercado() {
-        //this.manejador = new PropertyChangeSupport(this);
+        this.manejador = new PropertyChangeSupport(this);
         this.listaMayoristas = new ArrayList<>();
         this.listaProductos = new ArrayList<>();
         this.listaPuestos = new ArrayList<>();
@@ -33,9 +35,10 @@ public class Mercado implements Serializable{
     }
 
     public void agregarListaMayoristas(Mayorista unMayorista) {
-        
+        ArrayList<Mayorista> anterior = this.listaMayoristas;
         this.listaMayoristas.add(unMayorista);
         ordenarMayoristas();
+        manejador.firePropertyChange("listaMayoristas", anterior, this.listaMayoristas);
     }
 
     public ArrayList<Producto> getListaProductos() {
@@ -43,9 +46,9 @@ public class Mercado implements Serializable{
     }
 
     public void agregarListaProductos(Producto unProducto) {
-        
+        ArrayList<Producto> anterior = this.listaProductos;
         this.listaProductos.add(unProducto);
-        
+        manejador.firePropertyChange("listaProductos", anterior, this.listaProductos);
     }
 
     public ArrayList<Puesto> getListaPuestos() {
@@ -53,9 +56,9 @@ public class Mercado implements Serializable{
     }
 
     public void agregarListaPuestos(Puesto unPuesto) {
-        
+        ArrayList<Puesto> anterior = this.listaPuestos;
         this.listaPuestos.add(unPuesto);
-        
+        manejador.firePropertyChange("listaPuestos", anterior, this.listaPuestos);
     }
 
     public ArrayList<Dueño> getListaDueños() {
@@ -63,9 +66,9 @@ public class Mercado implements Serializable{
     }
 
     public void agregarListaDueños(Dueño unDueño) {
-        
+        ArrayList<Dueño> anterior = this.listaDueños;
         this.listaDueños.add(unDueño);
-        
+        manejador.firePropertyChange("listaDueños", anterior, this.listaDueños);
     }
 
     public ArrayList<Movimiento> getListaMovimientos() {
@@ -73,9 +76,9 @@ public class Mercado implements Serializable{
     }
 
     public void agregarListaMovimientos(Movimiento unMovimiento) {
-        
+        ArrayList<Movimiento> anterior = this.listaMovimientos;
         this.listaMovimientos.add(unMovimiento);
-        
+        manejador.firePropertyChange("listaMovimientos", anterior, this.listaMovimientos);
     }
     
     /*public boolean registrarProducto(Producto unProducto){
@@ -284,5 +287,10 @@ public class Mercado implements Serializable{
         });
     }
 
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        
+
+        manejador.addPropertyChangeListener(listener);
+    }
     
 }

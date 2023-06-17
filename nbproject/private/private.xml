@@ -3,12 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/agustin973/NetBeansProjects/Obligatorio2/src/Dominio/Producto.java</file>
-            <file>file:/home/agustin973/NetBeansProjects/Obligatorio2/src/Interfaz/registrarPuesto.java</file>
-            <file>file:/home/agustin973/NetBeansProjects/Obligatorio2/src/Dominio/Dueño.java</file>
-            <file>file:/home/agustin973/NetBeansProjects/Obligatorio2/src/Dominio/Mayorista.java</file>
-            <file>file:/home/agustin973/NetBeansProjects/Obligatorio2/src/Interfaz/registrarMayorista.java</file>
-            <file>file:/home/agustin973/NetBeansProjects/Obligatorio2/src/Dominio/Mercado.java</file>
+            <file>file:/Users/gabrielmachadoleal/NetBeansProjects/Obligatorio2/src/Interfaz/VentanaCompra.java</file>
+            <file>file:/Users/gabrielmachadoleal/NetBeansProjects/Obligatorio2/src/Interfaz/VentanaGenerarArchivo.java</file>
+            <file>file:/Users/gabrielmachadoleal/NetBeansProjects/Obligatorio2/src/Interfaz/VentanaVenta.java</file>
+            <file>file:/Users/gabrielmachadoleal/NetBeansProjects/Obligatorio2/src/Interfaz/consultaMayoristas.java</file>
+            <file>file:/Users/gabrielmachadoleal/NetBeansProjects/Obligatorio2/src/Dominio/Mercado.java</file>
+            <file>file:/Users/gabrielmachadoleal/NetBeansProjects/Obligatorio2/src/Interfaz/registrarPuesto.java</file>
+            <file>file:/Users/gabrielmachadoleal/NetBeansProjects/Obligatorio2/src/Interfaz/consultaDueños.java</file>
+            <file>file:/Users/gabrielmachadoleal/NetBeansProjects/Obligatorio2/src/Main/Obligatorio2.java</file>
         </group>
     </open-files>
 </project-private>

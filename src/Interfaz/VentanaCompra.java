@@ -2,15 +2,18 @@
 package Interfaz;
 
 import Dominio.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.*;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-public class VentanaCompra extends javax.swing.JFrame {
+public class VentanaCompra extends javax.swing.JFrame implements PropertyChangeListener{
 
     public VentanaCompra(Mercado unMercado) {
         mercado = unMercado;
+        mercado.addPropertyChangeListener(this);
         initComponents();
         this.setSize(1000,1000);
         productosAComprar = new HashMap<>();
@@ -22,6 +25,14 @@ public class VentanaCompra extends javax.swing.JFrame {
         txtCantidad.getDocument().addDocumentListener(new MyDocumentListener());
         txtPrecioUnitario.getDocument().addDocumentListener(new MyDocumentListener());
         banderaCambioMayorista = false;
+    }
+    
+    @Override
+    public void propertyChange(PropertyChangeEvent evt){
+        if (evt.getPropertyName().equals("listaPuestos") || 
+                evt.getPropertyName().equals("listaMayoristas")){
+            reCargar();
+        }
     }
     
     private class MyDocumentListener implements DocumentListener{

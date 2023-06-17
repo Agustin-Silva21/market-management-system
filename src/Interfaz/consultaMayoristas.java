@@ -4,12 +4,14 @@ package Interfaz;
 import Dominio.Mercado;
 import Dominio.Producto;
 import Dominio.Mayorista;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 
 
-public class consultaMayoristas extends javax.swing.JFrame {
+public class consultaMayoristas extends javax.swing.JFrame  implements PropertyChangeListener{
     private Mercado modelo;
 
     public consultaMayoristas() {
@@ -18,11 +20,19 @@ public class consultaMayoristas extends javax.swing.JFrame {
 
     public consultaMayoristas(Mercado unModelo) {
         modelo = unModelo;
+        modelo.addPropertyChangeListener(this);
         initComponents();
         this.cargarTabla();
         ajustarAnchoColumnaSegunTexto(tblMayoristas);
     }
-
+    
+    @Override
+    public void propertyChange(PropertyChangeEvent evt){
+        if (evt.getPropertyName().equals("listaMayoristas")){
+            cargarTabla();
+        }
+    }
+    
     public void cargarTabla(){
         String[][] matriz = new String[modelo.getListaMayoristas().size()][4];
         int i = 0;
@@ -106,37 +116,6 @@ public class consultaMayoristas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public static void main(String[] args) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(consultaMayoristas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(consultaMayoristas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(consultaMayoristas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(consultaMayoristas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new consultaMayoristas().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;

@@ -3,9 +3,11 @@ package Interfaz;
 
 import Dominio.Dueño;
 import Dominio.Mercado;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import javax.swing.*;
 
-public class registrarPuesto extends javax.swing.JFrame{
+public class registrarPuesto extends javax.swing.JFrame implements PropertyChangeListener{
     private Mercado modelo;
   
     public registrarPuesto() {
@@ -14,6 +16,7 @@ public class registrarPuesto extends javax.swing.JFrame{
 
     public registrarPuesto(Mercado unModelo) {        
         modelo = unModelo;
+        modelo.addPropertyChangeListener(this);
         initComponents();
         UIManager.put("OptionPane.yesButtonText", "Si");
         UIManager.put("OptionPane.noButtonText", "No");
@@ -21,7 +24,15 @@ public class registrarPuesto extends javax.swing.JFrame{
         ComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(modelo.getListaDueños().stream().map(Dueño::getNombre).toArray(String[]::new));
         cmbDuenio.setModel(comboBoxModel);        
     }
-
+    
+    @Override
+    public void propertyChange(PropertyChangeEvent evt){
+        if (evt.getPropertyName().equals("listaDueños")){
+            ComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(modelo.getListaDueños().stream().map(Dueño::getNombre).toArray(String[]::new));
+            cmbDuenio.setModel(comboBoxModel);
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -214,16 +225,6 @@ public class registrarPuesto extends javax.swing.JFrame{
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbDuenioActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new registrarPuesto().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;

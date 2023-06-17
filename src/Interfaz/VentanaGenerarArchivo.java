@@ -1,19 +1,22 @@
-
+// Gabriel Machado 318697, Agustin Silva 310087
 package Interfaz;
 
 import Dominio.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-public class VentanaGenerarArchivo extends javax.swing.JFrame {
+public class VentanaGenerarArchivo extends javax.swing.JFrame implements PropertyChangeListener{
 
     
     public VentanaGenerarArchivo(Mercado modelo) {
         mercado = modelo;
+        mercado.addPropertyChangeListener(this);
         initComponents();
         grupoTipo.add(radioCompras);
         grupoTipo.add(radioVentas);
@@ -41,7 +44,18 @@ public class VentanaGenerarArchivo extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    @Override
+    public void propertyChange(PropertyChangeEvent evt){
+        if (evt.getPropertyName().equals("listaPuestos") || 
+                evt.getPropertyName().equals("listaMovimientos")){
+            int[] desdeYHasta;
+            desdeYHasta = tratamientoDatos();
+        
+            lstPuestos.setListData(cargarPuestos(desdeYHasta[0], desdeYHasta[1], tipoM));
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -193,32 +207,19 @@ public class VentanaGenerarArchivo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCargarPuestosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarPuestosActionPerformed
-        int desde = 0;
-        int hasta = mercado.getListaMovimientos().size() - 1;
-        try{
-            desde = Integer.parseInt(txtDesde.getText());
-            hasta = Integer.parseInt(txtHasta.getText());
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(this, 
-                    "Rangos inválidos!\nSe buscará en todo el rango.");
-        }
+        int[] desdeYHasta;
+        desdeYHasta = tratamientoDatos();
         
-        lstPuestos.setListData(cargarPuestos(desde, hasta, tipoM));
+        lstPuestos.setListData(cargarPuestos(desdeYHasta[0], desdeYHasta[1], tipoM));
     }//GEN-LAST:event_btnCargarPuestosActionPerformed
 
     private void btnGenerarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarArchivoActionPerformed
-        int desde = 0;
-        int hasta = mercado.getListaMovimientos().size() - 1;
+        
         ArrayList<Puesto> puestosSeleccionados = new ArrayList<>();
+        int[] desdeYHasta;
         int[] indices = lstPuestos.getSelectedIndices();
         
-        try{
-            desde = Integer.parseInt(txtDesde.getText());
-            hasta = Integer.parseInt(txtHasta.getText());
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(this, 
-                    "Rangos inválidos!\nSe buscará en todo el rango.");
-        }
+        desdeYHasta = tratamientoDatos();
         
         for (int indice: indices){
             Puesto puesto = (Puesto) lstPuestos.getModel().getElementAt(indice);
@@ -227,9 +228,23 @@ public class VentanaGenerarArchivo extends javax.swing.JFrame {
         
         puestosABuscar = puestosSeleccionados;
         
-        generarArchivo(desde, hasta, tipoM, puestosABuscar);
+        generarArchivo(desdeYHasta[0], desdeYHasta[1], tipoM, puestosABuscar);
     }//GEN-LAST:event_btnGenerarArchivoActionPerformed
-
+    
+    private int[] tratamientoDatos(){
+        int[] aDevolver = new int[2];
+        aDevolver[0] = 0;
+        aDevolver[1] = mercado.getListaMovimientos().size() - 1;
+        try{
+            aDevolver[0] = Integer.parseInt(txtDesde.getText());
+            aDevolver[1] = Integer.parseInt(txtHasta.getText());
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(this, 
+                    "Rangos inválidos!\nSe buscará en todo el rango.");
+        }
+        return aDevolver;
+    }
+    
     public Puesto[] cargarPuestos(int desde, int hasta, String tipo) {
         ArrayList<Puesto> puestosADevolver = new ArrayList<>();
         try{

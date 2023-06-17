@@ -8,6 +8,8 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,10 +21,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.ToolTipManager;
 
-public class VentanaVenta extends javax.swing.JFrame{
+public class VentanaVenta extends javax.swing.JFrame implements PropertyChangeListener{
 
     public VentanaVenta(Mercado unMercado) {
         mercado = unMercado;
+        mercado.addPropertyChangeListener(this);
         initComponents();
         this.setSize(1000, 1000);
         ToolTipManager.sharedInstance().setInitialDelay(0);
@@ -54,6 +57,15 @@ public class VentanaVenta extends javax.swing.JFrame{
                 filtrarProductos(productosDelPuesto);
             }
         });
+    }
+    
+    @Override
+    public void propertyChange(PropertyChangeEvent evt){
+        if (evt.getPropertyName().equals("listaPuestos")){
+            lstPuestos.setListData(mercado.getListaPuestos().toArray());
+            // En caso se elimine el puesto que tenemos seleccionado, se vaciara el carrito
+            cambioEnPuestos();
+        }
     }
     
     private void filtrarProductos(Producto[] productosSinFiltrar) {
@@ -155,6 +167,16 @@ public class VentanaVenta extends javax.swing.JFrame{
                         "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
+    }
+    
+    private void cambioEnPuestos(){
+        Puesto seleccionLista = (Puesto)lstPuestos.getSelectedValue();
+        int posicion = mercado.getListaPuestos().indexOf(seleccionLista);
+        puestoActual = mercado.getListaPuestos().get(posicion);
+        productosDelPuesto = puestoActual.getOferta().keySet().toArray(new Producto[0]);
+        
+        filtrarProductos(productosDelPuesto);
+        mercado.getListaPuestos().get(posicion).limpiarProducto(puestoActual);
     }
     
     /**
@@ -279,13 +301,22 @@ public class VentanaVenta extends javax.swing.JFrame{
     
     
     private void lstPuestosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPuestosValueChanged
-        Puesto seleccionLista = (Puesto)lstPuestos.getSelectedValue();
-        int posicion = mercado.getListaPuestos().indexOf(seleccionLista);
-        puestoActual = mercado.getListaPuestos().get(posicion);
-        productosDelPuesto = puestoActual.getOferta().keySet().toArray(new Producto[0]);
-        
-        filtrarProductos(productosDelPuesto);
-        mercado.getListaPuestos().get(posicion).limpiarProducto(puestoActual);
+        if(!productosAComprar.isEmpty()){
+            int opcion = JOptionPane.showConfirmDialog(this, 
+                        "Esta seguro que desea cambiar el Puesto?\n"
+                        + "Su carrito se vaciara en caso de aceptar!", 
+                        "Confirmacion", JOptionPane.YES_NO_OPTION);
+                if (opcion == JOptionPane.YES_OPTION){
+
+                    productosAComprar.clear();
+                    cambioEnPuestos();
+                } else {
+                    // Como no se ejecuto el metodo cambioEnPuestos(), PuestoActual 
+                    // mantiene el valor seleccionado anterior
+                    
+                    lstPuestos.setSelectedValue(puestoActual, true);
+                }
+        }
         
     }//GEN-LAST:event_lstPuestosValueChanged
 
