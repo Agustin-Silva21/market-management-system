@@ -1,3 +1,4 @@
+// Gabriel Machado 318697, Agustin Silva 310087
 package Interfaz;
 
 import Dominio.*;

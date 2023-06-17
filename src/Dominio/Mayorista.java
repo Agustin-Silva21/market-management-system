@@ -1,18 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+// Gabriel Machado 318697, Agustin Silva 310087
 package Dominio;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-/**
- *
- * @author agustin973
- */
-public class Mayorista implements Serializable{
-    private static final long serialVersionUID = 1L;
+
+public class Mayorista{
     private String rut;
     private String nombre;
     private String direccion;

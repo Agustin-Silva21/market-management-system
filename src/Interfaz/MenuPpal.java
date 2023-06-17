@@ -1,3 +1,4 @@
+// Gabriel Machado 318697, Agustin Silva 310087
 package Interfaz;
 
 import Dominio.Mercado;
@@ -250,20 +251,11 @@ public class MenuPpal extends javax.swing.JFrame {
     }//GEN-LAST:event_consultaMayoristasActionPerformed
 
     private void generarArchivoMovimientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generarArchivoMovimientosActionPerformed
-        // TODO add your handling code here:
+        VentanaGenerarArchivo vent = new VentanaGenerarArchivo(modelo);
+        vent.setVisible(true);
     }//GEN-LAST:event_generarArchivoMovimientosActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-
-            public void run() {
-                new MenuPpal().setVisible(true);
-            }
-        });
-    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem agregarReserva;

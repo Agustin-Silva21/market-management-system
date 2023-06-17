@@ -1,4 +1,4 @@
-
+// Gabriel Machado 318697, Agustin Silva 310087
 package Interfaz;
 
 import Dominio.*;
@@ -42,8 +42,10 @@ public class VentanaCompra extends javax.swing.JFrame {
         private void actualizarPrecioTotal() {
             try {
                 
-                String auxCant= txtCantidad.getText().replace(",", ".");
-                String auxPrec= txtPrecioUnitario.getText().replace(",", ".");
+                String auxCant= txtCantidad.getText().replace(",", 
+                        ".");
+                String auxPrec= txtPrecioUnitario.getText().replace(",", 
+                        ".");
                 
                 float cant = Float.parseFloat(auxCant);
                 float precio = Float.parseFloat(auxPrec);
@@ -271,17 +273,24 @@ public class VentanaCompra extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
-        if(!lstPuestos.isSelectionEmpty() && !lstMayoristas.isSelectionEmpty() && !productosAComprar.isEmpty()){
+        if(!lstPuestos.isSelectionEmpty() && !lstMayoristas.isSelectionEmpty() 
+                && !productosAComprar.isEmpty()){
         
             Puesto unPuesto = (Puesto)lstPuestos.getSelectedValue();
             Mayorista unMayorista = (Mayorista)lstMayoristas.getSelectedValue();
             
-            mercado.comprarProducto(productosAComprar, unPuesto, unMayorista);
-            JOptionPane.showMessageDialog(this, "Se registro el movimiento numero: " + mercado.getListaMovimientos().get(mercado.getListaMovimientos().size()).getId(), "Registro Exitoso", JOptionPane.INFORMATION_MESSAGE);
+            mercado.comprarProducto(productosAComprar, unPuesto, 
+                    unMayorista);
+            JOptionPane.showMessageDialog(this, "Se registro el "
+                    + "movimiento numero: " + mercado.getListaMovimientos().
+                    get(mercado.getListaMovimientos().size()).getId(),
+                    "Registro Exitoso", JOptionPane.INFORMATION_MESSAGE);
             this.cantidadYPrecioParaMostrar.clear();
             this.productosAComprar.clear();
-            this.lstProductosAComprar.setListData(productosAComprar.keySet().toArray());
-            this.lstProductosAComprarDatos.setListData(cantidadYPrecioParaMostrar.toArray());
+            this.lstProductosAComprar.setListData(productosAComprar.
+                    keySet().toArray());
+            this.lstProductosAComprarDatos.setListData(
+                    cantidadYPrecioParaMostrar.toArray());
             
         } else{
             String mensajeError = "";
@@ -294,7 +303,9 @@ public class VentanaCompra extends javax.swing.JFrame {
             if(productosAComprar.isEmpty()){
                 mensajeError += "No tienes productos en el carrito.\n";
             }
-            JOptionPane.showMessageDialog(this, mensajeError, "Faltan algunos Datos", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, 
+                    mensajeError, "Faltan algunos Datos",
+                    JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnComprarActionPerformed
 
@@ -304,23 +315,34 @@ public class VentanaCompra extends javax.swing.JFrame {
 
                 // CUIDADO!! mayoristaAnterior y posicion son el mismo valor por ahora. Si luego ordeno los mayoristas a mostrar serian valores diferentes.
                 mayoristaAnterior = lstMayoristas.getSelectedIndex();
-                Mayorista mayoristaSeleccionado = (Mayorista) lstMayoristas.getSelectedValue();
-                int posicion = mercado.getListaMayoristas().indexOf(mayoristaSeleccionado);
-                lstProductosOfrecidos.setListData(mercado.getListaMayoristas().get(posicion).getProducto().toArray());
+                Mayorista mayoristaSeleccionado = (Mayorista) lstMayoristas.
+                        getSelectedValue();
+                int posicion = mercado.getListaMayoristas().indexOf(
+                        mayoristaSeleccionado);
+                lstProductosOfrecidos.setListData(mercado.getListaMayoristas()
+                        .get(posicion).getProducto().toArray());
             } else {
-                int opcion = JOptionPane.showConfirmDialog(this, "Esta seguro que desea cambiar el Mayorista?\nSu carrito se vaciara en caso de aceptar!", "Confirmacion", JOptionPane.YES_NO_OPTION);
+                int opcion = JOptionPane.showConfirmDialog(this, 
+                        "Esta seguro que desea cambiar el Mayorista?\n"
+                        + "Su carrito se vaciara en caso de aceptar!", 
+                        "Confirmacion", JOptionPane.YES_NO_OPTION);
                 if (opcion == JOptionPane.YES_OPTION){
 
                     mayoristaAnterior = lstMayoristas.getSelectedIndex();
-                    Mayorista mayoristaSeleccionado = (Mayorista) lstMayoristas.getSelectedValue();
-                    int posicion = mercado.getListaMayoristas().indexOf(mayoristaSeleccionado);
-                    lstProductosOfrecidos.setListData(mercado.getListaMayoristas().get(posicion).getProducto().toArray());
+                    Mayorista mayoristaSeleccionado = (Mayorista) lstMayoristas.
+                            getSelectedValue();
+                    int posicion = mercado.getListaMayoristas().indexOf(
+                            mayoristaSeleccionado);
+                    lstProductosOfrecidos.setListData(mercado.getListaMayoristas()
+                            .get(posicion).getProducto().toArray());
 
                     productosAComprar.clear();
                     cantidadYPrecioParaMostrar.clear();
 
-                    lstProductosAComprar.setListData(productosAComprar.keySet().toArray());
-                    lstProductosAComprarDatos.setListData(cantidadYPrecioParaMostrar.toArray());            
+                    lstProductosAComprar.setListData(productosAComprar.
+                            keySet().toArray());
+                    lstProductosAComprarDatos.setListData(
+                            cantidadYPrecioParaMostrar.toArray());            
                 } else {
                     banderaCambioMayorista = true;
                     lstMayoristas.setSelectedIndex(mayoristaAnterior);
@@ -364,12 +386,14 @@ public class VentanaCompra extends javax.swing.JFrame {
             }
             
             //Guardo los datos de cantidad y precio y limpio los campos
-            float[] cantYPrecio = {Float.parseFloat(txtCantidad.getText()),Float.parseFloat(txtPrecioUnitario.getText())};
+            float[] cantYPrecio = {Float.parseFloat(txtCantidad.getText()),
+                Float.parseFloat(txtPrecioUnitario.getText())};
             txtCantidad.setText("0");
             txtPrecioUnitario.setText("0");
             
             int indiceAux = -1;
-            if(productosAComprar.containsKey((Producto)lstProductosOfrecidos.getSelectedValue())){
+            if(productosAComprar.containsKey((Producto)lstProductosOfrecidos.
+                    getSelectedValue())){
                 Object[] listaAux = productosAComprar.keySet().toArray();
                 for( int i = 0; i < productosAComprar.size(); i++){
                     Producto pAux = (Producto)listaAux[i];
@@ -381,18 +405,25 @@ public class VentanaCompra extends javax.swing.JFrame {
             }
             
             if (indiceAux == -1){
-                cantidadYPrecioParaMostrar.add("$" + cantYPrecio[0] + "; x" + cantYPrecio[1] + " = " + (cantYPrecio[0] * cantYPrecio[1]));
+                cantidadYPrecioParaMostrar.add("$" + cantYPrecio[0] + "; x" + 
+                        cantYPrecio[1] + " = " + (cantYPrecio[0] * cantYPrecio[1]));
             } else{
-                cantidadYPrecioParaMostrar.add(indiceAux,"$" + cantYPrecio[0] + "; x" + cantYPrecio[1] + " = " + (cantYPrecio[0] * cantYPrecio[1]));
+                cantidadYPrecioParaMostrar.add(indiceAux,"$" + cantYPrecio[0] 
+                + "; x" + cantYPrecio[1] + " = " + (cantYPrecio[0] * cantYPrecio[1]));
             }
-            lstProductosAComprarDatos.setListData(cantidadYPrecioParaMostrar.toArray());            
+            lstProductosAComprarDatos.setListData(cantidadYPrecioParaMostrar
+                    .toArray());            
             
-            productosAComprar.put((Producto)lstProductosOfrecidos.getSelectedValue(), cantYPrecio);
-            lstProductosAComprar.setListData(productosAComprar.keySet().toArray());
+            productosAComprar.put((Producto)lstProductosOfrecidos.getSelectedValue(),
+                    cantYPrecio);
+            lstProductosAComprar.setListData(productosAComprar.keySet().
+                    toArray());
             
         } else{
             mensajeError += "Seleccione un producto\n";
-            JOptionPane.showMessageDialog(this, mensajeError, "Faltan algunos Datos", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, mensajeError, 
+                    "Faltan algunos Datos", JOptionPane.
+                            INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnAgregarProductoActionPerformed
 
@@ -416,11 +447,15 @@ public class VentanaCompra extends javax.swing.JFrame {
             int posicionSeleccionada = lstProductosAComprar.getSelectedIndex();
             productosAComprar.remove((Producto)lstProductosAComprar.getSelectedValue());
             cantidadYPrecioParaMostrar.remove(posicionSeleccionada);
-            lstProductosAComprar.setListData(productosAComprar.keySet().toArray());
-            lstProductosAComprarDatos.setListData(cantidadYPrecioParaMostrar.toArray());
+            lstProductosAComprar.setListData(productosAComprar.keySet().
+                    toArray());
+            lstProductosAComprarDatos.setListData(cantidadYPrecioParaMostrar
+                    .toArray());
             
         } else{
-            JOptionPane.showMessageDialog(this, mensajeError, "Por favor, seleccione un producto de su carrito", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, mensajeError,
+                    "Por favor, seleccione un producto de su carrito", 
+                    JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnQuitarProductoActionPerformed
 

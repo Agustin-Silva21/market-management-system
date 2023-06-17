@@ -1,11 +1,10 @@
+// Gabriel Machado 318697, Agustin Silva 310087
 package Dominio;
 
 // Cuando creas un movimiento creas una venta, si creas Compra, ahi si te queda Compra
 
-import java.io.Serializable;
 
-public class Movimiento implements Serializable{
-    private static final long serialVersionUID = 1L;
+public class Movimiento{
     private static int id = 0;
     private Puesto puesto;
     // private Mayorista unMayorista;

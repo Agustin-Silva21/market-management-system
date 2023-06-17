@@ -1,3 +1,4 @@
+// Gabriel Machado 318697, Agustin Silva 310087
 package Interfaz;
 
 import Dominio.Mercado;
@@ -5,11 +6,10 @@ import Dominio.Producto.FormaVenta;
 import Dominio.Producto.Tipo;
 import java.awt.Image;
 import java.io.File;
-import java.io.Serializable;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class registrarProducto extends javax.swing.JFrame implements Serializable{
+public class registrarProducto extends javax.swing.JFrame{
 
     private Mercado modelo;
     private static final int largoImg = 200;

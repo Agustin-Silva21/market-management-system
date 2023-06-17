@@ -1,13 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
+// Gabriel Machado 318697, Agustin Silva 310087
 package Main;
 
 import Dominio.*;
+import Dominio.Producto.FormaVenta;
+import Dominio.Producto.Tipo;
 import Interfaz.MenuPpal;
 import java.util.ArrayList;
-import java.util.HashMap;
+import javax.swing.JOptionPane;
 
 public class Obligatorio2 {
 
@@ -132,8 +131,66 @@ public class Obligatorio2 {
       mercado.agregarListaPuestos(puesto4);
       mercado.agregarListaPuestos(puesto5);
 
-      MenuPpal menu = new MenuPpal (mercado);
+      
+      
+      
+      MenuPpal menu = new MenuPpal (inicio());
       menu.setVisible(true);
+      
+      
+      
+      
+    }
+    
+    public static Mercado inicio(){
+        
+        Mercado mercadoACargar = null;
+        
+        String[] opciones = {"Cargar último mercado utilizado", "Crear nuevo mercado",
+        "Cargar productos únicamente"};
+        
+        int opcionSeleccionada = JOptionPane.showOptionDialog(null,
+        "Elige un método de inicio", "Inicio", JOptionPane.DEFAULT_OPTION,
+        JOptionPane.PLAIN_MESSAGE, null, opciones,opciones[0]);
+        
+        switch(opcionSeleccionada){
+            case 0:
+                mercadoACargar = Persistencia.cargarMercado();
+                break;
+            case 1:
+                mercadoACargar = new Mercado();
+                break;
+            case 2:
+                mercadoACargar = new Mercado();
+                cargarProductosEnMercado(mercadoACargar);
+                break;
+                
+        }
+        return mercadoACargar;
+    }
+    
+    public static void cargarProductosEnMercado(Mercado mercado){
+        ArchivoLectura arch = new ArchivoLectura("productos.txt");
+        
+        while(arch.hayMasLineas()){
+            String[] datosProd = arch.linea().split("@");
+            Tipo tipo;
+            FormaVenta formaVenta;
+            if(datosProd[2].equals("Fruta")){
+                tipo = Tipo.Fruta;
+            } else {
+                tipo = Tipo.Verdura;
+            }
+            if(datosProd[3].equals("Kilogramo")){
+                formaVenta = FormaVenta.Kilogramo;
+            } else {
+                formaVenta = FormaVenta.Unidad;
+            }
+            Producto unProducto = new Producto(datosProd[0], datosProd[1], 
+                    tipo, formaVenta, datosProd[4]);
+            mercado.agregarListaProductos(unProducto);
+        }
+        arch.cerrar();
     }
     
 }

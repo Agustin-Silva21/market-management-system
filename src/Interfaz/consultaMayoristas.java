@@ -1,3 +1,4 @@
+// Gabriel Machado 318697, Agustin Silva 310087
 package Interfaz;
 
 import Dominio.Mercado;
@@ -7,10 +8,7 @@ import Dominio.Mayorista;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-/**
- *
- * @author agustin973
- */
+
 public class consultaMayoristas extends javax.swing.JFrame {
     private Mercado modelo;
 

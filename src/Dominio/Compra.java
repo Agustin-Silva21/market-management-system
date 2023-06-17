@@ -1,16 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+// Gabriel Machado 318697, Agustin Silva 310087
 package Dominio;
 
-import java.io.Serializable;
 
-/**
- *
- * @author agustin973
- */
-public class Compra extends Movimiento implements Serializable{
+public class Compra extends Movimiento{
     private Mayorista mayorista;
     
     public Compra(Puesto unPuesto,Mayorista unMayorista, Producto unProducto, float precio, float cantidad) {

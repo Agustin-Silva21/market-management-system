@@ -1,12 +1,11 @@
-
+// Gabriel Machado 318697, Agustin Silva 310087
 package Interfaz;
 
 import Dominio.Mercado;
-import java.io.Serializable;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
-public class registrarDueño extends javax.swing.JFrame implements Serializable{
+public class registrarDueño extends javax.swing.JFrame{
 private Mercado modelo;
 
     public registrarDueño() {

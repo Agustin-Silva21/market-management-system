@@ -1,4 +1,4 @@
-
+// Gabriel Machado 318697, Agustin Silva 310087
 package Interfaz;
 
 import Dominio.*;
@@ -8,7 +8,6 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -20,7 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.ToolTipManager;
 
-public class VentanaVenta extends javax.swing.JFrame implements Serializable{
+public class VentanaVenta extends javax.swing.JFrame{
 
     public VentanaVenta(Mercado unMercado) {
         mercado = unMercado;

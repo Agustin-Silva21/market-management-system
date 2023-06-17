@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+// Gabriel Machado 318697, Agustin Silva 310087
 package Interfaz;
 
 import Dominio.Mercado;
@@ -12,10 +9,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 
-/**
- *
- * @author agustin973
- */
+
 public class consultaPuestos extends javax.swing.JFrame {
     private Mercado modelo;
 

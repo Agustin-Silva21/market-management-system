@@ -1,20 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+// Gabriel Machado 318697, Agustin Silva 310087
 package Dominio;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Objects;
 
-/**
- *
- * @author agustin973
- */
-public class Puesto implements Serializable{
-    private static final long serialVersionUID = 1L;
+
+public class Puesto{
     private String id;
     private Dueño dueño;
     private String ubicacion;

@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+// Gabriel Machado 318697, Agustin Silva 310087
 package Dominio;
 
 import java.awt.Image;
@@ -9,17 +6,12 @@ import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-/**
- *
- * @author agustin973
- */
-public class Producto implements Serializable, Comparable<Producto>{
-    private static final long serialVersionUID = 1L;
+
+public class Producto implements Comparable<Producto>{
     private String nombre;
     private String descripcion;
     private Tipo tipo;
