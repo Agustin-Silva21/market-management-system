@@ -4,17 +4,18 @@ package Dominio;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 
-public class Producto implements Comparable<Producto>{
+public class Producto implements Serializable, Comparable<Producto>{
     private String nombre;
     private String descripcion;
     private Tipo tipo;
     private FormaVenta venta;
-    private BufferedImage imagen;
+    private transient BufferedImage imagen;
     private String pathImagen;
 
     
@@ -38,7 +39,7 @@ public class Producto implements Comparable<Producto>{
             this.pathImagen = imagenPath;
             this.imagen = ImageIO.read(new File(imagenPath));
         } catch (IOException e){
-            
+            System.out.println("Imagen no encontrada 2");
         }
     }
     
@@ -47,7 +48,7 @@ public class Producto implements Comparable<Producto>{
         this.descripcion = descripcion;
         this.tipo = unTipo;
         this.venta = unaVenta;
-        this.pathImagen = "src/Helpers/ImagenesProductos/Uvas.jpg";
+        this.pathImagen = "src/Helpers/ImagenesProductos/No-Image-Placeholder.jpg";
         try{
             this.imagen = ImageIO.read(new File(pathImagen));
         } catch (IOException e){

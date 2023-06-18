@@ -18,10 +18,12 @@ public class VentanaGenerarArchivo extends javax.swing.JFrame implements Propert
         mercado = modelo;
         mercado.addPropertyChangeListener(this);
         initComponents();
+        tipoM = "Ambos";
         grupoTipo.add(radioCompras);
         grupoTipo.add(radioVentas);
         grupoTipo.add(radioAmbos);
         radioAmbos.setSelected(true);
+        
         
         radioCompras.addActionListener(new ActionListener() {
             @Override
@@ -43,6 +45,7 @@ public class VentanaGenerarArchivo extends javax.swing.JFrame implements Propert
                 tipoM = "Ambos";
             }
         });
+        
     }
     
     @Override
@@ -180,13 +183,13 @@ public class VentanaGenerarArchivo extends javax.swing.JFrame implements Propert
                         .addGap(20, 20, 20)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDesde))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDesde)
+                            .addComponent(lblDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtHasta))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtHasta)
+                            .addComponent(lblHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(btnCargarPuestos)
                         .addGap(155, 155, 155))))
@@ -241,6 +244,8 @@ public class VentanaGenerarArchivo extends javax.swing.JFrame implements Propert
         } catch (Exception e){
             JOptionPane.showMessageDialog(this, 
                     "Rangos inválidos!\nSe buscará en todo el rango.");
+            aDevolver[0] = 0;
+            aDevolver[1] = mercado.getListaMovimientos().size() - 1;
         }
         return aDevolver;
     }
@@ -257,16 +262,17 @@ public class VentanaGenerarArchivo extends javax.swing.JFrame implements Propert
                     tipoMov = "Venta";
                 }
 
-
-                if (mov.getId() >= desde && mov.getId() <= hasta && 
-                        (tipo.equals(tipoMov) || tipo.equals("Ambos"))){
+                if (!puestosADevolver.contains((Puesto)mov.getPuesto()) && mov.getId()
+                        >= desde && mov.getId() <= hasta && (tipo.equals(
+                                tipoMov) || tipo.equals("Ambos"))){
                     puestosADevolver.add(mov.getPuesto());
                 }
             }
         } catch (Exception e){
             JOptionPane.showMessageDialog(this, "Por favor señale el tipo de movimiento, así como el rango de movimientos que desea encontrar", "Faltan Datos", JOptionPane.ERROR_MESSAGE);
         }
-        return (Puesto[]) puestosADevolver.toArray();
+        
+        return puestosADevolver.toArray(new Puesto[0]);
     }
     
     public void generarArchivo(int desde, int hasta, String tipoM, ArrayList<Puesto> puestos){
@@ -294,13 +300,16 @@ public class VentanaGenerarArchivo extends javax.swing.JFrame implements Propert
             }
         }
         arch.cerrar();
+        JOptionPane.showMessageDialog(this, 
+                "Archivo generado correctamente");
     }
     
     private String obtenerFechaYHora(){
         LocalDateTime fechaHoraActual = LocalDateTime.now();
 
         // Definir el formato deseado para el String
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern(
+                "dd/MM/yyyy HH:mm:ss");
 
         // Formatear la fecha y hora actual utilizando el formato definido
         return "Fecha y hora actual: " + fechaHoraActual.format(formato);

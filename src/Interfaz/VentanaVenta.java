@@ -69,32 +69,34 @@ public class VentanaVenta extends javax.swing.JFrame implements PropertyChangeLi
     }
     
     private void filtrarProductos(Producto[] productosSinFiltrar) {
-        ArrayList<Producto> productosFiltrados = new ArrayList<>();
-        Producto[] productosFiltradosArray;
-        
-        if (radioFruta.isSelected()) {
-            for (Producto producto : productosSinFiltrar) {
-                if (producto.getTipo() == Tipo.Fruta) {
-                    productosFiltrados.add(producto);
+        if(productosSinFiltrar != null){
+            ArrayList<Producto> productosFiltrados = new ArrayList<>();
+            Producto[] productosFiltradosArray;
+
+            if (radioFruta.isSelected()) {
+                for (Producto producto : productosSinFiltrar) {
+                    if (producto.getTipo() == Tipo.Fruta) {
+                        productosFiltrados.add(producto);
+                    }
                 }
             }
-        }
 
-        if (radioVerdura.isSelected()) {
-            for (Producto producto : productosSinFiltrar) {
-                if (producto.getTipo() == Tipo.Verdura) {
-                    productosFiltrados.add(producto);
+            if (radioVerdura.isSelected()) {
+                for (Producto producto : productosSinFiltrar) {
+                    if (producto.getTipo() == Tipo.Verdura) {
+                        productosFiltrados.add(producto);
+                    }
                 }
             }
-        }
 
-        if (radioFYV.isSelected()) {
-            productosFiltrados.addAll(Arrays.asList(productosSinFiltrar));
-        }
+            if (radioFYV.isSelected()) {
+                productosFiltrados.addAll(Arrays.asList(productosSinFiltrar));
+            }
 
-        Collections.sort(productosFiltrados);
-        productosFiltradosArray = productosFiltrados.toArray(new Producto[0]);
-        cargarProductos(productosFiltradosArray);
+            Collections.sort(productosFiltrados);
+            productosFiltradosArray = productosFiltrados.toArray(new Producto[0]);
+            cargarProductos(productosFiltradosArray);
+        }
     }
     
     private void cargarProductos(Producto[] productos) {
@@ -155,6 +157,9 @@ public class VentanaVenta extends javax.swing.JFrame implements PropertyChangeLi
 
                 // Guardar el producto y su información en el HashMap
                 productosAComprar.put(producto, new float[]{cantidad, precioUnitario});
+                JOptionPane.showMessageDialog(null, 
+                        "Su selección ha sido agregada al carrito.", 
+                        "Carrito", JOptionPane.INFORMATION_MESSAGE);
             } catch (NumberFormatException e) {
                 // Mostrar JOptionPane de error si los valores ingresados no son numéricos
                 JOptionPane.showMessageDialog(null, 
@@ -176,7 +181,7 @@ public class VentanaVenta extends javax.swing.JFrame implements PropertyChangeLi
         productosDelPuesto = puestoActual.getOferta().keySet().toArray(new Producto[0]);
         
         filtrarProductos(productosDelPuesto);
-        mercado.getListaPuestos().get(posicion).limpiarProducto(puestoActual);
+        mercado.getListaPuestos().get(posicion).limpiarProducto();
     }
     
     /**
@@ -301,23 +306,25 @@ public class VentanaVenta extends javax.swing.JFrame implements PropertyChangeLi
     
     
     private void lstPuestosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPuestosValueChanged
-        if(!productosAComprar.isEmpty()){
-            int opcion = JOptionPane.showConfirmDialog(this, 
-                        "Esta seguro que desea cambiar el Puesto?\n"
-                        + "Su carrito se vaciara en caso de aceptar!", 
-                        "Confirmacion", JOptionPane.YES_NO_OPTION);
-                if (opcion == JOptionPane.YES_OPTION){
+        if (!productosAComprar.isEmpty()) {
+            int opcion = JOptionPane.showConfirmDialog(this,
+                    "Esta seguro que desea cambiar el Puesto?\n"
+                    + "Su carrito se vaciara en caso de aceptar!",
+                    "Confirmacion", JOptionPane.YES_NO_OPTION);
+            if (opcion == JOptionPane.YES_OPTION) {
 
-                    productosAComprar.clear();
-                    cambioEnPuestos();
-                } else {
-                    // Como no se ejecuto el metodo cambioEnPuestos(), PuestoActual 
-                    // mantiene el valor seleccionado anterior
-                    
-                    lstPuestos.setSelectedValue(puestoActual, true);
-                }
+                productosAComprar.clear();
+                cambioEnPuestos();
+            } else {
+                // Como no se ejecuto el metodo cambioEnPuestos(), PuestoActual 
+                // mantiene el valor seleccionado anterior
+
+                lstPuestos.setSelectedValue(puestoActual, true);
+            }
+        } else {
+            cambioEnPuestos();
         }
-        
+
     }//GEN-LAST:event_lstPuestosValueChanged
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed

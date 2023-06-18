@@ -21,14 +21,18 @@ public class registrarPuesto extends javax.swing.JFrame implements PropertyChang
         UIManager.put("OptionPane.yesButtonText", "Si");
         UIManager.put("OptionPane.noButtonText", "No");
         //http://www.orbital-computer.de/JComboBox/
-        ComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(modelo.getListaDueños().stream().map(Dueño::getNombre).toArray(String[]::new));
+        ComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(
+                modelo.getListaDueños().stream().map(Dueño::getNombre).
+                        toArray(String[]::new));
         cmbDuenio.setModel(comboBoxModel);        
     }
     
     @Override
     public void propertyChange(PropertyChangeEvent evt){
         if (evt.getPropertyName().equals("listaDueños")){
-            ComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(modelo.getListaDueños().stream().map(Dueño::getNombre).toArray(String[]::new));
+            ComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(
+                    modelo.getListaDueños().stream().map(Dueño::getNombre).
+                            toArray(String[]::new));
             cmbDuenio.setModel(comboBoxModel);
         }
     }

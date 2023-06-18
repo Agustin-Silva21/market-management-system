@@ -294,7 +294,7 @@ public class VentanaCompra extends javax.swing.JFrame implements PropertyChangeL
                     unMayorista);
             JOptionPane.showMessageDialog(this, "Se registro el "
                     + "movimiento numero: " + mercado.getListaMovimientos().
-                    get(mercado.getListaMovimientos().size()).getId(),
+                    get(mercado.getListaMovimientos().size() - 1).getId(),
                     "Registro Exitoso", JOptionPane.INFORMATION_MESSAGE);
             this.cantidadYPrecioParaMostrar.clear();
             this.productosAComprar.clear();

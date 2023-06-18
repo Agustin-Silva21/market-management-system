@@ -134,7 +134,7 @@ public class Obligatorio2 {
       
       
       
-      MenuPpal menu = new MenuPpal (inicio());
+      MenuPpal menu = new MenuPpal (mercado);
       menu.setVisible(true);
       
       
@@ -170,7 +170,8 @@ public class Obligatorio2 {
     }
     
     public static void cargarProductosEnMercado(Mercado mercado){
-        ArchivoLectura arch = new ArchivoLectura("productos.txt");
+        ArchivoLectura arch = new ArchivoLectura(
+                "src/Helpers/ImagenesProductos/productos.txt");
         
         while(arch.hayMasLineas()){
             String[] datosProd = arch.linea().split("@");
@@ -186,8 +187,9 @@ public class Obligatorio2 {
             } else {
                 formaVenta = FormaVenta.Unidad;
             }
+            String pathImagen = "src/Helpers/ImagenesProductos/" + datosProd[4];
             Producto unProducto = new Producto(datosProd[0], datosProd[1], 
-                    tipo, formaVenta, datosProd[4]);
+                    tipo, formaVenta, pathImagen);
             mercado.agregarListaProductos(unProducto);
         }
         arch.cerrar();

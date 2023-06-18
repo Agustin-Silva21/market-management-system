@@ -6,10 +6,8 @@
             <file>file:/Users/gabrielmachadoleal/NetBeansProjects/Obligatorio2/src/Interfaz/VentanaCompra.java</file>
             <file>file:/Users/gabrielmachadoleal/NetBeansProjects/Obligatorio2/src/Interfaz/VentanaGenerarArchivo.java</file>
             <file>file:/Users/gabrielmachadoleal/NetBeansProjects/Obligatorio2/src/Interfaz/VentanaVenta.java</file>
-            <file>file:/Users/gabrielmachadoleal/NetBeansProjects/Obligatorio2/src/Interfaz/consultaMayoristas.java</file>
-            <file>file:/Users/gabrielmachadoleal/NetBeansProjects/Obligatorio2/src/Dominio/Mercado.java</file>
-            <file>file:/Users/gabrielmachadoleal/NetBeansProjects/Obligatorio2/src/Interfaz/registrarPuesto.java</file>
-            <file>file:/Users/gabrielmachadoleal/NetBeansProjects/Obligatorio2/src/Interfaz/consultaDueños.java</file>
+            <file>file:/Users/gabrielmachadoleal/NetBeansProjects/Obligatorio2/src/Dominio/Compra.java</file>
+            <file>file:/Users/gabrielmachadoleal/NetBeansProjects/Obligatorio2/src/Dominio/Movimiento.java</file>
             <file>file:/Users/gabrielmachadoleal/NetBeansProjects/Obligatorio2/src/Main/Obligatorio2.java</file>
         </group>
     </open-files>

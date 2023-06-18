@@ -18,7 +18,7 @@ public class Mercado implements Serializable{
     private ArrayList<Puesto> listaPuestos;
     private ArrayList<Dueño> listaDueños;
     private ArrayList<Movimiento> listaMovimientos;
-    private PropertyChangeSupport manejador;
+    private transient PropertyChangeSupport manejador;
 
     public Mercado() {
         this.manejador = new PropertyChangeSupport(this);
@@ -168,7 +168,7 @@ public class Mercado implements Serializable{
                 Movimiento unMovimiento = new Movimiento(unPuesto,unProducto,precioUnitario,cantVendida);
                 agregarListaMovimientos (unMovimiento);
             }
-            unPuesto.limpiarProducto(unPuesto);
+            unPuesto.limpiarProducto();
         }
     }
     

@@ -1,12 +1,13 @@
 // Gabriel Machado 318697, Agustin Silva 310087
 package Dominio;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Objects;
 
 
-public class Puesto{
+public class Puesto implements Serializable{
     private String id;
     private Dueño dueño;
     private String ubicacion;
@@ -73,12 +74,12 @@ public class Puesto{
     }
     
     
-    public void limpiarProducto(Puesto unPuesto){
-        Iterator<Producto> it = unPuesto.getOferta().keySet().iterator();
+    public void limpiarProducto(){
+        Iterator<Producto> it = this.getOferta().keySet().iterator();
         while (it.hasNext()) {
             Producto unProducto = it.next();
-            if (unPuesto.getOferta().get(unProducto) == 0) {
-                unPuesto.getOferta().remove(unProducto);
+            if (this.getOferta().get(unProducto) == 0) {
+                this.getOferta().remove(unProducto);
             }
         }
     }

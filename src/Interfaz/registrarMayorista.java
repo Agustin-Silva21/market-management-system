@@ -2,10 +2,12 @@
 package Interfaz;
 
 import Dominio.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.*;
 import javax.swing.*;
 
-public class registrarMayorista extends javax.swing.JFrame {
+public class registrarMayorista extends javax.swing.JFrame  implements PropertyChangeListener{
 
     private Mercado modelo;
 
@@ -15,6 +17,7 @@ public class registrarMayorista extends javax.swing.JFrame {
 
     public registrarMayorista(Mercado unModelo) {        
         modelo = unModelo;
+        modelo.addPropertyChangeListener(this);
         initComponents();
         UIManager.put("OptionPane.yesButtonText", "Si");
         UIManager.put("OptionPane.noButtonText", "No");
@@ -26,6 +29,12 @@ public class registrarMayorista extends javax.swing.JFrame {
         lstProductos.getSelectionModel().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
     }
     
+    @Override
+    public void propertyChange(PropertyChangeEvent evt){
+        if (evt.getPropertyName().equals("listaProductos")){
+            // ver codigo para cargar lista de productos
+        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -41,7 +50,7 @@ public class registrarMayorista extends javax.swing.JFrame {
         lblAñosExp1 = new javax.swing.JLabel();
         txtDireccion = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        lstProductos = new javax.swing.JList<>();
+        lstProductos = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registro de Puesto");
@@ -90,11 +99,6 @@ public class registrarMayorista extends javax.swing.JFrame {
             }
         });
 
-        lstProductos.setModel(new javax.swing.AbstractListModel<String>() {
-            final String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         lstProductos.setToolTipText("Elegir uno o mas productos");
         jScrollPane1.setViewportView(lstProductos);
 
@@ -218,16 +222,6 @@ public class registrarMayorista extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDireccionActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new registrarMayorista().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
@@ -237,7 +231,7 @@ public class registrarMayorista extends javax.swing.JFrame {
     private javax.swing.JLabel lblAñosExp1;
     private javax.swing.JLabel lblEdad;
     private javax.swing.JLabel lblId;
-    private javax.swing.JList<String> lstProductos;
+    private javax.swing.JList lstProductos;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtRut;

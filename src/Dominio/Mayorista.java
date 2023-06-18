@@ -1,10 +1,11 @@
 // Gabriel Machado 318697, Agustin Silva 310087
 package Dominio;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Mayorista{
+public class Mayorista implements Serializable{
     private String rut;
     private String nombre;
     private String direccion;

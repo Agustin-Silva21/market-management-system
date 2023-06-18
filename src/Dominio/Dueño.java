@@ -1,10 +1,11 @@
 // Gabriel Machado 318697, Agustin Silva 310087
 package Dominio;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 
-public class Dueño{
+public class Dueño implements Serializable{
     private String nombre;
     private int edad;
     private int añosDeExp;
