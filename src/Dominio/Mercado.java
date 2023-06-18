@@ -35,10 +35,9 @@ public class Mercado implements Serializable{
     }
 
     public void agregarListaMayoristas(Mayorista unMayorista) {
-        ArrayList<Mayorista> anterior = this.listaMayoristas;
         this.listaMayoristas.add(unMayorista);
         ordenarMayoristas();
-        manejador.firePropertyChange("listaMayoristas", anterior, this.listaMayoristas);
+        manejador.firePropertyChange("listaMayoristas", null, this.listaMayoristas);
     }
 
     public ArrayList<Producto> getListaProductos() {
@@ -46,9 +45,8 @@ public class Mercado implements Serializable{
     }
 
     public void agregarListaProductos(Producto unProducto) {
-        ArrayList<Producto> anterior = this.listaProductos;
         this.listaProductos.add(unProducto);
-        manejador.firePropertyChange("listaProductos", anterior, this.listaProductos);
+        manejador.firePropertyChange("listaProductos", null, this.listaProductos);
     }
 
     public ArrayList<Puesto> getListaPuestos() {
@@ -56,9 +54,8 @@ public class Mercado implements Serializable{
     }
 
     public void agregarListaPuestos(Puesto unPuesto) {
-        ArrayList<Puesto> anterior = this.listaPuestos;
         this.listaPuestos.add(unPuesto);
-        manejador.firePropertyChange("listaPuestos", anterior, this.listaPuestos);
+        manejador.firePropertyChange("listaPuestos", null, this.listaPuestos);
     }
 
     public ArrayList<Dueño> getListaDueños() {
@@ -66,9 +63,8 @@ public class Mercado implements Serializable{
     }
 
     public void agregarListaDueños(Dueño unDueño) {
-        ArrayList<Dueño> anterior = this.listaDueños;
         this.listaDueños.add(unDueño);
-        manejador.firePropertyChange("listaDueños", anterior, this.listaDueños);
+        manejador.firePropertyChange("listaDueños", null, this.listaDueños);
     }
 
     public ArrayList<Movimiento> getListaMovimientos() {
@@ -76,19 +72,10 @@ public class Mercado implements Serializable{
     }
 
     public void agregarListaMovimientos(Movimiento unMovimiento) {
-        ArrayList<Movimiento> anterior = this.listaMovimientos;
         this.listaMovimientos.add(unMovimiento);
-        manejador.firePropertyChange("listaMovimientos", anterior, this.listaMovimientos);
+        manejador.firePropertyChange("listaMovimientos", null, this.listaMovimientos);
     }
     
-    /*public boolean registrarProducto(Producto unProducto){
-        boolean existe = false;
-        if (!getListaProductos().contains(unProducto)) {
-            agregarListaProductos(unProducto);
-            existe = true;
-        }
-        return existe;
-    }*/
     
     public boolean registrarProducto(String nombre, String descripcion, Producto.Tipo unTipo, Producto.FormaVenta unaVenta){
         boolean existe = false;
