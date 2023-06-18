@@ -20,7 +20,7 @@ public class MenuPpal extends javax.swing.JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                // Llamar al método guardarObjeto() aquí
+                
                 Persistencia.guardarMercado(modelo);
             }
         });
@@ -49,7 +49,7 @@ public class MenuPpal extends javax.swing.JFrame {
         consultaPuestos = new javax.swing.JMenuItem();
         consultaMayoristas = new javax.swing.JMenuItem();
         generarArchivoMovimientos = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
+        menuSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Reservas");
@@ -172,8 +172,13 @@ public class MenuPpal extends javax.swing.JFrame {
 
         menuBar.add(menuConsultas);
 
-        jMenu1.setText("Cerrar sesion");
-        menuBar.add(jMenu1);
+        menuSalir.setText("Cerrar sesion");
+        menuSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSalirActionPerformed(evt);
+            }
+        });
+        menuBar.add(menuSalir);
 
         setJMenuBar(menuBar);
 
@@ -263,6 +268,10 @@ public class MenuPpal extends javax.swing.JFrame {
         VentanaGenerarArchivo vent = new VentanaGenerarArchivo(modelo);
         vent.setVisible(true);
     }//GEN-LAST:event_generarArchivoMovimientosActionPerformed
+
+    private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
+        Persistencia.guardarMercado(modelo);
+    }//GEN-LAST:event_menuSalirActionPerformed
     
     
 
@@ -273,7 +282,6 @@ public class MenuPpal extends javax.swing.JFrame {
     private javax.swing.JMenuItem consultaPuestos;
     private javax.swing.JMenuItem generarArchivoMovimientos;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblImagenPpal;
     private javax.swing.JMenuBar menuBar;
@@ -282,6 +290,7 @@ public class MenuPpal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemVenta;
     private javax.swing.JMenu menuMovimientos;
     private javax.swing.JMenu menuRegistros;
+    private javax.swing.JMenu menuSalir;
     private javax.swing.JMenuItem registrarDueño;
     private javax.swing.JMenuItem registrarMayorista;
     private javax.swing.JMenuItem registrarProducto;

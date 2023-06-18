@@ -2,7 +2,6 @@
 package Dominio;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -12,7 +11,7 @@ import javax.swing.JOptionPane;
 
 public class Persistencia {
     public static void guardarMercado(Mercado mercado){
-        String ruta = "src/mercado.txt";
+        String ruta = "src/Archivos/mercado.txt";
         try {
             ObjectOutputStream mercadoAGuardar = new ObjectOutputStream(new FileOutputStream(ruta));
             mercadoAGuardar.writeObject(mercado);

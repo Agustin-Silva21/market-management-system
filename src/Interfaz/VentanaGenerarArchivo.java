@@ -276,7 +276,7 @@ public class VentanaGenerarArchivo extends javax.swing.JFrame implements Propert
     }
     
     public void generarArchivo(int desde, int hasta, String tipoM, ArrayList<Puesto> puestos){
-        ArchivoGrabacion arch = new ArchivoGrabacion("archivo.txt");
+        ArchivoGrabacion arch = new ArchivoGrabacion("src/Archivos/archivo.txt");
         arch.grabarLinea(obtenerFechaYHora());
         Movimiento[] movimientos = mercado.getListaMovimientos().toArray(new Movimiento[0]);
         String tipoMov = "";
