@@ -99,7 +99,12 @@ public class consultaDueños extends javax.swing.JFrame implements PropertyChang
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    @Override
+    public void dispose() {
+        modelo.removePropertyChangeListener(this);
+        super.dispose();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;

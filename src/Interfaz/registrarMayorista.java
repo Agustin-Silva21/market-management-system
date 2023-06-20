@@ -221,7 +221,12 @@ public class registrarMayorista extends javax.swing.JFrame  implements PropertyC
     private void txtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDireccionActionPerformed
-
+    
+    @Override
+    public void dispose() {
+        modelo.removePropertyChangeListener(this);
+        super.dispose();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;

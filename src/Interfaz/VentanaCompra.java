@@ -474,7 +474,13 @@ public class VentanaCompra extends javax.swing.JFrame implements PropertyChangeL
         this.lstPuestos.setListData(mercado.getListaPuestos().toArray());
         this.lstMayoristas.setListData(mercado.getListaMayoristas().toArray());
     }
-
+    
+    @Override
+    public void dispose() {
+        mercado.removePropertyChangeListener(this);
+        super.dispose();
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarProducto;
     private javax.swing.JButton btnComprar;

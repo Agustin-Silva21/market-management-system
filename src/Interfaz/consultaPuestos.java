@@ -81,6 +81,12 @@ public class consultaPuestos extends javax.swing.JFrame  implements PropertyChan
         lista.sort(Comparator.comparing(Puesto::getId));
         return lista;
     }
+    
+    @Override
+    public void dispose() {
+        modelo.removePropertyChangeListener(this);
+        super.dispose();
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

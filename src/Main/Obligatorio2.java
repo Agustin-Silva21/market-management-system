@@ -17,7 +17,7 @@ public class Obligatorio2 {
     
     public static Mercado inicio(){
         
-        Mercado mercadoACargar = null;
+        Mercado mercadoACargar = new Mercado();
         
         String[] opciones = {"Cargar último mercado utilizado", "Crear nuevo mercado",
         "Cargar productos únicamente"};
@@ -28,7 +28,8 @@ public class Obligatorio2 {
         
         switch(opcionSeleccionada){
             case 0:
-                mercadoACargar = Persistencia.cargarMercado();
+                mercadoACargar = Persistencia.cargarMercado(mercadoACargar);
+                mercadoACargar.setManejador();
                 break;
             case 1:
                 mercadoACargar = new Mercado();
@@ -43,29 +44,58 @@ public class Obligatorio2 {
     }
     
     public static void cargarProductosEnMercado(Mercado mercado){
-        ArchivoLectura arch = new ArchivoLectura(
-                "src/Helpers/ImagenesProductos/productos.txt");
-        
-        while(arch.hayMasLineas()){
-            String[] datosProd = arch.linea().split("@");
-            Tipo tipo;
-            FormaVenta formaVenta;
-            if(datosProd[2].equals("Fruta")){
-                tipo = Tipo.Fruta;
-            } else {
-                tipo = Tipo.Verdura;
+        //
+        if(mercado.seEjecutaDesdeJar()){
+            ArchivoLectura arch = new ArchivoLectura("Helpers/imagenesProductos/productos.txt");
+
+            while(arch.hayMasLineas()){
+                String[] datosProd = arch.linea().split("@");
+                Tipo tipo;
+                FormaVenta formaVenta;
+                if(datosProd[2].equals("Fruta")){
+                    tipo = Tipo.Fruta;
+                } else {
+                    tipo = Tipo.Verdura;
+                }
+                if(datosProd[3].equals("Kilogramo")){
+                    formaVenta = FormaVenta.Kilogramo;
+                } else {
+                    formaVenta = FormaVenta.Unidad;
+                }
+                String pathImagen = "Helpers/ImagenesProductos/" + datosProd[4];
+                System.out.println(pathImagen);
+                Producto unProducto = new Producto(datosProd[0], datosProd[1], 
+                        tipo, formaVenta, pathImagen);
+                mercado.agregarListaProductos(unProducto);
             }
-            if(datosProd[3].equals("Kilogramo")){
-                formaVenta = FormaVenta.Kilogramo;
-            } else {
-                formaVenta = FormaVenta.Unidad;
+            arch.cerrar();
+        } else {
+            ArchivoLectura arch = new ArchivoLectura("src/Helpers/ImagenesProductos/productos.txt", true);
+            
+            while(arch.hayMasLineasDesdeIDE()){
+                String[] datosProd = arch.linea().split("@");
+                Tipo tipo;
+                FormaVenta formaVenta;
+                if(datosProd[2].equals("Fruta")){
+                    tipo = Tipo.Fruta;
+                } else {
+                    tipo = Tipo.Verdura;
+                }
+                if(datosProd[3].equals("Kilogramo")){
+                    formaVenta = FormaVenta.Kilogramo;
+                } else {
+                    formaVenta = FormaVenta.Unidad;
+                }
+                String pathImagen = "src/Helpers/ImagenesProductos/" + datosProd[4];
+                Producto unProducto = new Producto(datosProd[0], datosProd[1], 
+                        tipo, formaVenta, pathImagen);
+                mercado.agregarListaProductos(unProducto);
             }
-            String pathImagen = "src/Helpers/ImagenesProductos/" + datosProd[4];
-            Producto unProducto = new Producto(datosProd[0], datosProd[1], 
-                    tipo, formaVenta, pathImagen);
-            mercado.agregarListaProductos(unProducto);
+            arch.cerrarDesdeIDE();
         }
-        arch.cerrar();
+
     }
+
+    
     
 }

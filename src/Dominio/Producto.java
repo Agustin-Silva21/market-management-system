@@ -19,7 +19,7 @@ public class Producto implements Serializable, Comparable<Producto>{
     private String pathImagen;
 
     
-    // https://stackoverflow.com/questions/34072052/is-it-possible-to-add-an-image-png-as-an-attribute-of-a-java-class
+    
     public enum Tipo {Fruta,Verdura}
     public enum FormaVenta {Unidad,Kilogramo}
 
@@ -97,8 +97,13 @@ public class Producto implements Serializable, Comparable<Producto>{
     }
 
     public Icon getImagenAsIcon() {
-        return new ImageIcon(this.imagen);
-    }
+        try{
+            return new ImageIcon(ImageIO.read(new File(this.pathImagen)));
+        } catch (IOException e){
+            return new ImageIcon(this.imagen);
+        }
+        
+   }
 
     @Override
     public boolean equals(Object obj) {

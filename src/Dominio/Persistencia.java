@@ -11,7 +11,12 @@ import javax.swing.JOptionPane;
 
 public class Persistencia {
     public static void guardarMercado(Mercado mercado){
-        String ruta = "src/Archivos/mercado.txt";
+        String ruta;
+        if(mercado.seEjecutaDesdeJar()){
+            ruta = "Archivos/mercado.txt";
+        } else{
+            ruta = "src/Archivos/mercado.txt";
+        }
         try {
             ObjectOutputStream mercadoAGuardar = new ObjectOutputStream(new FileOutputStream(ruta));
             mercadoAGuardar.writeObject(mercado);
@@ -24,9 +29,14 @@ public class Persistencia {
         }
     }
     
-    public static Mercado cargarMercado() {
-        String ruta = "src/Archivos/mercado.txt";
-        Object mercado = null;
+    public static Mercado cargarMercado(Mercado mercado2) {
+        String ruta;
+        if(mercado2.seEjecutaDesdeJar()){
+            ruta = "Archivos/mercado.txt";
+        } else{
+            ruta = "src/Archivos/mercado.txt";
+        }
+        Object mercado = new Mercado();
         try {
             ObjectInputStream mercadoGuardado = new ObjectInputStream(
                     new FileInputStream(ruta));

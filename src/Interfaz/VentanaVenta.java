@@ -199,8 +199,6 @@ public class VentanaVenta extends javax.swing.JFrame implements PropertyChangeLi
         lstPuestos = new javax.swing.JList();
         lblCompra = new javax.swing.JLabel();
         lblPuestos = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        listaPrueba = new javax.swing.JList();
         lstProductosOfrecidos = new javax.swing.JScrollPane();
         radioFruta = new javax.swing.JRadioButton();
         radioVerdura = new javax.swing.JRadioButton();
@@ -222,8 +220,6 @@ public class VentanaVenta extends javax.swing.JFrame implements PropertyChangeLi
         lblCompra.setText("Registro de Ventas");
 
         lblPuestos.setText("Puestos");
-
-        jScrollPane3.setViewportView(listaPrueba);
 
         grupoFYV.add(radioFruta);
         radioFruta.setText("Frutas");
@@ -255,9 +251,7 @@ public class VentanaVenta extends javax.swing.JFrame implements PropertyChangeLi
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblPuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(radioFruta)
@@ -276,7 +270,7 @@ public class VentanaVenta extends javax.swing.JFrame implements PropertyChangeLi
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblPuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -287,19 +281,14 @@ public class VentanaVenta extends javax.swing.JFrame implements PropertyChangeLi
                                 .addComponent(radioVerdura)
                                 .addGap(18, 18, 18)
                                 .addComponent(radioFYV)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(65, 65, 65)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(125, 125, 125)
-                                .addComponent(btnComprar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnComprar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lstProductosOfrecidos, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(635, 635, 635))
+                .addGap(722, 722, 722))
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 850, 590);
+        jPanel1.setBounds(0, 0, 850, 420);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -362,17 +351,19 @@ public class VentanaVenta extends javax.swing.JFrame implements PropertyChangeLi
                     JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnComprarActionPerformed
-
+    @Override
+    public void dispose() {
+        mercado.removePropertyChangeListener(this);
+        super.dispose();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnComprar;
     private javax.swing.ButtonGroup grupoFYV;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblCompra;
     private javax.swing.JLabel lblPuestos;
-    private javax.swing.JList listaPrueba;
     private javax.swing.JScrollPane lstProductosOfrecidos;
     private javax.swing.JList lstPuestos;
     private javax.swing.JRadioButton radioFYV;

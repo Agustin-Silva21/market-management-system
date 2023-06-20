@@ -50,6 +50,7 @@ public class MenuPpal extends javax.swing.JFrame {
         consultaMayoristas = new javax.swing.JMenuItem();
         generarArchivoMovimientos = new javax.swing.JMenuItem();
         menuSalir = new javax.swing.JMenu();
+        menuSalir2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Reservas");
@@ -178,6 +179,15 @@ public class MenuPpal extends javax.swing.JFrame {
                 menuSalirActionPerformed(evt);
             }
         });
+
+        menuSalir2.setText("Salir");
+        menuSalir2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSalir2ActionPerformed(evt);
+            }
+        });
+        menuSalir.add(menuSalir2);
+
         menuBar.add(menuSalir);
 
         setJMenuBar(menuBar);
@@ -274,9 +284,13 @@ public class MenuPpal extends javax.swing.JFrame {
     }//GEN-LAST:event_generarArchivoMovimientosActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
+        
+    }//GEN-LAST:event_menuSalirActionPerformed
+
+    private void menuSalir2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalir2ActionPerformed
         Persistencia.guardarMercado(modelo);
         dispose();
-    }//GEN-LAST:event_menuSalirActionPerformed
+    }//GEN-LAST:event_menuSalir2ActionPerformed
     
     
 
@@ -296,6 +310,7 @@ public class MenuPpal extends javax.swing.JFrame {
     private javax.swing.JMenu menuMovimientos;
     private javax.swing.JMenu menuRegistros;
     private javax.swing.JMenu menuSalir;
+    private javax.swing.JMenuItem menuSalir2;
     private javax.swing.JMenuItem registrarDueño;
     private javax.swing.JMenuItem registrarMayorista;
     private javax.swing.JMenuItem registrarProducto;

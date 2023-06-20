@@ -228,7 +228,12 @@ public class registrarPuesto extends javax.swing.JFrame implements PropertyChang
     private void cmbDuenioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDuenioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbDuenioActionPerformed
-
+    
+    @Override
+    public void dispose() {
+        modelo.removePropertyChangeListener(this);
+        super.dispose();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;

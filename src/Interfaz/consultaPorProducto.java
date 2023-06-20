@@ -431,8 +431,13 @@ public class consultaPorProducto extends javax.swing.JFrame implements PropertyC
     private void txtCantCompradaPuestosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantCompradaPuestosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCantCompradaPuestosActionPerformed
-
-
+    
+    @Override
+    public void dispose() {
+        modelo.removePropertyChangeListener(this);
+        soporteDeCambio.removePropertyChangeListener(this);
+        super.dispose();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDerecha;

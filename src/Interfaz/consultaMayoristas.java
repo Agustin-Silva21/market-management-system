@@ -75,7 +75,13 @@ public class consultaMayoristas extends javax.swing.JFrame  implements PropertyC
             table.getColumnModel().getColumn(column).setPreferredWidth(width);
         }
     }
-
+    
+    @Override
+    public void dispose() {
+        modelo.removePropertyChangeListener(this);
+        super.dispose();
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

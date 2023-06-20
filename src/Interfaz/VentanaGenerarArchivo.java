@@ -276,7 +276,13 @@ public class VentanaGenerarArchivo extends javax.swing.JFrame implements Propert
     }
     
     public void generarArchivo(int desde, int hasta, String tipoM, ArrayList<Puesto> puestos){
-        ArchivoGrabacion arch = new ArchivoGrabacion("src/Archivos/archivo.txt");
+        ArchivoGrabacion arch;
+        if(mercado.seEjecutaDesdeJar()){
+            arch = new ArchivoGrabacion("Archivos/archivo.txt");
+        } else{
+            arch = new ArchivoGrabacion("src/Archivos/archivo.txt");
+        }
+        
         arch.grabarLinea(obtenerFechaYHora());
         Movimiento[] movimientos = mercado.getListaMovimientos().toArray(new Movimiento[0]);
         String tipoMov = "";
@@ -314,7 +320,13 @@ public class VentanaGenerarArchivo extends javax.swing.JFrame implements Propert
         // Formatear la fecha y hora actual utilizando el formato definido
         return "Fecha y hora actual: " + fechaHoraActual.format(formato);
     }
-
+    
+    @Override
+    public void dispose() {
+        mercado.removePropertyChangeListener(this);
+        super.dispose();
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCargarPuestos;
     private javax.swing.JButton btnGenerarArchivo;

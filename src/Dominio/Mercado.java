@@ -1,6 +1,8 @@
 // Gabriel Machado 318697, Agustin Silva 310087
 package Dominio;
 
+import Interfaz.consultaPuestos;
+import Main.Obligatorio2;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
@@ -30,6 +32,16 @@ public class Mercado implements Serializable{
                 
     }
 
+    public PropertyChangeSupport getManejador() {
+        return manejador;
+    }
+
+    public void setManejador() {
+        this.manejador = new PropertyChangeSupport(this);
+    }
+    
+    
+    
     public ArrayList<Mayorista> getListaMayoristas() {
         return listaMayoristas;
     }
@@ -215,8 +227,15 @@ public class Mercado implements Serializable{
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         
-
         manejador.addPropertyChangeListener(listener);
     }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        manejador.removePropertyChangeListener(listener);
+    }
     
+    public boolean seEjecutaDesdeJar() {
+        String jarPath = Obligatorio2.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+        return jarPath.endsWith(".jar");
+    }
 }
