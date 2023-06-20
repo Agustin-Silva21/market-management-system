@@ -25,7 +25,7 @@ public class Persistencia {
     }
     
     public static Mercado cargarMercado() {
-        String ruta = "mercado.txt";
+        String ruta = "src/Archivos/mercado.txt";
         Object mercado = null;
         try {
             ObjectInputStream mercadoGuardado = new ObjectInputStream(
