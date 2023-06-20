@@ -22,8 +22,8 @@ public class registrarMayorista extends javax.swing.JFrame  implements PropertyC
         UIManager.put("OptionPane.yesButtonText", "Si");
         UIManager.put("OptionPane.noButtonText", "No");
         DefaultListModel<String> listModel = new DefaultListModel<>();
-        for (Mayorista mayorista : modelo.getListaMayoristas()) {
-            listModel.addElement(mayorista.getNombre());
+        for (Producto producto : modelo.getListaProductos()) {
+            listModel.addElement(producto.getNombre());
         }
         lstProductos.setModel(listModel);
         lstProductos.getSelectionModel().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
