@@ -18,11 +18,9 @@ public class MenuPpal extends javax.swing.JFrame {
     public MenuPpal(Mercado unModelo) {
         modelo = unModelo;
         initComponents();
-        
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                
                 Persistencia.guardarMercado(modelo);
             }
         });
