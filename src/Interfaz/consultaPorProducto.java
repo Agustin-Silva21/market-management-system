@@ -30,7 +30,6 @@ public class consultaPorProducto extends javax.swing.JFrame implements PropertyC
             showProductData(indice);
         } else {
             JOptionPane.showMessageDialog(this, "No hay productos en el mercado!");
-            this.dispose();
         }
     }
 

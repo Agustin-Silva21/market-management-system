@@ -3,6 +3,8 @@ package Interfaz;
 
 import Dominio.Mercado;
 import Dominio.Persistencia;
+
+import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 public class MenuPpal extends javax.swing.JFrame {
@@ -219,9 +221,13 @@ public class MenuPpal extends javax.swing.JFrame {
 }//GEN-LAST:event_registrarPuestoActionPerformed
 
     private void consultaProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaProductoActionPerformed
-        consultaPorProducto v = new consultaPorProducto(modelo);
-        v.setVisible(true);        
-    }//GEN-LAST:event_consultaProductoActionPerformed
+        if (!modelo.getListaProductos().isEmpty()) {
+            consultaPorProducto v = new consultaPorProducto(modelo);
+            v.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "No hay productos en el mercado!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     private void registrarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarProductoActionPerformed
         
