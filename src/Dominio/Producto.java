@@ -28,7 +28,7 @@ public class Producto implements Serializable, Comparable<Producto>{
         this.descripcion = "----";
         this.tipo = Tipo.Fruta;
         this.venta = FormaVenta.Kilogramo;
-        this.pathImagen = "src/Helpers/ImagenesProductos/No-Image-Placeholder.jpg";
+        this.pathImagen = "src/Helpers/No-Image-Placeholder.jpg";
         this.imagen = ImageIO.read(new File(pathImagen));
     }
     
@@ -48,7 +48,7 @@ public class Producto implements Serializable, Comparable<Producto>{
         this.descripcion = descripcion;
         this.tipo = unTipo;
         this.venta = unaVenta;
-        this.pathImagen = "src/Helpers/ImagenesProductos/No-Image-Placeholder.jpg";
+        this.pathImagen = "src/Helpers/No-Image-Placeholder.jpg";
         try{
             this.imagen = ImageIO.read(new File(pathImagen));
         } catch (IOException e){
@@ -102,16 +102,16 @@ public class Producto implements Serializable, Comparable<Producto>{
 
     @Override
     public boolean equals(Object obj) {
-    boolean retVal = false;
+        boolean retVal = false;
 
-    if (obj instanceof Producto) {
-        Producto ptr = (Producto) obj;
-        retVal = (ptr.getNombre() == null ? this.getNombre() == null : ptr.getNombre().equals(this.getNombre()));
+        if (obj instanceof Producto) {
+            Producto ptr = (Producto) obj;
+            retVal = (ptr.getNombre() == null ? this.getNombre() == null : ptr.getNombre().equals(this.getNombre()));
+        }
+
+        return retVal;
     }
-
-    return retVal;
-}
-    // https://stackoverflow.com/questions/8322129/arraylists-custom-contains-method
+    
     @Override
     public int hashCode() {
         int hash = 7;
