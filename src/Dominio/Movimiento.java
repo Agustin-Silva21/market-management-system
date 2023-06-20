@@ -5,13 +5,9 @@ package Dominio;
 
 import java.io.Serializable;
 
-
-
 public class Movimiento implements Serializable{
     private static int id = 0;
     private Puesto puesto;
-    // private Mayorista unMayorista;
-    // Probamos con clase abstracta y sino lo dejamos aca y lo ponemos null
     private Producto producto;
     private float precio;
     private float cantidad;
@@ -32,7 +28,6 @@ public class Movimiento implements Serializable{
     public void setId(int id) {
         Movimiento.id = id;
     }
-    // posible solucion: https://www.javatpoint.com/how-to-find-number-of-objects-created-in-java
     
     public Puesto getPuesto() {
         return puesto;

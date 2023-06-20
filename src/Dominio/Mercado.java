@@ -159,53 +159,6 @@ public class Mercado implements Serializable{
         }
     }
     
-    public HashMap<String, Float> consultaProducto(Producto unProducto) {
-        HashMap<String, Float> DatosADevolver = new HashMap<>();
-        float totalVendido = 0;
-        float totalComprado = 0;
-        float cantVendida = 0;
-        float cantComprada = 0;
-        float precioMinimoVendido = 0;
-        float precioMaximoVendido = 0;
-        Iterator<Movimiento> it = listaMovimientos.iterator();
-        while (it.hasNext()) {
-            Movimiento unMovimiento = it.next();
-            if (unMovimiento.getProducto().equals(unProducto)) {
-                if (unMovimiento.getClass().getName().equalsIgnoreCase("Compra")) {
-                    totalComprado += unMovimiento.getPrecio();
-                    cantComprada += unMovimiento.getCantidad();
-                } else {
-                    totalVendido += unMovimiento.getPrecio();
-                    cantVendida += unMovimiento.getCantidad();
-                    if (precioMinimoVendido > unMovimiento.getPrecio()) {
-                        precioMinimoVendido = unMovimiento.getPrecio();
-                    }
-                    if (precioMaximoVendido < unMovimiento.getPrecio()) {
-                        precioMaximoVendido = unMovimiento.getPrecio();
-                    }                    
-                }
-            }
-        }
-        DatosADevolver.put("totalVendido", totalVendido);
-        DatosADevolver.put("totalComprado", totalComprado);
-        DatosADevolver.put("cantVendida", cantVendida);
-        DatosADevolver.put("cantComprada", cantComprada);
-        DatosADevolver.put("precioMinimoVendido", precioMinimoVendido);
-        DatosADevolver.put("precioMaximoVendido", precioMaximoVendido);
-        return DatosADevolver;
-    }
-    
-    public String[] consultaPrecioPuestos(float unPrecio){
-        ArrayList<String> listaPuestosAuxiliar = new ArrayList<>();
-        for (int i = 0; i < this.getListaMovimientos().size(); i++) {
-            Movimiento unMovimiento = this.getListaMovimientos().get(i);
-            if (unMovimiento.getPrecio() == unPrecio) {                
-                listaPuestosAuxiliar.add(unMovimiento.getPuesto().getId());
-            }
-        }
-        return listaPuestosAuxiliar.toArray(new String[listaPuestosAuxiliar.size()]);
-    }
-    
     public Dueño getDueñoPorIndice(int indice) {
         if (indice >= 0 && indice < listaDueños.size()) {
             return listaDueños.get(indice);
@@ -233,20 +186,6 @@ public class Mercado implements Serializable{
             arrayTipoProducto[i] = enumValues[i].toString();
         }
         return arrayTipoProducto;
-    }
-    
-    public String nombreProductoXPath(String path){
-        String nombreProd = "";
-        Boolean encontrado = false;
-        Producto aux;
-        for(int i = 0; i < this.getListaProductos().size() && !encontrado; i++){
-            aux = this.getListaProductos().get(i);
-            if(aux.getPathImagen().equals(path)){
-                nombreProd = aux.getNombre();
-                encontrado = true;
-            }
-        }        
-        return nombreProd;
     }
     
     public ArrayList<Producto> getProductoPorNombre(List<String> listaProductosString){
