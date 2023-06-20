@@ -19,6 +19,10 @@ public class registrarMayorista extends javax.swing.JFrame  implements PropertyC
         modelo = unModelo;
         modelo.addPropertyChangeListener(this);
         initComponents();
+        iniciarComponentes();
+    }
+
+    public void iniciarComponentes(){
         UIManager.put("OptionPane.yesButtonText", "Si");
         UIManager.put("OptionPane.noButtonText", "No");
         DefaultListModel<String> listModel = new DefaultListModel<>();
@@ -28,12 +32,12 @@ public class registrarMayorista extends javax.swing.JFrame  implements PropertyC
         lstProductos.setModel(listModel);
         lstProductos.getSelectionModel().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
     }
-    
-    @Override
-    public void propertyChange(PropertyChangeEvent evt){
-        if (evt.getPropertyName().equals("listaProductos")){
-            // ver codigo para cargar lista de productos
-        }
+
+    public void reiniciarComponentes(){
+        txtRut.setText("");
+        txtNombre.setText("");
+        txtDireccion.setText("");
+        lstProductos.clearSelection();
     }
 
     @SuppressWarnings("unchecked")
@@ -167,27 +171,23 @@ public class registrarMayorista extends javax.swing.JFrame  implements PropertyC
         if (eleccion == JOptionPane.YES_OPTION) {
             dispose();            
         }
-    }//GEN-LAST:event_btnSalirActionPerformed
+    }
 
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {
         String rut = txtRut.getText().trim();
         String nombre = txtNombre.getText().trim();
-        String direccion = txtDireccion.getText().trim();        
+        String direccion = txtDireccion.getText().trim();
         try {
             List<String> valoresSeleccionados = lstProductos.getSelectedValuesList();
-            System.out.println(valoresSeleccionados.size());
-            //System.out.println("1"+valoresSeleccionados + "1");
             ArrayList<Producto> productosSeleccionados = modelo.getProductoPorNombre(valoresSeleccionados);
-            //System.out.println("2" + productosSeleccionados.get(0).getNombre() + "2");
             String mensaje = "";
-            
-            mensaje = rut.isEmpty() ? "El RUT no puede estar vacio!\n" : mensaje;
-            mensaje += nombre.isEmpty() ? "El nombre no puede estar vacio!\n" : mensaje;
-            mensaje += direccion.isEmpty() ? "La direccion no puede estar vacia!\n" : mensaje;
-            System.out.println("mensaje:" + mensaje + ".");
-            
+            mensaje = rut.isEmpty() ? "El RUT no puede estar vacio!\n" : "";
+            mensaje += nombre.isEmpty() ? "El nombre no puede estar vacio!\n" : "";
+            mensaje += direccion.isEmpty() ? "La direccion no puede estar vacia!\n" : "";
             if (mensaje.isEmpty()) {
+                System.out.println("llegue a mensaje.isEmpty()");
                 mensaje = "Rut: " + rut + "\nNombre: " + nombre + "\nDireccion: " + direccion + "\nProductos: " + String.join(", ", valoresSeleccionados);
+                System.out.println("mensaje: " + mensaje);
                 int opcion = JOptionPane.showOptionDialog(null, mensaje, "Confirmacion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Guardar", "Cancelar"}, "Guardar");
                 if (opcion == JOptionPane.YES_OPTION) {
                     if (modelo.registrarMayorista(rut, nombre, direccion, productosSeleccionados)) {
@@ -203,13 +203,22 @@ public class registrarMayorista extends javax.swing.JFrame  implements PropertyC
             String errorMessage = "Se debe registrar al menos un producto para registrar un mayorista";            
             JOptionPane.showMessageDialog(null, errorMessage, "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
-            txtRut.setText("---");
-            txtDireccion.setText("");
-            txtNombre.setText("");
-            lstProductos.clearSelection();
+            reiniciarComponentes();
         }
-    }//GEN-LAST:event_btnAgregarActionPerformed
+    }
 
+    @Override
+    public void propertyChange(PropertyChangeEvent evt){
+        if (evt.getPropertyName().equals("listaProductos")){
+            // ver codigo para cargar lista de productos
+        }
+    }
+
+    @Override
+    public void dispose() {
+        modelo.removePropertyChangeListener(this);
+        super.dispose();
+    }
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
@@ -221,12 +230,6 @@ public class registrarMayorista extends javax.swing.JFrame  implements PropertyC
     private void txtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDireccionActionPerformed
-    
-    @Override
-    public void dispose() {
-        modelo.removePropertyChangeListener(this);
-        super.dispose();
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;

@@ -1,7 +1,6 @@
 // Gabriel Machado 318697, Agustin Silva 310087
 package Dominio;
 
-import Interfaz.consultaPuestos;
 import Main.Obligatorio2;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -202,7 +201,6 @@ public class Mercado implements Serializable{
     
     public ArrayList<Producto> getProductoPorNombre(List<String> listaProductosString){
         ArrayList<Producto> productosHallados = new ArrayList<>();
-        
         for (int i = 0; i < listaProductosString.size(); i++) {
             boolean encontre = false;
             int j = 0;
@@ -212,6 +210,7 @@ public class Mercado implements Serializable{
                     encontre = true;
                     productosHallados.add(productoEncontrado);
                 }
+                j++;
             }
         }
         return productosHallados;
