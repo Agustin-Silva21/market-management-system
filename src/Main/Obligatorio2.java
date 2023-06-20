@@ -13,7 +13,6 @@ public class Obligatorio2 {
  
       MenuPpal menu = new MenuPpal (inicio());
       menu.setVisible(true);
-      
     }
     
     public static Mercado inicio(){

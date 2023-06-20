@@ -218,7 +218,7 @@ public class MenuPpal extends javax.swing.JFrame {
         v.setVisible(true);       
 }//GEN-LAST:event_registrarPuestoActionPerformed
 
-    private void consultaProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaProductoActionPerformed
+    private void consultaProductoActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         if (!modelo.getListaProductos().isEmpty()) {
             consultaPorProducto v = new consultaPorProducto(modelo);
             v.setVisible(true);
@@ -275,6 +275,7 @@ public class MenuPpal extends javax.swing.JFrame {
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
         Persistencia.guardarMercado(modelo);
+        dispose();
     }//GEN-LAST:event_menuSalirActionPerformed
     
     
